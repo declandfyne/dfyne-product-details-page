@@ -1,0 +1,39 @@
+.accordion {
+  border-top: 1px solid #e4e4dd;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 16px;
+  cursor: pointer;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  color: black;
+}
+
+.title.bold { font-weight: 600; }
+
+.chevron {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.chevron.open { transform: rotate(180deg); }
+
+.body {
+  padding: 0 16px 20px;
+}

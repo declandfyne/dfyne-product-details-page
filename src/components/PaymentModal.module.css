@@ -1,0 +1,164 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  /* constrain to the 409px phone frame */
+  width: 100%;
+  max-width: 789px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sheet {
+  background: white;
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  padding: 16px 16px 24px;
+  box-shadow: 0px 20px 25px -5px rgba(0,0,0,0.1), 0px 8px 10px -6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  /* slide-up animation */
+  transform: translateY(100%);
+  animation: slideUp 0.28s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0); }
+}
+
+.handle {
+  width: 36px;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  margin: 0 auto 4px;
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #0a0a0a;
+  letter-spacing: 0.3px;
+}
+
+.closeBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  color: #6a6a6a;
+  line-height: 16.5px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0.522px solid #e7e7e7;
+  border-radius: 8px;
+  padding: 0 12.5px;
+  height: 56.5px;
+}
+
+.optionLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.logoWrap {
+  width: 47px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.optionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.optionTitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #0a0a0a;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.optionSubtitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #6a6a6a;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.optionPrice {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.amount {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  color: black;
+  letter-spacing: 0.3px;
+}
+
+.installments {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #6c6c6c;
+  letter-spacing: 0.3px;
+}
+
+.footer {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 9px;
+  color: #6a6a6a;
+  text-align: center;
+  letter-spacing: 0.3px;
+}

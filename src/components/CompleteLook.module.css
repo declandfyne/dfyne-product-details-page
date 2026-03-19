@@ -1,0 +1,51 @@
+.section {
+  padding: 16px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  color: black;
+  margin-bottom: 16px;
+}
+
+.scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.scroll::-webkit-scrollbar { display: none; }
+
+.card {
+  flex-shrink: 0;
+  width: 103px;
+  cursor: pointer;
+}
+
+.card img {
+  width: 103px;
+  height: 103px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.name {
+  font-size: 10px;
+  line-height: 16px;
+  color: black;
+  letter-spacing: 0.3px;
+  margin-top: 3px;
+}
+
+.color {
+  display: block;
+  font-weight: 600;
+  font-size: 8px;
+  color: black;
+  letter-spacing: 1.5px;
+  text-align: center;
+}

@@ -1,0 +1,84 @@
+.section {
+  padding: 0 0 0 16px;
+}
+
+.label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.label strong { font-weight: 700; }
+
+.swatches {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  padding-right: 16px;
+}
+
+.swatches::-webkit-scrollbar { display: none; }
+
+.swatch {
+  flex-shrink: 0;
+  width: 66px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.imgWrap {
+  width: 66px;
+  height: 99px;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.imgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.newBadge {
+  position: absolute;
+  bottom: 6px;
+  right: 2px;
+  background: black;
+  color: white;
+  font-weight: 600;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.swatchName {
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  font-size: 10px;
+  text-align: center;
+  padding: 0 4px;
+  background: white;
+  color: #6a6a6a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s, color 0.15s;
+}
+
+.swatch.active .swatchName {
+  background: black;
+  color: white;
+}
