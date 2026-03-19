@@ -15,7 +15,7 @@ import PaymentModal  from './components/PaymentModal'
 
 import styles from './App.module.css'
 
-const DEFAULT_COLOR = COLORS.find(c => c.id === 'truffle')
+const DEFAULT_COLOR = COLORS.find(c => c.id === 'midnight-black')
 const DEFAULT_SIZE  = SIZES.find(s => s.id === 'xs')
 
 export default function App() {
