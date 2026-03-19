@@ -89,7 +89,7 @@ const MODEL_MEASUREMENTS = [
 function ModelContent({ model }) {
   return (
     <div className={styles.content}>
-      <p className={styles.tabTitle}>{model.name}'s Size & Fit</p>
+      <p className={styles.tabTitle}>{model.name?.toUpperCase()}'S SIZE & FIT</p>
 
       <div className={styles.featSection}>
         <p className={styles.featSectionLabel}>ABOUT {model.name?.toUpperCase()}</p>
