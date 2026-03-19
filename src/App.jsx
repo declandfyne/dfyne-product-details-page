@@ -57,6 +57,7 @@ export default function App() {
         open={infoTab !== null}
         activeTab={infoTab}
         onClose={() => setInfoTab(null)}
+        model={selectedColor.model}
       />
 
       <hr className={styles.divider} />

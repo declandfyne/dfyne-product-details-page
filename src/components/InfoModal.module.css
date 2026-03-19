@@ -74,7 +74,101 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+}
+
+.featSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.featSectionLabel {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #888;
+  margin: 0;
+}
+
+.bulletList {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.bulletItem {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  line-height: 18px;
+  list-style: disc;
+}
+
+.materialBar {
+  display: flex;
+  height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.materialFill {
+  background: black;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.materialRemainder {
+  background: #e0e0e0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.materialLabel {
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}
+
+.materialRemainder .materialLabel {
+  color: #555;
+}
+
+.fitCallout {
+  background: #f6f6f6;
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fitCalloutTitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #888;
+  margin: 0;
+}
+
+.fitCalloutText {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  line-height: 18px;
+  margin: 0;
 }
 
 .tabTitle {
@@ -112,6 +206,43 @@
   border: 1px solid #ebebeb;
   border-radius: 8px;
   overflow: hidden;
+}
+
+.modelStats {
+  display: flex;
+  gap: 8px;
+}
+
+.modelStat {
+  flex: 1;
+  background: #f6f6f6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modelStatLabel {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #888;
+}
+
+.modelStatValue {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: black;
+}
+
+.modelStatSub {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #888;
 }
 
 .modelRow {

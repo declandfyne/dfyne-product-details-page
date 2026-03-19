@@ -1,0 +1,58 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1.2px;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dots {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.dot {
+  width: 5px;
+  height: 12px;
+  border-radius: 999px;
+}
+
+.dotFilled {
+  background: black;
+}
+
+.dotEmpty {
+  background: #e0e0e0;
+}
+
+.label {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  color: black;
+  white-space: nowrap;
+}

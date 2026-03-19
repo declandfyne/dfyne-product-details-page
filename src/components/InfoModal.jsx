@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from './InfoModal.module.css'
+import FeatureRatings from './FeatureRatings'
+import { FEATURE_RATINGS } from '../data/product'
 
 const CloseIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -13,31 +15,69 @@ const TABS = [
   { id: 'delivery',  label: 'DELIVERY & RETURNS' },
 ]
 
+
+const HIGHLIGHTS = [
+  'Built-in bra with removable cups & pads',
+  'Twill knit underbust & waist for contouring',
+  'Strappy halterneck with open back',
+  'High scoop, incredibly soft feel',
+  'Durable, shape-retaining fabric',
+]
+
 function FeaturesContent() {
   return (
     <div className={styles.content}>
       <p className={styles.tabTitle}>PRODUCT FEATURES</p>
+
       <p className={styles.text}>
         Make your IMPACT in our Longline Strappy Top. Designed with a twill knit underbust and waist
         for contouring and support during every workout. The halterneck and open back is the perfect
-        combo to show off your back day gains. Pair this Strappy Longline with the rest of the IMPACT
-        range for the ultimate strong girl gym fit.
+        combo to show off your back day gains.
       </p>
-      <ul className={styles.featureList}>
-        <li>Removable cups (great!)</li>
-        <li>Strappy halterneck</li>
-        <li>High scoop, durable fabric</li>
-        <li>Incredibly soft feel</li>
-        <li>Built-in bra with removable pads</li>
-        <li>Twill knit underbust and waist for contouring</li>
-        <li>90% Nylon | 10% Elastane</li>
-        <li><strong>Fit – Firm at True to Size;</strong> Size up for a more relaxed fit</li>
-      </ul>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>FEEL</p>
+        <FeatureRatings ratings={FEATURE_RATINGS} />
+      </div>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>HIGHLIGHTS</p>
+        <ul className={styles.bulletList}>
+          {HIGHLIGHTS.map(h => (
+            <li key={h} className={styles.bulletItem}>{h}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>MATERIAL</p>
+        <div className={styles.materialBar}>
+          <div className={styles.materialFill} style={{ width: '90%' }}>
+            <span className={styles.materialLabel}>90% Nylon</span>
+          </div>
+          <div className={styles.materialRemainder}>
+            <span className={styles.materialLabel}>10% Elastane</span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.fitCallout}>
+        <p className={styles.fitCalloutTitle}>FIT GUIDE</p>
+        <p className={styles.fitCalloutText}>
+          <strong>Firm at True to Size.</strong> Size up for a more relaxed fit.
+        </p>
+      </div>
     </div>
   )
 }
 
-const MODEL_ROWS = [
+const MODEL_STATS = [
+  { label: 'HEIGHT',     uk: '168 cm',  usa: '5\'6"'  },
+  { label: 'DRESS SIZE', uk: '8 – 10',  usa: '6 – 8'  },
+  { label: 'CUP SIZE',   uk: 'B',       usa: 'B'      },
+]
+
+const MODEL_MEASUREMENTS = [
   { label: 'Model Height',   uk: '168 cm',  usa: '5\'6"' },
   { label: 'Model Hips',     uk: '101 cm',  usa: '40"'   },
   { label: 'Model Waist',    uk: '69 cm',   usa: '27"'   },
@@ -46,24 +86,50 @@ const MODEL_ROWS = [
   { label: 'Dress Size',     uk: '8 - 10',  usa: '6 - 8' },
 ]
 
-function ModelContent() {
+function ModelContent({ model }) {
   return (
     <div className={styles.content}>
-      <p className={styles.tabTitle}>MODEL SIZE</p>
-      <div className={styles.modelTable}>
-        <div className={`${styles.modelRow} ${styles.modelHeader}`}>
-          <span className={styles.modelLabel} />
-          <span className={styles.modelColHead}>UK</span>
-          <span className={styles.modelColHead}>USA</span>
+      <p className={styles.tabTitle}>{model.name}'s Size & Fit</p>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>ABOUT {model.name?.toUpperCase()}</p>
+        <div className={styles.modelStats}>
+          {MODEL_STATS.map(({ label, uk, usa }) => (
+            <div key={label} className={styles.modelStat}>
+              <span className={styles.modelStatLabel}>{label}</span>
+              <span className={styles.modelStatValue}>{uk}</span>
+              <span className={styles.modelStatSub}>{usa}</span>
+            </div>
+          ))}
         </div>
-        {MODEL_ROWS.map(({ label, uk, usa }) => (
-          <div key={label} className={styles.modelRow}>
-            <span className={styles.modelLabel}>{label}</span>
-            <span className={styles.modelValue}>{uk}</span>
-            <span className={styles.modelValue}>{usa}</span>
-          </div>
-        ))}
       </div>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>MEASUREMENTS</p>
+        <div className={styles.modelTable}>
+          <div className={`${styles.modelRow} ${styles.modelHeader}`}>
+            <span className={styles.modelLabel} />
+            <span className={styles.modelColHead}>UK</span>
+            <span className={styles.modelColHead}>USA</span>
+          </div>
+          {MODEL_MEASUREMENTS.map(({ label, uk, usa }) => (
+            <div key={label} className={styles.modelRow}>
+              <span className={styles.modelLabel}>{label}</span>
+              <span className={styles.modelValue}>{uk}</span>
+              <span className={styles.modelValue}>{usa}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.fitCallout}>
+        <p className={styles.fitCalloutTitle}>SIZE WORN</p>
+        <p className={styles.fitCalloutText}>
+          {model.name} is wearing a <strong>Size {model.size}</strong> in this style.
+          This product fits <strong>firm at true to size</strong> — size up for a more relaxed fit.
+        </p>
+      </div>
+
     </div>
   )
 }
@@ -118,13 +184,7 @@ function DeliveryContent() {
   )
 }
 
-const TAB_CONTENT = {
-  features: <FeaturesContent />,
-  model:    <ModelContent />,
-  delivery: <DeliveryContent />,
-}
-
-export default function InfoModal({ open, activeTab, onClose }) {
+export default function InfoModal({ open, activeTab, onClose, model }) {
   const [tab, setTab] = useState(activeTab || 'features')
 
   useEffect(() => {
@@ -160,7 +220,9 @@ export default function InfoModal({ open, activeTab, onClose }) {
         </div>
 
         <div className={styles.body}>
-          {TAB_CONTENT[tab]}
+          {tab === 'features' && <FeaturesContent />}
+          {tab === 'model'    && <ModelContent model={model} />}
+          {tab === 'delivery' && <DeliveryContent />}
         </div>
       </div>
     </div>

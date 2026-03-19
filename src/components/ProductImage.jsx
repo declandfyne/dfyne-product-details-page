@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './ProductImage.module.css'
 
 const ChevronDown = () => (
@@ -27,7 +27,30 @@ const InfoIcon = () => (
   </svg>
 )
 
+const ChevronLeft = () => (
+  <svg width="9" height="14" viewBox="0 0 9 14" fill="none">
+    <path d="M7.5 1L1.5 7L7.5 13" stroke="black" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 const MEASURE_ROWS = ['height', 'bust', 'waist', 'hips']
+
+function MeasurementInlineBanner({ model, onCollapse }) {
+  return (
+    <div className={styles.modelInlineBannerWrap}>
+      <button className={styles.modelInlineBanner} onClick={onCollapse}>
+        <ChevronLeft />
+        <p className={styles.modelInlineBannerText}>
+          Anna is {model.height},{' '}
+          <strong>Chest</strong>({model.bust}){' '}
+          <strong>Waist</strong>({model.waist}){' '}
+          <strong>Hips</strong>({model.hips}){' '}
+          wearing size {model.size}
+        </p>
+      </button>
+    </div>
+  )
+}
 
 function MeasurementCard({ model, onCollapse }) {
   return (
@@ -70,6 +93,8 @@ function MeasurementBanner({ model, onClose }) {
 export default function ProductImage({ src, alt, model, onModelClick }) {
   const [open, setOpen] = useState(false)
 
+  useEffect(() => { setOpen(false) }, [model])
+
   return (
     <div className={styles.wrap}>
       <img className={styles.img} src={src} alt={alt} />
@@ -80,11 +105,18 @@ export default function ProductImage({ src, alt, model, onModelClick }) {
 
       {model && (
         <>
-          {/* Card variant — always expanded, no toggle */}
+          {/* Card variant — pill expands to inline banner */}
           {model.variant === 'card' && (
-            <div className={styles.modelBadgeWrap}>
-              <MeasurementCard model={model} onCollapse={() => {}} />
-            </div>
+            open
+              ? <MeasurementInlineBanner model={model} onCollapse={() => setOpen(false)} />
+              : (
+                <div className={styles.modelBadgeWrap}>
+                  <button className={styles.modelBadge} onClick={() => setOpen(true)}>
+                    {model.badgeText}
+                    <ChevronDown />
+                  </button>
+                </div>
+              )
           )}
 
           {/* Banner variant — static pill on right, no chevron, not clickable */}
