@@ -4,6 +4,12 @@ export const COLORS = [
     label: 'Midnight B...',
     name: 'MIDNIGHT BLACK',
     img: 'https://www.figma.com/api/mcp/asset/3bbbdcc0-d662-47f8-b8e7-47ad10be407c',
+    images: [
+      'https://www.figma.com/api/mcp/asset/3bbbdcc0-d662-47f8-b8e7-47ad10be407c',
+      mbImg2,
+      mbImg3,
+      mbImg4,
+    ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Anna is 5'7 wearing S", name: 'Anna', size: 'S', height: '149cm', bust: '81cm', waist: '54cm', hips: '91cm' },
   },
@@ -96,6 +102,9 @@ import afterpayLogo from '../assets/afterpay.svg'
 import shopPayLogo  from '../assets/shoppay.svg'
 import klarnaLogo   from '../assets/klarna.svg'
 import modelPhoto   from '../assets/modelfullbody.jpg'
+import mbImg2 from '../assets/IMG_1313_1-Edit-1.webp'
+import mbImg3 from '../assets/IMG_1331_1-Edit-2.webp'
+import mbImg4 from '../assets/IMG_1341_1-Edit-3.webp'
 
 export const FEATURE_RATINGS = [
   { label: 'Support',  value: 4 },

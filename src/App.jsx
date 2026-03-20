@@ -29,7 +29,7 @@ export default function App() {
       <Header />
       <ImpactBanner />
 
-      <ProductImage src={selectedColor.img} alt={`Longline Strappy Top – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
+      <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Longline Strappy Top – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
 
       <ProductInfo />
 

@@ -46,7 +46,7 @@
 .tab {
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   cursor: pointer;
   padding: 10px 12px;
   font-family: 'Raleway', sans-serif;
@@ -61,7 +61,7 @@
 
 .tab.tabActive {
   color: black;
-  border-bottom-color: black;
+  border-bottom: 3px solid black;
   font-weight: 700;
 }
 

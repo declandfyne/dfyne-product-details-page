@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './ProductImage.module.css'
 
 const ChevronDown = () => (
@@ -90,18 +90,52 @@ function MeasurementBanner({ model, onClose }) {
   )
 }
 
-export default function ProductImage({ src, alt, model, onModelClick }) {
+export default function ProductImage({ src, images, alt, model, onModelClick }) {
   const [open, setOpen] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const carouselRef = useRef(null)
 
-  useEffect(() => { setOpen(false) }, [model])
+  useEffect(() => { setOpen(false); setCurrentIndex(0) }, [model])
+
+  const handleScroll = () => {
+    if (!carouselRef.current) return
+    const index = Math.round(carouselRef.current.scrollLeft / carouselRef.current.offsetWidth)
+    setCurrentIndex(index)
+  }
+
+  const imgList = images || [src]
+  const total = imgList.length
 
   return (
     <div className={styles.wrap}>
-      <img className={styles.img} src={src} alt={alt} />
+      {images ? (
+        <div className={styles.carousel} ref={carouselRef} onScroll={handleScroll}>
+          {imgList.map((imgSrc, i) => (
+            <div key={i} className={styles.slide}>
+              <img className={styles.img} src={imgSrc} alt={`${alt} ${i + 1}`} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <img className={styles.img} src={src} alt={alt} />
+      )}
 
-      <div className={styles.counter}>
-        1 <span className={styles.total}>/ 4</span>
-      </div>
+      {images && (
+        <div className={styles.thumbnailStrip}>
+          {imgList.map((imgSrc, i) => (
+            <button
+              key={i}
+              className={`${styles.thumbnail} ${i === currentIndex ? styles.thumbnailActive : ''}`}
+              onClick={() => {
+                carouselRef.current.scrollTo({ left: i * carouselRef.current.offsetWidth, behavior: 'smooth' })
+                setCurrentIndex(i)
+              }}
+            >
+              <img src={imgSrc} alt={`View ${i + 1}`} className={styles.thumbnailImg} />
+            </button>
+          ))}
+        </div>
+      )}
 
       {model && (
         <>
@@ -126,8 +160,8 @@ export default function ProductImage({ src, alt, model, onModelClick }) {
               : (
                 <div className={styles.modelBadgeWrapRight}>
                   <button className={styles.modelBadgeStatic} onClick={onModelClick}>
-                    <InfoIcon />
                     {model.badgeText}
+                    <ChevronDown />
                   </button>
                 </div>
               )
