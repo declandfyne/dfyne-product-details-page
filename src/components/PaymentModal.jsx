@@ -63,7 +63,7 @@ export default function PaymentModal({ open, onClose }) {
 
         {/* Header */}
         <div className={styles.header}>
-          <h2 className={styles.title}>Split The Cost. Interest Free</h2>
+          <h2 className={styles.title}>Buy Now, Pay Later</h2>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M5 5L15 15M15 5L5 15" stroke="#0a0a0a" strokeWidth="1.5" strokeLinecap="round" />
