@@ -91,26 +91,22 @@ function ModelContent({ model, productImg }) {
   return (
     <div className={styles.modelContent}>
 
-      {productImg && (
-        <div className={styles.modelHero}>
-          <img src={productImg} className={styles.modelHeroImg} alt={model.name} />
-          <div className={styles.modelHeroGradient} />
-          <p className={styles.modelHeroTitle}>{model.name?.toUpperCase()}'S SIZE & FIT</p>
-        </div>
-      )}
+      <p className={styles.tabTitle}>{model.name?.toUpperCase()}'S SIZE & FIT</p>
 
-      <div className={styles.editorialStats}>
-        {EDITORIAL_STATS.map(({ value, label }, i) => (
-          <>
-            <div key={label} className={styles.editorialStat}>
+      <div className={styles.modelSideBySide}>
+        {productImg && (
+          <div className={styles.modelHeroSmall}>
+            <img src={productImg} className={styles.modelHeroImg} alt={model.name} />
+          </div>
+        )}
+        <div className={styles.editorialStatsStacked}>
+          {EDITORIAL_STATS.map(({ value, label }) => (
+            <div key={label} className={styles.editorialStatRow}>
               <span className={styles.editorialValue}>{value}</span>
               <span className={styles.editorialLabel}>{label}</span>
             </div>
-            {i < EDITORIAL_STATS.length - 1 && (
-              <div key={`div-${i}`} className={styles.editorialDivider} />
-            )}
-          </>
-        ))}
+          ))}
+        </div>
       </div>
 
       <p className={styles.sizeWornNote}>

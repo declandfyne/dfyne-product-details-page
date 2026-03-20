@@ -214,10 +214,17 @@
   gap: 20px;
 }
 
-.modelHero {
-  margin: -20px -16px 0;
-  position: relative;
+.modelSideBySide {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.modelHeroSmall {
+  width: 160px;
+  flex-shrink: 0;
   aspect-ratio: 3 / 4;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -228,43 +235,36 @@
   object-position: center center;
 }
 
-.modelHeroGradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 55%);
-}
-
-.modelHeroTitle {
-  position: absolute;
-  bottom: 14px;
-  left: 16px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1.5px;
-  color: white;
-  margin: 0;
-}
-
-.editorialStats {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px 0;
-}
-
-.editorialStat {
+.editorialStatsStacked {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
+  justify-content: space-around;
+  gap: 0;
+  align-self: stretch;
+}
+
+.editorialStatRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.editorialStatRow:first-child {
+  padding-top: 0;
+}
+
+.editorialStatRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .editorialValue {
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
   color: black;
 }
 
@@ -274,13 +274,6 @@
   font-size: 9px;
   letter-spacing: 1.5px;
   color: #888;
-}
-
-.editorialDivider {
-  width: 1px;
-  height: 28px;
-  background: #e0e0e0;
-  flex-shrink: 0;
 }
 
 .sizeWornNote {
