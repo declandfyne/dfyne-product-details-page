@@ -14,7 +14,7 @@ export default function CartSection({ onOpenPayment }) {
 
       <button className={styles.paymentBar} onClick={onOpenPayment}>
         <div className={styles.paymentLeft}>
-          <span className={styles.paymentText}>Split The Cost. Interest Free</span>
+          <span className={styles.paymentText}>Buy Now, Pay Later</span>
           <div className={styles.paymentLogos}>
             <img style={{ width: 47, height: 16, objectFit: 'contain' }} src={ASSETS.klarna}   alt="Klarna" />
             <img style={{ width: 47, height: 16, objectFit: 'contain' }} src={ASSETS.afterpay} alt="Afterpay" />
