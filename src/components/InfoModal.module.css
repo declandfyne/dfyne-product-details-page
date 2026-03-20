@@ -370,3 +370,21 @@
 .shippingRow:last-child {
   border-bottom: none;
 }
+
+.contactBtn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 89px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 4px;
+}

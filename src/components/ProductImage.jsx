@@ -120,22 +120,9 @@ export default function ProductImage({ src, images, alt, model, onModelClick }) 
         <img className={styles.img} src={src} alt={alt} />
       )}
 
-      {images && (
-        <div className={styles.thumbnailStrip}>
-          {imgList.map((imgSrc, i) => (
-            <button
-              key={i}
-              className={`${styles.thumbnail} ${i === currentIndex ? styles.thumbnailActive : ''}`}
-              onClick={() => {
-                carouselRef.current.scrollTo({ left: i * carouselRef.current.offsetWidth, behavior: 'smooth' })
-                setCurrentIndex(i)
-              }}
-            >
-              <img src={imgSrc} alt={`View ${i + 1}`} className={styles.thumbnailImg} />
-            </button>
-          ))}
-        </div>
-      )}
+      <div className={styles.counter}>
+        {currentIndex + 1} <span className={styles.total}>/ {total}</span>
+      </div>
 
       {model && (
         <>

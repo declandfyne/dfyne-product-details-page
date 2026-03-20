@@ -180,6 +180,8 @@ function DeliveryContent() {
           </div>
         ))}
       </div>
+
+      <a href="/contact" className={styles.contactBtn}>Contact Us</a>
     </div>
   )
 }
