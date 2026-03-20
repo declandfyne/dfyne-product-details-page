@@ -21,10 +21,8 @@ export default function InfoSection({ onOpen }) {
       <div className={styles.block}>
         <p className={styles.sectionLabel}>ABOUT</p>
         <p className={styles.description}>
-          Make your IMPACT in our Longline Strappy Top. Designed with a twill knit underbust and waist
-          for contouring and support during every workout. The halterneck and open back is the perfect
-          combo to show off your back day gains. Pair this Strappy Longline with the rest of the IMPACT
-          range for the ultimate strong girl gym fit.
+          Make your IMPACT in our Longline Strappy Top. Twill knit underbust and waist for contouring support, with a halterneck, open back and built-in bra.{' '}
+          <button className={styles.learnMore} onClick={() => onOpen('features')}>Learn more</button>
         </p>
       </div>
 

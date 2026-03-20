@@ -30,9 +30,7 @@ function FeaturesContent() {
       <p className={styles.tabTitle}>PRODUCT FEATURES</p>
 
       <p className={styles.text}>
-        Make your IMPACT in our Longline Strappy Top. Designed with a twill knit underbust and waist
-        for contouring and support during every workout. The halterneck and open back is the perfect
-        combo to show off your back day gains.
+        Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Engineered with a twill knit underbust and waist panel that contours and supports your core through every rep, squat and set. The adjustable halterneck and open back design keeps you cool and confident, while the built-in bra with removable cups and pads means no extra layers needed. Crafted from our signature 90% Nylon, 10% Elastane fabric — incredibly soft, durable, and shape-retaining wash after wash.
       </p>
 
       <div className={styles.featSection}>

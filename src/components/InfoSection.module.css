@@ -30,6 +30,19 @@
   margin: 0;
 }
 
+.learnMore {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: black;
+  border-bottom: 1.5px solid black;
+  letter-spacing: 0.3px;
+}
+
 .links {
   display: flex;
   flex-direction: column;
