@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from './InfoModal.module.css'
 import FeatureRatings from './FeatureRatings'
-import { FEATURE_RATINGS } from '../data/product'
+import { FEATURE_RATINGS, REVIEW_RATINGS } from '../data/product'
 
 const CloseIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -65,17 +65,35 @@ function FeaturesContent() {
           <strong>Firm at True to Size.</strong> Size up for a more relaxed fit.
         </p>
       </div>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>CUSTOMER REVIEWS</p>
+        <div className={styles.reviewBars}>
+          {REVIEW_RATINGS.map(({ label, low, high, value }) => (
+            <div key={label} className={styles.reviewBarItem}>
+              <span className={styles.reviewBarLabel}>{label}</span>
+              <div className={styles.reviewBarTrack}>
+                <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
+              </div>
+              <div className={styles.reviewBarEnds}>
+                <span>{low}</span>
+                <span>{high}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
 
 const MODEL_MEASUREMENTS = [
-  { label: 'Model Height',   uk: '168 cm',  usa: '5\'6"' },
-  { label: 'Model Hips',     uk: '101 cm',  usa: '40"'   },
-  { label: 'Model Waist',    uk: '69 cm',   usa: '27"'   },
-  { label: 'Model Bust',     uk: '81.5 cm', usa: '32"'   },
-  { label: 'Model Cup Size', uk: 'B',       usa: 'B'     },
-  { label: 'Dress Size',     uk: '8 - 10',  usa: '6 - 8' },
+  { label: 'Height',    cm: '168',   imperial: '5\'6"'  },
+  { label: 'Hips',      cm: '101',   imperial: '40"'    },
+  { label: 'Waist',     cm: '69',    imperial: '27"'    },
+  { label: 'Bust',      cm: '81.5',  imperial: '32"'    },
+  { label: 'Cup Size',  cm: 'B',     imperial: 'B'      },
+  { label: 'Dress Size',cm: '8 - 10',imperial: '6 - 8'  },
 ]
 
 function ModelContent({ model, productImg }) {
@@ -117,14 +135,14 @@ function ModelContent({ model, productImg }) {
         <div className={styles.modelTable}>
           <div className={`${styles.modelRow} ${styles.modelHeader}`}>
             <span className={styles.modelLabel} />
-            <span className={styles.modelColHead}>UK</span>
-            <span className={styles.modelColHead}>USA</span>
+            <span className={styles.modelColHead}>METRIC</span>
+            <span className={styles.modelColHead}>IMPERIAL</span>
           </div>
-          {MODEL_MEASUREMENTS.map(({ label, uk, usa }) => (
+          {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
             <div key={label} className={styles.modelRow}>
               <span className={styles.modelLabel}>{label}</span>
-              <span className={styles.modelValue}>{uk}</span>
-              <span className={styles.modelValue}>{usa}</span>
+              <span className={styles.modelValue}>{cm}</span>
+              <span className={styles.modelValue}>{imperial}</span>
             </div>
           ))}
         </div>

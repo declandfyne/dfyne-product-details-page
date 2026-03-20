@@ -112,6 +112,13 @@ export const FEATURE_RATINGS = [
   { label: 'Stretch',  value: 3 },
 ]
 
+// Review ratings from Judge.me — replace with API data
+export const REVIEW_RATINGS = [
+  { label: 'Product Quality', low: 'Not as expected', high: 'Incredible', value: 95 },
+  { label: 'Sizing',          low: 'Size Down',       high: 'Size Up',    value: 78 },
+  { label: 'Fit',             low: 'Loose',           high: 'Tight',      value: 72 },
+]
+
 export const ASSETS = {
   logo:       'https://www.figma.com/api/mcp/asset/4d673a14-695c-4c7f-9dbf-2bd93e068c7a',
   klarna:     klarnaLogo,
