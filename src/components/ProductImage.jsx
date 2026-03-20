@@ -41,7 +41,7 @@ function MeasurementInlineBanner({ model, onCollapse }) {
       <button className={styles.modelInlineBanner} onClick={onCollapse}>
         <ChevronLeft />
         <p className={styles.modelInlineBannerText}>
-          Anna is {model.height},{' '}
+          Aliyah is {model.height},{' '}
           <strong>Chest</strong>({model.bust}){' '}
           <strong>Waist</strong>({model.waist}){' '}
           <strong>Hips</strong>({model.hips}){' '}
@@ -57,7 +57,7 @@ function MeasurementCard({ model, onCollapse }) {
     <div className={styles.modelCard}>
       <button className={styles.modelCardHeader} onClick={onCollapse}>
         <span className={styles.modelCardTitle}>
-          Anna wears <strong>{model.size}</strong>
+          Aliyah wears <strong>{model.size}</strong>
         </span>
         <ChevronUp />
       </button>
@@ -77,7 +77,7 @@ function MeasurementBanner({ model, onClose }) {
   return (
     <div className={styles.modelBanner}>
       <p className={styles.modelBannerText}>
-        Anna is {model.height},{' '}
+        Aliyah is {model.height},{' '}
         <strong>Chest</strong>({model.bust}){' '}
         <strong>Waist</strong>({model.waist}){' '}
         <strong>Hips</strong>({model.hips}){' '}
