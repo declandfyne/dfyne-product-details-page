@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { COLORS, SIZES } from './data/product'
+import { COLORS, SIZES, ASSETS } from './data/product'
 
 import Header        from './components/Header'
 import ImpactBanner  from './components/ImpactBanner'
@@ -58,6 +58,7 @@ export default function App() {
         activeTab={infoTab}
         onClose={() => setInfoTab(null)}
         model={selectedColor.model}
+        productImg={ASSETS.modelPhoto}
       />
 
       <hr className={styles.divider} />

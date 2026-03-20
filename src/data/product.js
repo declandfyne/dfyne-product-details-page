@@ -95,6 +95,7 @@ export const LOOK_ITEMS = [
 import afterpayLogo from '../assets/afterpay.svg'
 import shopPayLogo  from '../assets/shoppay.svg'
 import klarnaLogo   from '../assets/klarna.svg'
+import modelPhoto   from '../assets/modelfullbody.jpg'
 
 export const FEATURE_RATINGS = [
   { label: 'Support',  value: 4 },
@@ -103,9 +104,10 @@ export const FEATURE_RATINGS = [
 ]
 
 export const ASSETS = {
-  logo:     'https://www.figma.com/api/mcp/asset/4d673a14-695c-4c7f-9dbf-2bd93e068c7a',
-  klarna:   klarnaLogo,
-  afterpay: afterpayLogo,
-  shopPay:  shopPayLogo,
-  package:  'https://www.figma.com/api/mcp/asset/0fb87a78-48ee-4a9b-9295-96f22e839dae',
+  logo:       'https://www.figma.com/api/mcp/asset/4d673a14-695c-4c7f-9dbf-2bd93e068c7a',
+  klarna:     klarnaLogo,
+  afterpay:   afterpayLogo,
+  shopPay:    shopPayLogo,
+  package:    'https://www.figma.com/api/mcp/asset/0fb87a78-48ee-4a9b-9295-96f22e839dae',
+  modelPhoto: modelPhoto,
 }

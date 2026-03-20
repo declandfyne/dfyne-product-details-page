@@ -71,12 +71,6 @@ function FeaturesContent() {
   )
 }
 
-const MODEL_STATS = [
-  { label: 'HEIGHT',     uk: '168 cm',  usa: '5\'6"'  },
-  { label: 'DRESS SIZE', uk: '8 – 10',  usa: '6 – 8'  },
-  { label: 'CUP SIZE',   uk: 'B',       usa: 'B'      },
-]
-
 const MODEL_MEASUREMENTS = [
   { label: 'Model Height',   uk: '168 cm',  usa: '5\'6"' },
   { label: 'Model Hips',     uk: '101 cm',  usa: '40"'   },
@@ -86,26 +80,46 @@ const MODEL_MEASUREMENTS = [
   { label: 'Dress Size',     uk: '8 - 10',  usa: '6 - 8' },
 ]
 
-function ModelContent({ model }) {
-  return (
-    <div className={styles.content}>
-      <p className={styles.tabTitle}>{model.name?.toUpperCase()}'S SIZE & FIT</p>
+function ModelContent({ model, productImg }) {
+  const EDITORIAL_STATS = [
+    { value: '168 cm', label: 'HEIGHT' },
+    { value: '8 – 10', label: 'UK DRESS' },
+    { value: 'Cup B',  label: 'BUST' },
+    { value: `Size ${model.size}`, label: 'WEARING' },
+  ]
 
-      <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>ABOUT {model.name?.toUpperCase()}</p>
-        <div className={styles.modelStats}>
-          {MODEL_STATS.map(({ label, uk, usa }) => (
-            <div key={label} className={styles.modelStat}>
-              <span className={styles.modelStatLabel}>{label}</span>
-              <span className={styles.modelStatValue}>{uk}</span>
-              <span className={styles.modelStatSub}>{usa}</span>
-            </div>
-          ))}
+  return (
+    <div className={styles.modelContent}>
+
+      {productImg && (
+        <div className={styles.modelHero}>
+          <img src={productImg} className={styles.modelHeroImg} alt={model.name} />
+          <div className={styles.modelHeroGradient} />
+          <p className={styles.modelHeroTitle}>{model.name?.toUpperCase()}'S SIZE & FIT</p>
         </div>
+      )}
+
+      <div className={styles.editorialStats}>
+        {EDITORIAL_STATS.map(({ value, label }, i) => (
+          <>
+            <div key={label} className={styles.editorialStat}>
+              <span className={styles.editorialValue}>{value}</span>
+              <span className={styles.editorialLabel}>{label}</span>
+            </div>
+            {i < EDITORIAL_STATS.length - 1 && (
+              <div key={`div-${i}`} className={styles.editorialDivider} />
+            )}
+          </>
+        ))}
       </div>
 
+      <p className={styles.sizeWornNote}>
+        {model.name} is wearing a <strong>Size {model.size}</strong> in this style.{' '}
+        Fits <strong>firm at true to size</strong> — size up for a more relaxed fit.
+      </p>
+
       <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>MEASUREMENTS</p>
+        <p className={styles.featSectionLabel}>FULL MEASUREMENTS</p>
         <div className={styles.modelTable}>
           <div className={`${styles.modelRow} ${styles.modelHeader}`}>
             <span className={styles.modelLabel} />
@@ -120,14 +134,6 @@ function ModelContent({ model }) {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className={styles.fitCallout}>
-        <p className={styles.fitCalloutTitle}>SIZE WORN</p>
-        <p className={styles.fitCalloutText}>
-          {model.name} is wearing a <strong>Size {model.size}</strong> in this style.
-          This product fits <strong>firm at true to size</strong> — size up for a more relaxed fit.
-        </p>
       </div>
 
     </div>
@@ -184,7 +190,7 @@ function DeliveryContent() {
   )
 }
 
-export default function InfoModal({ open, activeTab, onClose, model }) {
+export default function InfoModal({ open, activeTab, onClose, model, productImg }) {
   const [tab, setTab] = useState(activeTab || 'features')
 
   useEffect(() => {
@@ -221,7 +227,7 @@ export default function InfoModal({ open, activeTab, onClose, model }) {
 
         <div className={styles.body}>
           {tab === 'features' && <FeaturesContent />}
-          {tab === 'model'    && <ModelContent model={model} />}
+          {tab === 'model'    && <ModelContent model={model} productImg={productImg} />}
           {tab === 'delivery' && <DeliveryContent />}
         </div>
       </div>
