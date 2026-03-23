@@ -13,13 +13,13 @@ export default function CartSection({ onOpenPayment }) {
       <button className={styles.addToCart}>ADD TO CART</button>
 
       <button className={styles.paymentBar} onClick={onOpenPayment}>
-        <span className={styles.paymentText}>BUY NOW, PAY LATER</span>
-        <ChevronDown />
+        <span className={styles.paymentText}>Split The Cost. Interest Free</span>
         <div className={styles.paymentLogos}>
-          <img style={{ width: 40, height: 14, objectFit: 'contain' }} src={ASSETS.klarna}   alt="Klarna" />
-          <img style={{ width: 40, height: 14, objectFit: 'contain' }} src={ASSETS.afterpay} alt="Afterpay" />
-          <img style={{ width: 40, height: 14, objectFit: 'contain' }} src={ASSETS.shopPay}  alt="Shop Pay" />
+          <img style={{ width: 47, height: 20, objectFit: 'contain' }} src={ASSETS.klarna}   alt="Klarna" />
+          <img style={{ width: 47, height: 16, objectFit: 'contain' }} src={ASSETS.afterpay} alt="Afterpay" />
+          <img style={{ width: 47, height: 11, objectFit: 'contain' }} src={ASSETS.shopPay}  alt="Shop Pay" />
         </div>
+        <ChevronDown />
       </button>
 
       <div className={styles.deliveryRow}>

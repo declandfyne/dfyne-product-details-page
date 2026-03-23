@@ -29,17 +29,16 @@ function FeaturesContent() {
     <div className={styles.content}>
       <p className={styles.tabTitle}>PRODUCT FEATURES</p>
 
-      <p className={styles.text}>
-        Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Engineered with a twill knit underbust and waist panel that contours and supports your core through every rep, squat and set. The adjustable halterneck and open back design keeps you cool and confident, while the built-in bra with removable cups and pads means no extra layers needed. Crafted from our signature 90% Nylon, 10% Elastane fabric — incredibly soft, durable, and shape-retaining wash after wash.
-      </p>
-
       <div className={styles.featSection}>
         <p className={styles.featSectionLabel}>FEEL</p>
         <FeatureRatings ratings={FEATURE_RATINGS} />
       </div>
 
+      <p className={styles.text}>
+        Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Engineered with a twill knit underbust and waist panel that contours and supports your core through every rep, squat and set. The adjustable halterneck and open back design keeps you cool and confident, while the built-in bra with removable cups and pads means no extra layers needed. Crafted from our signature 90% Nylon, 10% Elastane fabric — incredibly soft, durable, and shape-retaining wash after wash.
+      </p>
+
       <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>HIGHLIGHTS</p>
         <ul className={styles.bulletList}>
           {HIGHLIGHTS.map(h => (
             <li key={h} className={styles.bulletItem}>{h}</li>
@@ -72,12 +71,12 @@ function FeaturesContent() {
           {REVIEW_RATINGS.map(({ label, low, high, value }) => (
             <div key={label} className={styles.reviewBarItem}>
               <span className={styles.reviewBarLabel}>{label}</span>
-              <div className={styles.reviewBarTrack}>
-                <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
-              </div>
-              <div className={styles.reviewBarEnds}>
-                <span>{low}</span>
-                <span>{high}</span>
+              <div className={styles.reviewBarScaleRow}>
+                <span className={styles.reviewBarEnd}>{low}</span>
+                <div className={styles.reviewBarTrack}>
+                  <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
+                </div>
+                <span className={styles.reviewBarEnd}>{high}</span>
               </div>
             </div>
           ))}
