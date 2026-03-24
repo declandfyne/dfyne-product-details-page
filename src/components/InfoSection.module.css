@@ -46,7 +46,7 @@
 .links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .linkRow {
@@ -54,10 +54,16 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background: none;
-  border: none;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 0;
+  padding: 14px 14px;
+  transition: border-color 0.2s ease;
+}
+
+.linkRow:hover {
+  border-color: #0a0a0a;
 }
 
 .linkLabel {
@@ -68,8 +74,6 @@
   letter-spacing: 1.2px;
   color: black;
   text-decoration: none;
-  border-bottom: 1.5px solid black;
-  padding-bottom: 2px;
 }
 
 .reviewLinkContent {
