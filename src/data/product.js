@@ -18,48 +18,66 @@ export const COLORS = [
     label: 'Navy',
     name: 'NAVY',
     img: 'https://www.figma.com/api/mcp/asset/5ce4669e-7b50-4402-a497-3b8e95897b8d',
+    images: [
+      'https://www.figma.com/api/mcp/asset/5ce4669e-7b50-4402-a497-3b8e95897b8d',
+    ],
     isNew: true,
-    model: { variant: 'card', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'Small', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
+    model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
   },
   {
     id: 'teal',
     label: 'Teal',
     name: 'TEAL',
     img: 'https://www.figma.com/api/mcp/asset/c1eaa29a-d01d-4297-b585-c5903b8a5e16',
+    images: [
+      'https://www.figma.com/api/mcp/asset/c1eaa29a-d01d-4297-b585-c5903b8a5e16',
+    ],
     isNew: false,
-    model: { variant: 'pill', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'Small', height: "5'7\" / 170cm", bust: '32" / 81cm', waist: '25" / 64cm', hips: '36" / 91cm' },
+    model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
   },
   {
     id: 'truffle',
     label: 'Truffle',
     name: 'TRUFFLE',
     img: 'https://www.figma.com/api/mcp/asset/ada6f9e8-47f9-4a8c-a9ab-75d18b026441',
+    images: [
+      'https://www.figma.com/api/mcp/asset/ada6f9e8-47f9-4a8c-a9ab-75d18b026441',
+    ],
     isNew: false,
-    model: { variant: 'pill', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'Small', height: "5'7\" / 170cm", bust: '32" / 81cm', waist: '25" / 64cm', hips: '36" / 91cm' },
+    model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
   },
   {
     id: 'optic-white',
     label: 'Optic White',
     name: 'OPTIC WHITE',
     img: 'https://www.figma.com/api/mcp/asset/698eb3ed-d387-4912-8d64-bf7a6b83adf0',
+    images: [
+      'https://www.figma.com/api/mcp/asset/698eb3ed-d387-4912-8d64-bf7a6b83adf0',
+    ],
     isNew: false,
-    model: { variant: 'pill', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'Small', height: "5'7\" / 170cm", bust: '32" / 81cm', waist: '25" / 64cm', hips: '36" / 91cm' },
+    model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
   },
   {
     id: 'blue',
     label: 'Blue',
     name: 'BLUE',
     img: 'https://www.figma.com/api/mcp/asset/6fd3209b-e290-4e89-911f-1ff72225ac45',
+    images: [
+      'https://www.figma.com/api/mcp/asset/6fd3209b-e290-4e89-911f-1ff72225ac45',
+    ],
     isNew: false,
-    model: { variant: 'pill', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'Small', height: "5'7\" / 170cm", bust: '32" / 81cm', waist: '25" / 64cm', hips: '36" / 91cm' },
+    model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
   },
   {
     id: 'rangers',
     label: 'Rangers',
     name: 'RANGERS',
     img: 'https://www.figma.com/api/mcp/asset/c5ffc7ba-f75e-450c-a0eb-1df17b836ef4',
+    images: [
+      'https://www.figma.com/api/mcp/asset/c5ffc7ba-f75e-450c-a0eb-1df17b836ef4',
+    ],
     isNew: false,
-    model: { variant: 'pill', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'Small', height: "5'7\" / 170cm", bust: '32" / 81cm', waist: '25" / 64cm', hips: '36" / 91cm' },
+    model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
   },
 ]
 

@@ -20,7 +20,7 @@ const LINKS = [
   { id: 'delivery', label: 'DELIVERY & RETURNS' },
 ]
 
-export default function InfoSection({ onOpen, onOpenReviews }) {
+export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'button', featureVariant = 'default' }) {
   return (
     <div className={styles.section}>
 
@@ -31,14 +31,26 @@ export default function InfoSection({ onOpen, onOpenReviews }) {
         </p>
       </div>
 
-      <div className={styles.block}>
-        <p className={styles.sectionLabel}>FEEL</p>
-        <FeatureRatings ratings={FEATURE_RATINGS} />
-      </div>
+      {(featureLayout === 'standalone' || featureLayout === 'standalone-pills') && (
+        <div className={styles.block}>
+          <FeatureRatings ratings={FEATURE_RATINGS} variant={featureLayout === 'standalone-pills' ? 'pills' : featureVariant} />
+        </div>
+      )}
 
       <div className={styles.block}>
         <div className={styles.links}>
-          {LINKS.map(link => (
+          <button className={styles.linkRow} onClick={() => onOpen('features')}>
+            <span className={styles.featuresLinkContent}>
+              <span className={styles.linkLabel}>PRODUCT FEATURES</span>
+              {featureLayout === 'button' && (
+                <span className={styles.featuresSubline}>
+                  <FeatureRatings ratings={FEATURE_RATINGS} compact />
+                </span>
+              )}
+            </span>
+            <CaretRight />
+          </button>
+          {LINKS.filter(link => link.id !== 'features').map(link => (
             <button key={link.id} className={styles.linkRow} onClick={() => onOpen(link.id)}>
               <span className={styles.linkLabel}>{link.label}</span>
               <CaretRight />

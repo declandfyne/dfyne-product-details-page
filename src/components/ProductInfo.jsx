@@ -1,6 +1,8 @@
 import styles from './ProductInfo.module.css'
+import FeatureRatings from './FeatureRatings'
+import { FEATURE_RATINGS } from '../data/product'
 
-export default function ProductInfo({ price = '£44.99', onOpenReviews }) {
+export default function ProductInfo({ price = '£44.99', onOpenReviews, showFeatures = false }) {
   return (
     <div className={styles.info}>
       <p className={styles.brand}>IMPACT</p>
@@ -13,6 +15,11 @@ export default function ProductInfo({ price = '£44.99', onOpenReviews }) {
         <span className={styles.average}>5.0</span>
         <button className={styles.reviews} onClick={onOpenReviews}>(6746)</button>
       </div>
+      {showFeatures && (
+        <div className={styles.featuresBox}>
+          <FeatureRatings ratings={FEATURE_RATINGS} />
+        </div>
+      )}
     </div>
   )
 }

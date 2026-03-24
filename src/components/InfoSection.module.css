@@ -76,6 +76,17 @@
   text-decoration: none;
 }
 
+.featuresLinkContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.featuresSubline {
+  display: block;
+}
+
 .reviewLinkContent {
   display: flex;
   flex-direction: column;

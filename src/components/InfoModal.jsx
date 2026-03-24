@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import styles from './InfoModal.module.css'
+import FeatureRatings from './FeatureRatings'
+import { FEATURE_RATINGS } from '../data/product'
 
 const StarIcon = ({ filled }) => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill={filled ? '#0a0a0a' : 'none'} stroke="#0a0a0a" strokeWidth="1.5">
@@ -163,6 +165,11 @@ function FeaturesContent() {
             <li key={h} className={styles.bulletItem}>{h}</li>
           ))}
         </ul>
+      </div>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>FEEL</p>
+        <FeatureRatings ratings={FEATURE_RATINGS} />
       </div>
 
       <div className={styles.featSection}>

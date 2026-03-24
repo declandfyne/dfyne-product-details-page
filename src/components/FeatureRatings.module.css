@@ -56,3 +56,56 @@
   color: black;
   white-space: nowrap;
 }
+
+.pills .list {
+  gap: 6px;
+}
+
+.pills .item {
+  flex: 1;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.pills .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.pills .dotFilled {
+  background: #0a0a0a;
+}
+
+.pills .dotEmpty {
+  background: #ddd;
+}
+
+.pills .label {
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #0a0a0a;
+}
+
+.compact .list {
+  gap: 14px;
+}
+
+.compact .item {
+  gap: 4px;
+}
+
+.compact .dot {
+  width: 4px;
+  height: 10px;
+}
+
+.compact .label {
+  font-size: 10px;
+  color: #555;
+}

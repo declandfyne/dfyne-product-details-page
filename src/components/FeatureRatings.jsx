@@ -13,9 +13,10 @@ function RatingDots({ value, max = 5 }) {
   )
 }
 
-export default function FeatureRatings({ ratings }) {
+export default function FeatureRatings({ ratings, compact = false, variant = 'default' }) {
+  const cls = [styles.wrap, compact ? styles.compact : '', variant === 'pills' ? styles.pills : ''].filter(Boolean).join(' ')
   return (
-    <div className={styles.wrap}>
+    <div className={cls}>
       <div className={styles.list}>
         {ratings.map(({ label, value }) => (
           <div key={label} className={styles.item}>
