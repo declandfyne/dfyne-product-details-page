@@ -13,7 +13,7 @@
   width: 100%;
   max-width: 789px;
   border-radius: 16px 16px 0 0;
-  height: 75vh;
+  max-height: 75vh;
   display: flex;
   flex-direction: column;
 }
@@ -234,6 +234,15 @@
   gap: 20px;
 }
 
+.modelWearing {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #0a0a0a;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
 .modelSideBySide {
   display: flex;
   gap: 16px;
@@ -241,10 +250,10 @@
 }
 
 .modelHeroSmall {
-  width: 160px;
+  width: 200px;
   flex-shrink: 0;
   aspect-ratio: 3 / 4;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -259,7 +268,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   gap: 0;
   align-self: stretch;
 }
@@ -268,7 +277,9 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 10px 0;
+  flex: 1;
+  justify-content: center;
+  padding: 0;
   border-bottom: 1px solid #ebebeb;
 }
 
@@ -278,7 +289,6 @@
 
 .editorialStatRow:last-child {
   border-bottom: none;
-  padding-bottom: 0;
 }
 
 .editorialValue {
@@ -304,7 +314,8 @@
   line-height: 18px;
   margin: 0;
   padding: 12px 14px;
-  background: #f6f6f6;
+  background: #fff;
+  border: 1px solid #0a0a0a;
   border-radius: 8px;
 }
 
@@ -312,10 +323,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border-bottom: 1px solid #ebebeb;
   font-family: 'Raleway', sans-serif;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .modelRow:last-child {
@@ -327,19 +338,22 @@
 }
 
 .modelColHead {
-  font-weight: 700;
-  color: black;
+  font-weight: 600;
+  color: #888;
   text-align: center;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .modelLabel {
-  font-weight: 400;
-  color: #666;
+  font-weight: 500;
+  color: #444;
 }
 
 .modelValue {
-  font-weight: 600;
-  color: black;
+  font-weight: 400;
+  color: #666;
   text-align: center;
 }
 

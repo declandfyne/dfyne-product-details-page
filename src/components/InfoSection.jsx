@@ -1,6 +1,6 @@
 import styles from './InfoSection.module.css'
 import FeatureRatings from './FeatureRatings'
-import { FEATURE_RATINGS } from '../data/product'
+import { FEATURE_RATINGS, REVIEW_RATINGS } from '../data/product'
 
 const CaretRight = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -26,8 +26,7 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
 
       <div className={styles.block}>
         <p className={styles.description}>
-          Make your IMPACT in our Longline Strappy Top. Twill knit underbust and waist for contouring support, with a halterneck, open back and built-in bra.{' '}
-          <button className={styles.learnMore} onClick={() => onOpen('features')}>Learn more</button>
+          Make your IMPACT in our Longline Strappy Top. Twill knit underbust and waist for contouring support, with a halterneck, open back and built-in bra.
         </p>
       </div>
 
@@ -56,16 +55,35 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
               <CaretRight />
             </button>
           ))}
-          <button className={styles.linkRow} onClick={onOpenReviews}>
-            <span className={styles.reviewLinkContent}>
-              <span className={styles.linkLabel}>CUSTOMER REVIEWS</span>
-              <span className={styles.reviewSubline}>
-                Loved by 6,746 customers · 5.0 <StarIcon />
-              </span>
-            </span>
-            <CaretRight />
-          </button>
         </div>
+      </div>
+
+      <hr className={styles.divider} />
+
+      {/* Customer Reviews summary section */}
+      <div className={styles.reviewSummary}>
+        <p className={styles.sectionLabel}>CUSTOMER REVIEWS</p>
+
+        <button className={styles.reviewScoreRow} onClick={onOpenReviews}>
+          <span className={styles.reviewScoreBadge}>5.0</span>
+          <span className={styles.reviewScoreText}>Excellent · 6,746 reviews</span>
+          <CaretRight />
+        </button>
+
+        <div className={styles.reviewBars}>
+          {REVIEW_RATINGS.map(({ label, value }) => (
+            <div key={label} className={styles.reviewBarItem}>
+              <span className={styles.reviewBarLabel}>{label}</span>
+              <div className={styles.reviewBarTrack}>
+                <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button className={styles.readAllLink} onClick={onOpenReviews}>
+          Read all reviews
+        </button>
       </div>
 
     </div>

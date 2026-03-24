@@ -13,7 +13,7 @@
   width: 100%;
   max-width: 789px;
   border-radius: 16px 16px 0 0;
-  height: 75vh;
+  max-height: 75vh;
   display: flex;
   flex-direction: column;
 }

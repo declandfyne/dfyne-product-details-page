@@ -6,7 +6,7 @@ export default function SizeSelector({ selectedId, onChange }) {
     <div className={styles.section}>
       <div className={styles.header}>
         <p className={styles.label}>
-          SIZE: <strong>{selectedId?.toUpperCase()}</strong>
+          TRUE TO SIZE: <strong>{selectedId?.toUpperCase()}</strong>
         </p>
         <button className={styles.guideBtn}>SIZE GUIDE</button>
       </div>

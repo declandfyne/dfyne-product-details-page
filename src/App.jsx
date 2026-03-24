@@ -51,7 +51,7 @@ export default function App() {
 
       <hr className={styles.dividerNoTop} />
 
-      <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout={selectedColor.id === 'navy' ? 'hidden' : selectedColor.id === 'teal' ? 'standalone' : selectedColor.id === 'truffle' ? 'standalone-pills' : 'button'} />
+      <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout={selectedColor.id === 'navy' ? 'hidden' : (selectedColor.id === 'teal' || selectedColor.id === 'midnight-black') ? 'standalone' : selectedColor.id === 'truffle' ? 'standalone-pills' : 'button'} />
 
       <InfoModal
         open={infoTab !== null}
