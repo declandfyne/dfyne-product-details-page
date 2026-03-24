@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import styles from './InfoModal.module.css'
-import { REVIEW_RATINGS } from '../data/product'
 
 const StarIcon = ({ filled }) => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill={filled ? '#0a0a0a' : 'none'} stroke="#0a0a0a" strokeWidth="1.5">
@@ -83,46 +82,62 @@ function ReviewCard({ review }) {
   )
 }
 
+const AGGREGATE_SCORES = { quality: 95, sizing: 78, fit: 72 }
+
 function ReviewsContent() {
   const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
   return (
     <div className={styles.content}>
+      <p className={styles.tabTitle}>CUSTOMER REVIEWS</p>
+
       <div className={styles.summarySection}>
-        <p className={styles.tabTitle}>CUSTOMER REVIEWS</p>
         <div className={styles.summaryRow}>
           <span className={styles.avgScore}>{avgRating}</span>
           <Stars count={Math.round(Number(avgRating))} />
           <span className={styles.reviewCount}>Based on {MOCK_REVIEWS.length} reviews</span>
         </div>
       </div>
+
+      <div className={styles.summaryScales}>
+        <div className={styles.summaryScalesRow}>
+          <div className={styles.summaryScaleItem}>
+            <span className={styles.summaryScaleLabel}>Product Quality:</span>
+            <div className={styles.summaryScaleTrack}>
+              <div className={styles.summaryScaleFill} style={{ width: `${AGGREGATE_SCORES.quality}%` }} />
+            </div>
+            <div className={styles.summaryScaleEnds}>
+              <span>Not as expected</span>
+              <span>Incredible</span>
+            </div>
+          </div>
+          <div className={styles.summaryScaleItem}>
+            <span className={styles.summaryScaleLabel}>Sizing:</span>
+            <div className={styles.summaryScaleTrack}>
+              <div className={styles.summaryScaleFill} style={{ width: `${AGGREGATE_SCORES.sizing}%` }} />
+            </div>
+            <div className={styles.summaryScaleEnds}>
+              <span>Size Down</span>
+              <span>Size Up</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.summaryScaleItemHalf}>
+          <span className={styles.summaryScaleLabel}>Fit:</span>
+          <div className={styles.summaryScaleTrack}>
+            <div className={styles.summaryScaleFill} style={{ width: `${AGGREGATE_SCORES.fit}%` }} />
+          </div>
+          <div className={styles.summaryScaleEnds}>
+            <span>Loose</span>
+            <span>Tight</span>
+          </div>
+        </div>
+      </div>
+
       <div className={styles.reviewsList}>
         {MOCK_REVIEWS.map((review, i) => (
           <ReviewCard key={i} review={review} />
         ))}
       </div>
-    </div>
-  )
-}
-
-function ReviewSection({ onReadReviews }) {
-  return (
-    <div className={styles.featSection}>
-      <p className={styles.featSectionLabel}>CUSTOMER REVIEWS</p>
-      <div className={styles.reviewBars}>
-        {REVIEW_RATINGS.map(({ label, low, high, value }) => (
-          <div key={label} className={styles.reviewBarItem}>
-            <span className={styles.reviewBarLabel}>{label}</span>
-            <div className={styles.reviewBarScaleRow}>
-              <span className={styles.reviewBarEnd}>{low}</span>
-              <div className={styles.reviewBarTrack}>
-                <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
-              </div>
-              <span className={styles.reviewBarEnd}>{high}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-      <button className={styles.readReviewsBtn} onClick={onReadReviews}>READ REVIEWS</button>
     </div>
   )
 }
@@ -133,14 +148,6 @@ const CloseIcon = () => (
   </svg>
 )
 
-const TABS = [
-  { id: 'features',  label: 'PRODUCT FEATURES' },
-  { id: 'model',     label: 'MODEL SIZE' },
-  { id: 'delivery',  label: 'DELIVERY & RETURNS' },
-  { id: 'reviews',   label: 'REVIEWS' },
-]
-
-
 const HIGHLIGHTS = [
   'Built-in bra with removable cups & pads',
   'Twill knit underbust & waist for contouring',
@@ -149,7 +156,7 @@ const HIGHLIGHTS = [
   'Durable, shape-retaining fabric',
 ]
 
-function FeaturesContent({ onReadReviews }) {
+function FeaturesContent() {
   return (
     <div className={styles.content}>
       <p className={styles.tabTitle}>PRODUCT FEATURES</p>
@@ -187,8 +194,6 @@ function FeaturesContent({ onReadReviews }) {
           <strong>Firm at True to Size.</strong> Size up for a more relaxed fit.
         </p>
       </div>
-
-      <ReviewSection onReadReviews={onReadReviews} />
     </div>
   )
 }
@@ -312,12 +317,6 @@ function DeliveryContent() {
 }
 
 export default function InfoModal({ open, activeTab, onClose, model, productImg }) {
-  const [tab, setTab] = useState(activeTab || 'features')
-
-  useEffect(() => {
-    if (activeTab) setTab(activeTab)
-  }, [activeTab])
-
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -334,23 +333,11 @@ export default function InfoModal({ open, activeTab, onClose, model, productImg 
           </button>
         </div>
 
-        <div className={styles.tabs}>
-          {TABS.map(t => (
-            <button
-              key={t.id}
-              className={`${styles.tab} ${tab === t.id ? styles.tabActive : ''}`}
-              onClick={() => setTab(t.id)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
         <div className={styles.body}>
-          {tab === 'features' && <FeaturesContent onReadReviews={() => setTab('reviews')} />}
-          {tab === 'model'    && <ModelContent model={model} productImg={productImg} />}
-          {tab === 'delivery' && <DeliveryContent />}
-          {tab === 'reviews'  && <ReviewsContent />}
+          {activeTab === 'features' && <FeaturesContent />}
+          {activeTab === 'model'    && <ModelContent model={model} productImg={productImg} />}
+          {activeTab === 'delivery' && <DeliveryContent />}
+          {activeTab === 'reviews'  && <ReviewsContent />}
         </div>
       </div>
     </div>
