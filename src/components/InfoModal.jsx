@@ -1,7 +1,131 @@
 import { useState, useEffect } from 'react'
 import styles from './InfoModal.module.css'
-import FeatureRatings from './FeatureRatings'
-import { FEATURE_RATINGS, REVIEW_RATINGS } from '../data/product'
+import { REVIEW_RATINGS } from '../data/product'
+
+const StarIcon = ({ filled }) => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill={filled ? '#0a0a0a' : 'none'} stroke="#0a0a0a" strokeWidth="1.5">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </svg>
+)
+
+function Stars({ count }) {
+  return (
+    <div className={styles.stars}>
+      {[1, 2, 3, 4, 5].map(i => (
+        <StarIcon key={i} filled={i <= count} />
+      ))}
+    </div>
+  )
+}
+
+const MOCK_REVIEWS = [
+  { name: 'Reyna V.', verified: true, location: 'United States', date: '14/01/2026', stars: 5, title: 'Love this jacket!', scores: { quality: 100, sizing: 74, fit: 74 } },
+  { name: 'Sophie L.', verified: true, location: 'United Kingdom', date: '09/01/2026', stars: 5, title: 'Best workout top I own', scores: { quality: 95, sizing: 50, fit: 60 } },
+  { name: 'Megan T.', verified: true, location: 'Canada', date: '02/01/2026', stars: 5, title: 'Super cute, runs a little small', scores: { quality: 90, sizing: 85, fit: 80 } },
+  { name: 'Aisha K.', verified: true, location: 'Australia', date: '28/12/2025', stars: 5, title: 'Incredibly soft fabric', scores: null },
+  { name: 'Emma R.', verified: true, location: 'United Kingdom', date: '20/12/2025', stars: 5, title: 'Perfect for the gym and brunch after', scores: { quality: 100, sizing: 50, fit: 55 } },
+  { name: 'Chloe B.', verified: false, location: 'Ireland', date: '15/12/2025', stars: 5, title: 'Great quality, wished it came in more colours', scores: null },
+  { name: 'Jasmine P.', verified: true, location: 'United States', date: '10/12/2025', stars: 5, title: 'The built-in bra is a game changer', scores: { quality: 100, sizing: 55, fit: 65 } },
+  { name: 'Nina W.', verified: true, location: 'Germany', date: '05/12/2025', stars: 5, title: 'Flattering fit, holds everything in place', scores: null },
+  { name: 'Olivia D.', verified: true, location: 'Canada', date: '28/11/2025', stars: 5, title: 'Ordered two more after my first', scores: { quality: 95, sizing: 50, fit: 50 } },
+  { name: 'Priya S.', verified: true, location: 'United Kingdom', date: '20/11/2025', stars: 5, title: 'Washes beautifully, no shape loss', scores: null },
+]
+
+function ReviewScores({ scores }) {
+  const items = [
+    { label: 'Product Quality', low: 'Not as expected', high: 'Incredible', value: scores.quality },
+    { label: 'Sizing', low: 'Size Down', high: 'Size Up', value: scores.sizing },
+    { label: 'Fit', low: 'Loose', high: 'Tight', value: scores.fit },
+  ]
+  return (
+    <div className={styles.scoresGrid}>
+      {items.map(({ label, low, high, value }) => (
+        <div key={label} className={styles.scoreItem}>
+          <span className={styles.scoreLabel}>{label}:</span>
+          <div className={styles.scoreTrack}>
+            <div className={styles.scoreFill} style={{ width: `${value}%` }} />
+          </div>
+          <div className={styles.scoreEnds}>
+            <span>{low}</span>
+            <span>{high}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ReviewCard({ review }) {
+  return (
+    <div className={styles.reviewCard}>
+      <div className={styles.cardHeader}>
+        <div className={styles.avatar}>
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="1.5">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </div>
+        <div className={styles.userInfo}>
+          <div className={styles.nameRow}>
+            <span className={styles.userName}>{review.name}</span>
+            {review.verified && <span className={styles.verifiedBadge}>Verified</span>}
+          </div>
+          <span className={styles.userLocation}>{review.location}</span>
+        </div>
+      </div>
+      <div className={styles.ratingRow}>
+        <Stars count={review.stars} />
+        <span className={styles.reviewDate}>{review.date}</span>
+      </div>
+      <p className={styles.reviewTitle}>{review.title}</p>
+      {review.scores && <ReviewScores scores={review.scores} />}
+    </div>
+  )
+}
+
+function ReviewsContent() {
+  const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
+  return (
+    <div className={styles.content}>
+      <div className={styles.summarySection}>
+        <p className={styles.tabTitle}>CUSTOMER REVIEWS</p>
+        <div className={styles.summaryRow}>
+          <span className={styles.avgScore}>{avgRating}</span>
+          <Stars count={Math.round(Number(avgRating))} />
+          <span className={styles.reviewCount}>Based on {MOCK_REVIEWS.length} reviews</span>
+        </div>
+      </div>
+      <div className={styles.reviewsList}>
+        {MOCK_REVIEWS.map((review, i) => (
+          <ReviewCard key={i} review={review} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ReviewSection({ onReadReviews }) {
+  return (
+    <div className={styles.featSection}>
+      <p className={styles.featSectionLabel}>CUSTOMER REVIEWS</p>
+      <div className={styles.reviewBars}>
+        {REVIEW_RATINGS.map(({ label, low, high, value }) => (
+          <div key={label} className={styles.reviewBarItem}>
+            <span className={styles.reviewBarLabel}>{label}</span>
+            <div className={styles.reviewBarScaleRow}>
+              <span className={styles.reviewBarEnd}>{low}</span>
+              <div className={styles.reviewBarTrack}>
+                <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
+              </div>
+              <span className={styles.reviewBarEnd}>{high}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button className={styles.readReviewsBtn} onClick={onReadReviews}>READ REVIEWS</button>
+    </div>
+  )
+}
 
 const CloseIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -13,6 +137,7 @@ const TABS = [
   { id: 'features',  label: 'PRODUCT FEATURES' },
   { id: 'model',     label: 'MODEL SIZE' },
   { id: 'delivery',  label: 'DELIVERY & RETURNS' },
+  { id: 'reviews',   label: 'REVIEWS' },
 ]
 
 
@@ -24,19 +149,10 @@ const HIGHLIGHTS = [
   'Durable, shape-retaining fabric',
 ]
 
-function FeaturesContent() {
+function FeaturesContent({ onReadReviews }) {
   return (
     <div className={styles.content}>
       <p className={styles.tabTitle}>PRODUCT FEATURES</p>
-
-      <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>FEEL</p>
-        <FeatureRatings ratings={FEATURE_RATINGS} />
-      </div>
-
-      <p className={styles.text}>
-        Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Engineered with a twill knit underbust and waist panel that contours and supports your core through every rep, squat and set. The adjustable halterneck and open back design keeps you cool and confident, while the built-in bra with removable cups and pads means no extra layers needed. Crafted from our signature 90% Nylon, 10% Elastane fabric — incredibly soft, durable, and shape-retaining wash after wash.
-      </p>
 
       <div className={styles.featSection}>
         <ul className={styles.bulletList}>
@@ -44,6 +160,13 @@ function FeaturesContent() {
             <li key={h} className={styles.bulletItem}>{h}</li>
           ))}
         </ul>
+      </div>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>DESCRIPTION</p>
+        <p className={styles.text}>
+          Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Designed to contour and support your core through every rep, squat and set while keeping you cool and confident.
+        </p>
       </div>
 
       <div className={styles.featSection}>
@@ -65,23 +188,7 @@ function FeaturesContent() {
         </p>
       </div>
 
-      <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>CUSTOMER REVIEWS</p>
-        <div className={styles.reviewBars}>
-          {REVIEW_RATINGS.map(({ label, low, high, value }) => (
-            <div key={label} className={styles.reviewBarItem}>
-              <span className={styles.reviewBarLabel}>{label}</span>
-              <div className={styles.reviewBarScaleRow}>
-                <span className={styles.reviewBarEnd}>{low}</span>
-                <div className={styles.reviewBarTrack}>
-                  <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
-                </div>
-                <span className={styles.reviewBarEnd}>{high}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <ReviewSection onReadReviews={onReadReviews} />
     </div>
   )
 }
@@ -199,6 +306,7 @@ function DeliveryContent() {
       </div>
 
       <a href="/contact" className={styles.contactBtn}>Contact Us</a>
+
     </div>
   )
 }
@@ -239,9 +347,10 @@ export default function InfoModal({ open, activeTab, onClose, model, productImg 
         </div>
 
         <div className={styles.body}>
-          {tab === 'features' && <FeaturesContent />}
+          {tab === 'features' && <FeaturesContent onReadReviews={() => setTab('reviews')} />}
           {tab === 'model'    && <ModelContent model={model} productImg={productImg} />}
           {tab === 'delivery' && <DeliveryContent />}
+          {tab === 'reviews'  && <ReviewsContent />}
         </div>
       </div>
     </div>
