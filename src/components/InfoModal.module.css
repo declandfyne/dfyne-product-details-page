@@ -293,15 +293,15 @@
 
 .editorialValue {
   font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 11px;
   color: black;
 }
 
 .editorialLabel {
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 1.5px;
   color: #888;
 }
