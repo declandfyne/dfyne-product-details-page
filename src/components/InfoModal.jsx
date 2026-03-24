@@ -88,8 +88,6 @@ function ReviewsContent() {
   const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
   return (
     <div className={styles.content}>
-      <p className={styles.tabTitle}>CUSTOMER REVIEWS</p>
-
       <div className={styles.summarySection}>
         <div className={styles.summaryRow}>
           <span className={styles.avgScore}>{avgRating}</span>
@@ -159,8 +157,6 @@ const HIGHLIGHTS = [
 function FeaturesContent() {
   return (
     <div className={styles.content}>
-      <p className={styles.tabTitle}>PRODUCT FEATURES</p>
-
       <div className={styles.featSection}>
         <ul className={styles.bulletList}>
           {HIGHLIGHTS.map(h => (
@@ -218,7 +214,6 @@ function ModelContent({ model, productImg }) {
   return (
     <div className={styles.modelContent}>
 
-      <p className={styles.tabTitle}>{model.name?.toUpperCase()}'S SIZE & FIT</p>
 
       <div className={styles.modelSideBySide}>
         {productImg && (
@@ -275,7 +270,6 @@ const SHIPPING_ROWS = [
 function DeliveryContent() {
   return (
     <div className={styles.content}>
-      <p className={styles.tabTitle}>DELIVERY & RETURNS</p>
       <p className={styles.text}>
         We offer <strong>free returns</strong> for all orders from the UK, Mainland USA, Canada, EU, and Australia. See more <u>here</u>.
       </p>
@@ -315,6 +309,13 @@ function DeliveryContent() {
   )
 }
 
+const TITLES = {
+  features: 'PRODUCT FEATURES',
+  model: 'MODEL SIZE',
+  delivery: 'DELIVERY & RETURNS',
+  reviews: 'CUSTOMER REVIEWS',
+}
+
 export default function InfoModal({ open, activeTab, onClose, model, productImg }) {
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -327,6 +328,7 @@ export default function InfoModal({ open, activeTab, onClose, model, productImg 
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.sheet} onClick={e => e.stopPropagation()}>
         <div className={styles.header}>
+          <p className={styles.headerTitle}>{TITLES[activeTab]}</p>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <CloseIcon />
           </button>
