@@ -32,7 +32,7 @@
 .dividerNoTop {
   border: none;
   border-top: 1px solid #e7e7e7;
-  margin: 0 16px 24px;
+  margin: 24px 16px;
 }
 
 .bottomPad { height: 40px; }
