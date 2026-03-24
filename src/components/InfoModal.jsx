@@ -168,17 +168,7 @@ function FeaturesContent() {
       </div>
 
       <div className={styles.featSection}>
-        <p className={styles.text}>
-          Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Designed to contour and support your core through every rep, squat and set while keeping you cool and confident.
-        </p>
-      </div>
-
-      <div className={styles.featSection}>
-        <FeatureRatings ratings={FEATURE_RATINGS} />
-      </div>
-
-      <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>MATERIAL</p>
+        <p className={styles.featSectionLabel}>MATERIAL & FEEL</p>
         <div className={styles.materialBar}>
           <div className={styles.materialFill} style={{ width: '90%' }}>
             <span className={styles.materialLabel}>90% Nylon</span>
@@ -187,6 +177,7 @@ function FeaturesContent() {
             <span className={styles.materialLabel}>10% Elastane</span>
           </div>
         </div>
+        <FeatureRatings ratings={FEATURE_RATINGS} />
       </div>
 
       <div className={styles.fitCallout}>

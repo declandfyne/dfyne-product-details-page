@@ -125,7 +125,7 @@ import mbImg3 from '../assets/IMG_1331_1-Edit-2.webp'
 import mbImg4 from '../assets/IMG_1341_1-Edit-3.webp'
 
 export const FEATURE_RATINGS = [
-  { label: 'Support',  value: 4 },
+  { label: 'Bra Support',  value: 4 },
   { label: 'Softness', value: 5 },
   { label: 'Stretch',  value: 3 },
 ]
