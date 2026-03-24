@@ -277,20 +277,19 @@ function DeliveryContent() {
     <div className={styles.content}>
       <p className={styles.tabTitle}>DELIVERY & RETURNS</p>
       <p className={styles.text}>
-        We offer free returns for all orders from the UK, Mainland USA, Canada, EU, and Australia. See more here.
+        We offer <strong>free returns</strong> for all orders from the UK, Mainland USA, Canada, EU, and Australia. See more <u>here</u>.
       </p>
       <p className={styles.text}>
-        Express shipping is our standard.
+        <strong>Express shipping is our standard</strong>
       </p>
       <p className={styles.text}>
-        For tracked shipments, your tracking information will be included in your shipping confirmation email.
-        You can also log into your account and hit 'view my order' to find your tracking information once the order has been dispatched.
+        For tracked shipments, your tracking information will be included in your shipping confirmation email. You can also log into your account and hit '<em>view my order</em>' to find your tracking information once the order has been dispatched.
       </p>
       <p className={styles.text}>
-        You can also use our tracking portal here to track your order.
+        You can also use our <u>tracking portal here</u> to track your order.
       </p>
       <p className={styles.text}>
-        All orders made before 3pm GMT Monday – Friday will be dispatched same day.
+        All orders made before <strong><u>3pm GMT Monday – Friday</u></strong> will be dispatched same day.
       </p>
 
       <div className={styles.shippingTable}>
