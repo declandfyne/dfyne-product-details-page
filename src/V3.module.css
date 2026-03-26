@@ -1,0 +1,24 @@
+.page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 8px;
+}
+
+.label {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
+}
+
+.sub {
+  font-size: 14px;
+  color: #666;
+}

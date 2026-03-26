@@ -1,71 +1,110 @@
 import { useState } from 'react'
-import { COLORS, SIZES, ASSETS } from './data/product'
+import V1 from './V1'
+import V2 from './V2'
+import V3 from './V3'
 
-import Header        from './components/Header'
-import ImpactBanner  from './components/ImpactBanner'
-import ProductImage  from './components/ProductImage'
-import ProductInfo   from './components/ProductInfo'
-import ColorSelector from './components/ColorSelector'
-import SizeSelector  from './components/SizeSelector'
-import CartSection   from './components/CartSection'
-import InfoSection   from './components/InfoSection'
-import InfoModal     from './components/InfoModal'
-import CompleteLook  from './components/CompleteLook'
-import PaymentModal  from './components/PaymentModal'
-
-import styles from './App.module.css'
-
-const DEFAULT_COLOR = COLORS.find(c => c.id === 'midnight-black')
-const DEFAULT_SIZE  = SIZES.find(s => s.id === 'xs')
+const VERSIONS = [
+  { id: 1, label: 'V1' },
+  { id: 2, label: 'V2' },
+  { id: 3, label: 'V3' },
+]
 
 export default function App() {
-  const [selectedColor,  setSelectedColor]  = useState(DEFAULT_COLOR)
-  const [selectedSize,   setSelectedSize]   = useState(DEFAULT_SIZE)
-  const [paymentOpen,    setPaymentOpen]    = useState(false)
-  const [infoTab,        setInfoTab]        = useState(null)
+  const [version, setVersion] = useState(1)
+  const [showSwitcher, setShowSwitcher] = useState(true)
 
   return (
-    <div className={styles.page}>
-      <Header />
-      <ImpactBanner />
+    <>
+      {version === 1 && <V1 />}
+      {version === 2 && <V2 />}
+      {version === 3 && <V3 />}
 
-      <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Longline Strappy Top – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
+      {showSwitcher && (
+        <div style={switcher}>
+          {VERSIONS.map(v => (
+            <button
+              key={v.id}
+              onClick={() => setVersion(v.id)}
+              style={{
+                ...pill,
+                ...(version === v.id ? pillActive : {}),
+              }}
+            >
+              {v.label}
+            </button>
+          ))}
+          <button onClick={() => setShowSwitcher(false)} style={closeBtn}>
+            ✕
+          </button>
+        </div>
+      )}
 
-      <ProductInfo onOpenReviews={() => setInfoTab('reviews')} />
-
-      <hr className={styles.divider} />
-
-      <ColorSelector
-        selectedId={selectedColor.id}
-        onChange={setSelectedColor}
-      />
-
-      <SizeSelector
-        selectedId={selectedSize.id}
-        onChange={setSelectedSize}
-      />
-
-      <CartSection onOpenPayment={() => setPaymentOpen(true)} />
-
-      <PaymentModal open={paymentOpen} onClose={() => setPaymentOpen(false)} />
-
-      <hr className={styles.dividerNoTop} />
-
-      <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout="standalone" />
-
-      <InfoModal
-        open={infoTab !== null}
-        activeTab={infoTab}
-        onClose={() => setInfoTab(null)}
-        model={selectedColor.model}
-        productImg={ASSETS.modelPhoto}
-      />
-
-      <hr className={styles.divider} />
-
-      <CompleteLook />
-
-      <div className={styles.bottomPad} />
-    </div>
+      {!showSwitcher && (
+        <button
+          onClick={() => setShowSwitcher(true)}
+          style={fab}
+        >
+          V{version}
+        </button>
+      )}
+    </>
   )
+}
+
+const switcher = {
+  position: 'fixed',
+  bottom: 24,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  display: 'flex',
+  gap: 6,
+  background: '#111',
+  borderRadius: 999,
+  padding: '6px 8px',
+  zIndex: 9999,
+  boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+}
+
+const pill = {
+  border: 'none',
+  borderRadius: 999,
+  padding: '8px 18px',
+  fontSize: 13,
+  fontWeight: 600,
+  cursor: 'pointer',
+  background: 'transparent',
+  color: '#888',
+  transition: 'all 0.2s',
+}
+
+const pillActive = {
+  background: '#fff',
+  color: '#111',
+}
+
+const closeBtn = {
+  border: 'none',
+  background: 'transparent',
+  color: '#666',
+  fontSize: 14,
+  cursor: 'pointer',
+  padding: '8px 6px',
+  marginLeft: 2,
+}
+
+const fab = {
+  position: 'fixed',
+  bottom: 24,
+  right: 24,
+  width: 44,
+  height: 44,
+  borderRadius: '50%',
+  border: 'none',
+  background: '#111',
+  color: '#fff',
+  fontSize: 13,
+  fontWeight: 700,
+  cursor: 'pointer',
+  zIndex: 9999,
+  boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
 }
