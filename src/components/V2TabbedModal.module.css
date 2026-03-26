@@ -1,0 +1,526 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sheet {
+  background: white;
+  width: 100%;
+  max-width: 789px;
+  border-radius: 16px 16px 0 0;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 14px 16px 0;
+  flex-shrink: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 0 16px;
+  gap: 0;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.tab {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  padding: 12px 14px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  color: #888;
+  white-space: nowrap;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab.tabActive {
+  color: #0a0a0a;
+  border-bottom-color: #0a0a0a;
+  font-weight: 700;
+}
+
+.body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 20px 16px 32px;
+}
+
+/* Content shared styles */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.text {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: black;
+  margin: 0;
+}
+
+/* Features */
+.featSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.featSectionLabel {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.bulletList {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.bulletItem {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  line-height: 18px;
+  list-style: disc;
+}
+
+.materialBar {
+  display: flex;
+  height: 28px;
+  width: 100%;
+}
+
+.materialFill {
+  background: black;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 6px 0 0 6px;
+}
+
+.materialRemainder {
+  background: #e0e0e0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 0 6px 6px 0;
+}
+
+.materialLabel {
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}
+
+.materialLabelDark {
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  white-space: nowrap;
+}
+
+.fitCallout {
+  background: #fff;
+  border: 1px solid #0a0a0a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fitCalloutTitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.fitCalloutText {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  line-height: 18px;
+  margin: 0;
+}
+
+/* Model */
+.modelSideBySide {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.modelHeroSmall {
+  width: 200px;
+  flex-shrink: 0;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.modelHeroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.editorialStatsStacked {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  align-self: stretch;
+}
+
+.editorialStatRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+  padding: 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.editorialStatRow:last-child {
+  border-bottom: none;
+}
+
+.editorialValue {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: black;
+}
+
+.editorialLabel {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #888;
+}
+
+.modelTable {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modelRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 8px 14px;
+  border-bottom: 1px solid #ebebeb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+}
+
+.modelRow:last-child {
+  border-bottom: none;
+}
+
+.modelHeader {
+  background: #fafafa;
+}
+
+.modelColHead {
+  font-weight: 600;
+  color: #888;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.modelLabel {
+  font-weight: 500;
+  color: #444;
+}
+
+.modelValue {
+  font-weight: 400;
+  color: #666;
+  text-align: center;
+}
+
+/* Delivery */
+.shippingTable {
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+  font-size: 11px;
+}
+
+.shippingHeader {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr;
+  padding: 8px 12px;
+  background: #fafafa;
+  border-bottom: 1px solid #ebebeb;
+  font-weight: 700;
+  color: black;
+  gap: 8px;
+}
+
+.shippingRow {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr;
+  padding: 10px 12px;
+  border-bottom: 1px solid #ebebeb;
+  color: #444;
+  gap: 8px;
+  line-height: 16px;
+}
+
+.shippingRow:last-child {
+  border-bottom: none;
+}
+
+.contactBtn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 89px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+/* Reviews */
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avgScore {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: #0a0a0a;
+  line-height: 1;
+}
+
+.reviewCount {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 0.3px;
+}
+
+.summaryScales {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.summaryScaleItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scoresGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.scoreItem {
+  flex: 1 1 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scoreLabel {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #0a0a0a;
+  letter-spacing: 0.86px;
+}
+
+.scoreTrack {
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: 116px;
+  width: 100%;
+}
+
+.scoreFill {
+  height: 100%;
+  background: #0a0a0a;
+  border-radius: 116px;
+}
+
+.scoreEnds {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  color: #0a0a0a;
+}
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewCard {
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cardHeader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.avatar {
+  width: 36px;
+  height: 38px;
+  background: #ededed;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.userName {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #0a0a0a;
+  letter-spacing: 0.3px;
+}
+
+.verifiedBadge {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: white;
+  background: #0a0a0a;
+  border-radius: 4px;
+  padding: 2px 8px;
+  letter-spacing: 0.3px;
+}
+
+.userLocation {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #8a8a8a;
+  letter-spacing: 0.3px;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reviewDate {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 9px;
+  color: #707070;
+  letter-spacing: 0.3px;
+}
+
+.reviewTitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #0a0a0a;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
