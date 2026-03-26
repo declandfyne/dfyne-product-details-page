@@ -31,7 +31,7 @@ export default function App() {
 
       <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Longline Strappy Top – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
 
-      <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={selectedColor.id === 'navy'} />
+      <ProductInfo onOpenReviews={() => setInfoTab('reviews')} />
 
       <hr className={styles.divider} />
 
@@ -51,7 +51,7 @@ export default function App() {
 
       <hr className={styles.dividerNoTop} />
 
-      <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout={selectedColor.id === 'navy' ? 'hidden' : (selectedColor.id === 'teal' || selectedColor.id === 'midnight-black') ? 'standalone' : selectedColor.id === 'truffle' ? 'standalone-pills' : 'button'} />
+      <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout="standalone" />
 
       <InfoModal
         open={infoTab !== null}
