@@ -31,7 +31,7 @@ export default function CartSection({ onOpenPayment }) {
           </svg>
           <span className={styles.deliveryText}>Free Tracked Delivery over £30</span>
         </div>
-        <span className={styles.dot}> • </span>
+        <span className={styles.divider} />
         <div className={styles.deliveryInner}>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="1 4 1 10 7 10" />

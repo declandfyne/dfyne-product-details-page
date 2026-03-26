@@ -33,7 +33,9 @@ export default function V3InfoSection({ onOpenDetails, onOpenReviews, featureLay
       <button className={styles.detailsBtn} onClick={onOpenDetails}>
         <div className={styles.detailsBtnContent}>
           <span className={styles.detailsBtnLabel}>DETAILS & DELIVERY</span>
-          <span className={styles.detailsBtnSub}>Features · Model & Sizing · Delivery & Returns</span>
+          <span className={styles.detailsBtnSub}>
+            Features <span className={styles.subDivider} /> Model & Sizing <span className={styles.subDivider} /> Delivery & Returns
+          </span>
         </div>
         <CaretRight />
       </button>
