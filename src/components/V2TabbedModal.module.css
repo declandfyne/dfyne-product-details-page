@@ -189,6 +189,32 @@
   margin: 0;
 }
 
+.fitCalloutV2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fitInfoIcon {
+  flex-shrink: 0;
+}
+
+.fitCalloutBold {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000;
+}
+
+.fitCalloutRegular {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000;
+}
+
 /* Model */
 .modelSideBySide {
   display: flex;
@@ -202,6 +228,7 @@
   aspect-ratio: 3 / 4;
   border-radius: 4px;
   overflow: hidden;
+  position: relative;
 }
 
 .modelHeroImg {
@@ -257,9 +284,101 @@
   overflow: hidden;
 }
 
+.unitToggleOverlay {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.unitBtn {
+  background: white;
+  border: none;
+  padding: 6px 14px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #888;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.unitBtn.unitBtnActive {
+  background: #0a0a0a;
+  color: white;
+}
+
+.dressSizeChips {
+  display: flex;
+  gap: 6px;
+}
+
+.dressSizeChip {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0;
+  background: #fafafa;
+  border-radius: 6px;
+}
+
+.dressSizeRegion {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #888;
+}
+
+.dressSizeValue {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #0a0a0a;
+}
+
+.regionalSizes {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.regionalSizeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8px 14px;
+  border-bottom: 1px solid #ebebeb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+}
+
+.regionalSizeRow:last-child {
+  border-bottom: none;
+}
+
+.regionalSizeLabel {
+  font-weight: 500;
+  color: #444;
+}
+
+.regionalSizeValue {
+  font-weight: 400;
+  color: #666;
+  text-align: center;
+}
+
 .modelRow {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 8px 14px;
   border-bottom: 1px solid #ebebeb;

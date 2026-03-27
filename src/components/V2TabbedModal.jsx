@@ -23,10 +23,25 @@ const HIGHLIGHTS = [
   'Durable, shape-retaining fabric',
 ]
 
+const CARE_INSTRUCTIONS = [
+  'Machine wash cold, inside out — gentle/delicates cycle, mesh bag recommended.',
+  'Mild detergent only — no fabric softener, no bleach.',
+  'Air dry flat — away from direct heat and sunlight.',
+  'No tumble dryer, no iron, no dry cleaning.',
+  'Rinse in cold water after workouts if you can\'t wash straight away.',
+]
+
 function FeaturesContent() {
   return (
     <div className={styles.content}>
+      <p className={styles.text}>
+        Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Designed to contour and support your core through every rep, squat and set while keeping you cool and confident.
+      </p>
+
+      <FeatureRatings ratings={FEATURE_RATINGS} />
+
       <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>FEATURES</p>
         <ul className={styles.bulletList}>
           {HIGHLIGHTS.map(h => (
             <li key={h} className={styles.bulletItem}>{h}</li>
@@ -34,8 +49,19 @@ function FeaturesContent() {
         </ul>
       </div>
 
+      <div className={styles.fitCalloutV2}>
+        <svg className={styles.fitInfoIcon} width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="8" fill="#0a0a0a" />
+          <text x="8" y="11.5" textAnchor="middle" fill="white" fontSize="10" fontWeight="700" fontFamily="Raleway, sans-serif">i</text>
+        </svg>
+        <span>
+          <span className={styles.fitCalloutBold}>Firm at True to Size.</span>
+          <span className={styles.fitCalloutRegular}> Size up for a more relaxed fit.</span>
+        </span>
+      </div>
+
       <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>MATERIAL & FEEL</p>
+        <p className={styles.featSectionLabel}>MATERIAL COMPOSITION</p>
         <div className={styles.materialBar}>
           <div className={styles.materialFill} style={{ width: '90%' }}>
             <span className={styles.materialLabel}>90% Nylon</span>
@@ -44,33 +70,53 @@ function FeaturesContent() {
             <span className={styles.materialLabelDark}>10% Elastane</span>
           </div>
         </div>
-        <FeatureRatings ratings={FEATURE_RATINGS} />
       </div>
 
-      <div className={styles.fitCallout}>
-        <p className={styles.fitCalloutTitle}>FIT GUIDE</p>
-        <p className={styles.fitCalloutText}>
-          <strong>Firm at True to Size.</strong> Size up for a more relaxed fit.
-        </p>
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>CARE INSTRUCTIONS</p>
+        <ul className={styles.bulletList}>
+          {CARE_INSTRUCTIONS.map(item => (
+            <li key={item} className={styles.bulletItem}>{item}</li>
+          ))}
+        </ul>
       </div>
     </div>
   )
 }
 
 const MODEL_MEASUREMENTS = [
-  { label: 'Height',     cm: '168',    imperial: '5\'6"'  },
-  { label: 'Hips',       cm: '101',    imperial: '40"'    },
-  { label: 'Waist',      cm: '69',     imperial: '27"'    },
-  { label: 'Bust',       cm: '81.5',   imperial: '32"'    },
-  { label: 'Cup Size',   cm: 'B',      imperial: 'B'      },
-  { label: 'Dress Size', cm: '8 - 10', imperial: '6 - 8'  },
+  { label: 'Height',   cm: '168',  imperial: '5\'6"' },
+  { label: 'Hips',     cm: '101',  imperial: '40"'   },
+  { label: 'Waist',    cm: '69',   imperial: '27"'   },
+  { label: 'Bust',     cm: '81.5', imperial: '32"'   },
+  { label: 'Cup Size', cm: 'B',    imperial: 'B'     },
 ]
 
+const REGIONAL_SIZES = [
+  { region: 'UK',  size: '8 – 10' },
+  { region: 'US',  size: '4 – 6'  },
+  { region: 'EU',  size: '36 – 38' },
+  { region: 'AU',  size: '8 – 10' },
+]
+
+const getDefaultUnit = () => {
+  const lang = navigator.language || ''
+  const imperialLocales = ['en-US', 'en-LR', 'en-MM']
+  return imperialLocales.some(l => lang.startsWith(l)) ? 'imperial' : 'metric'
+}
+
 function ModelContent({ model }) {
-  const EDITORIAL_STATS = [
+  const [unit, setUnit] = useState(getDefaultUnit)
+
+  const EDITORIAL_STATS = unit === 'metric' ? [
     { value: '168 cm', label: 'HEIGHT' },
-    { value: '8 – 10', label: 'UK DRESS' },
     { value: 'Cup B',  label: 'BUST' },
+    { value: '8 – 10', label: 'UK DRESS' },
+    { value: `Size ${model.size}`, label: 'WEARING' },
+  ] : [
+    { value: '5\'6"', label: 'HEIGHT' },
+    { value: 'Cup B',  label: 'BUST' },
+    { value: '4 – 6', label: 'US DRESS' },
     { value: `Size ${model.size}`, label: 'WEARING' },
   ]
 
@@ -79,6 +125,20 @@ function ModelContent({ model }) {
       <div className={styles.modelSideBySide}>
         <div className={styles.modelHeroSmall}>
           <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
+          <div className={styles.unitToggleOverlay}>
+            <button
+              className={`${styles.unitBtn} ${unit === 'metric' ? styles.unitBtnActive : ''}`}
+              onClick={() => setUnit('metric')}
+            >
+              CM
+            </button>
+            <button
+              className={`${styles.unitBtn} ${unit === 'imperial' ? styles.unitBtnActive : ''}`}
+              onClick={() => setUnit('imperial')}
+            >
+              IN
+            </button>
+          </div>
         </div>
         <div className={styles.editorialStatsStacked}>
           {EDITORIAL_STATS.map(({ value, label }) => (
@@ -91,18 +151,28 @@ function ModelContent({ model }) {
       </div>
 
       <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>FULL MEASUREMENTS</p>
+        <p className={styles.featSectionLabel}>ALEIAH'S MEASUREMENTS</p>
         <div className={styles.modelTable}>
           <div className={`${styles.modelRow} ${styles.modelHeader}`}>
             <span className={styles.modelLabel} />
-            <span className={styles.modelColHead}>METRIC</span>
-            <span className={styles.modelColHead}>IMPERIAL</span>
+            <span className={styles.modelColHead}>{unit === 'metric' ? 'CM' : 'INCHES'}</span>
           </div>
           {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
             <div key={label} className={styles.modelRow}>
               <span className={styles.modelLabel}>{label}</span>
-              <span className={styles.modelValue}>{cm}</span>
-              <span className={styles.modelValue}>{imperial}</span>
+              <span className={styles.modelValue}>{unit === 'metric' ? cm : imperial}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>DRESS SIZE CONVERSIONS</p>
+        <div className={styles.dressSizeChips}>
+          {REGIONAL_SIZES.map(({ region, size }) => (
+            <div key={region} className={styles.dressSizeChip}>
+              <span className={styles.dressSizeRegion}>{region}</span>
+              <span className={styles.dressSizeValue}>{size}</span>
             </div>
           ))}
         </div>
