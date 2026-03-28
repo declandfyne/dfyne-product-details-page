@@ -429,6 +429,42 @@
   gap: 8px;
 }
 
+.dressGrid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dressGridRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+}
+
+.dressGridRow:first-child {
+  background: #fafafa;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.dressGridLabel {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  color: #888;
+  padding: 8px 0;
+}
+
+.dressGridValue {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  color: #0a0a0a;
+  padding: 10px 0;
+}
+
 .dressSection .modelTableCompact {
   flex: none;
 }

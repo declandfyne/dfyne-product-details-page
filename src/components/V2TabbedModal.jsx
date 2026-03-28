@@ -160,13 +160,17 @@ function ModelContent({ model }) {
 
       <div className={styles.dressSection}>
         <p className={styles.modelName}>DRESS SIZE CONVERSIONS</p>
-        <div className={styles.modelTableCompact}>
-          {REGIONAL_SIZES.map(({ region, size }) => (
-            <div key={region} className={styles.modelRowCompact}>
-              <span className={styles.modelLabelCompact}>{region}</span>
-              <span className={styles.modelValueCompact}>{size}</span>
-            </div>
-          ))}
+        <div className={styles.dressGrid}>
+          <div className={styles.dressGridRow}>
+            {REGIONAL_SIZES.map(({ region }) => (
+              <span key={region} className={styles.dressGridLabel}>{region}</span>
+            ))}
+          </div>
+          <div className={styles.dressGridRow}>
+            {REGIONAL_SIZES.map(({ region, size }) => (
+              <span key={region} className={styles.dressGridValue}>{size}</span>
+            ))}
+          </div>
         </div>
       </div>
 
