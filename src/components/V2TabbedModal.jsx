@@ -109,54 +109,86 @@ const RulerIcon = () => (
   </svg>
 )
 
+const ChevronDownSmall = () => (
+  <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+    <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+const ChevronUpSmall = () => (
+  <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+    <path d="M9 5L5 1L1 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 function ModelContent({ model }) {
   const [unit, setUnit] = useState(getDefaultUnit)
-
-  const EDITORIAL_STATS = unit === 'metric' ? [
-    { value: '168 cm', label: 'HEIGHT' },
-    { value: 'Cup B',  label: 'BUST' },
-    { value: '8 – 10', label: 'UK DRESS' },
-    { value: `Size ${model.size}`, label: 'WEARING' },
-  ] : [
-    { value: '5\'6"', label: 'HEIGHT' },
-    { value: 'Cup B',  label: 'BUST' },
-    { value: '4 – 6', label: 'US DRESS' },
-    { value: `Size ${model.size}`, label: 'WEARING' },
-  ]
+  const [showMeasurements, setShowMeasurements] = useState(false)
 
   return (
     <div className={styles.content}>
-      <div className={styles.modelSideBySide}>
-        <div className={styles.modelInfoRight}>
-          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS · SIZE {model.size.toUpperCase()}</p>
-          <div className={styles.unitToggleInline}>
-            <button
-              className={`${styles.unitBtn} ${unit === 'metric' ? styles.unitBtnActive : ''}`}
-              onClick={() => setUnit('metric')}
-            >
-              CM
-            </button>
-            <button
-              className={`${styles.unitBtn} ${unit === 'imperial' ? styles.unitBtnActive : ''}`}
-              onClick={() => setUnit('imperial')}
-            >
-              IN
-            </button>
-          </div>
-          <div className={styles.modelTableCompact}>
-            {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
-              <div key={label} className={styles.modelRowCompact}>
-                <span className={styles.modelLabelCompact}>{label}</span>
-                <span className={styles.modelValueCompact}>{unit === 'metric' ? cm : imperial}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.modelHeroSmall}>
+      {/* Hero: image + key stats side by side */}
+      <div className={styles.modelHeroRow}>
+        <div className={styles.modelHeroImgWrap}>
           <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
+        </div>
+        <div className={styles.modelKeyStats}>
+          <p className={styles.modelName}>ALEIAH</p>
+          <div className={styles.keyStatItems}>
+            <div className={styles.keyStat}>
+              <span className={styles.keyStatValue}>{unit === 'metric' ? '168cm' : '5\'6"'}</span>
+              <span className={styles.keyStatLabel}>HEIGHT</span>
+            </div>
+            <div className={styles.keyStat}>
+              <span className={styles.keyStatValue}>Size {model.size}</span>
+              <span className={styles.keyStatLabel}>WEARING</span>
+            </div>
+            <div className={styles.keyStat}>
+              <span className={styles.keyStatValue}>{unit === 'metric' ? '8 – 10' : '4 – 6'}</span>
+              <span className={styles.keyStatLabel}>{unit === 'metric' ? 'UK DRESS' : 'US DRESS'}</span>
+            </div>
+          </div>
         </div>
       </div>
 
+      {/* Expandable full measurements */}
+      <div className={styles.expandSection}>
+        <button
+          className={styles.expandToggle}
+          onClick={() => setShowMeasurements(!showMeasurements)}
+        >
+          <span>FULL MEASUREMENTS</span>
+          {showMeasurements ? <ChevronUpSmall /> : <ChevronDownSmall />}
+        </button>
+        {showMeasurements && (
+          <div className={styles.expandBody}>
+            <div className={styles.unitToggleInline}>
+              <button
+                className={`${styles.unitBtn} ${unit === 'metric' ? styles.unitBtnActive : ''}`}
+                onClick={() => setUnit('metric')}
+              >
+                CM
+              </button>
+              <button
+                className={`${styles.unitBtn} ${unit === 'imperial' ? styles.unitBtnActive : ''}`}
+                onClick={() => setUnit('imperial')}
+              >
+                IN
+              </button>
+            </div>
+            <div className={styles.modelTableCompact}>
+              {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
+                <div key={label} className={styles.modelRowCompact}>
+                  <span className={styles.modelLabelCompact}>{label}</span>
+                  <span className={styles.modelValueCompact}>{unit === 'metric' ? cm : imperial}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Dress size conversions — always visible */}
       <div className={styles.dressSection}>
         <p className={styles.modelName}>DRESS SIZE CONVERSIONS</p>
         <div className={styles.modelTableCompact}>

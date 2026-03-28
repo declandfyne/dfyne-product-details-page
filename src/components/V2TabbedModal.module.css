@@ -341,19 +341,18 @@
 }
 
 /* Model */
-.modelSideBySide {
+.modelHeroRow {
   display: flex;
   gap: 16px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
-.modelHeroSmall {
-  width: 200px;
+.modelHeroImgWrap {
+  width: 140px;
   flex-shrink: 0;
-  aspect-ratio: 3 / 3.5;
-  border-radius: 4px;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
   overflow: hidden;
-  position: relative;
 }
 
 .modelHeroImg {
@@ -363,13 +362,69 @@
   object-position: center center;
 }
 
-.modelInfoRight {
+.modelKeyStats {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  align-self: flex-start;
+  gap: 12px;
+  justify-content: center;
+}
+
+.keyStatItems {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.keyStat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.keyStatValue {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #0a0a0a;
+}
+
+.keyStatLabel {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #888;
+}
+
+.expandSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.expandToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border: none;
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  background: none;
+  cursor: pointer;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #0a0a0a;
+}
+
+.expandBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
 }
 
 .modelName {
