@@ -69,3 +69,19 @@
   font-size: 5px;
   color: white;
 }
+
+@media (min-width: 1024px) {
+  .header {
+    padding: 0 clamp(40px, calc(23.44vw - 200px), 250px);
+    height: 72px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .logo {
+    height: 22px;
+    width: 130px;
+  }
+}

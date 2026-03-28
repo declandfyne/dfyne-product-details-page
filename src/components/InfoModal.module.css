@@ -164,7 +164,7 @@
 
 .fitCallout {
   background: #fff;
-  border: 1px solid #0a0a0a;
+  border: 1px solid #555555;
   border-radius: 8px;
   padding: 12px 14px;
   display: flex;
@@ -177,7 +177,7 @@
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 2px;
-  color: #0a0a0a;
+  color: #555555;
   margin: 0;
 }
 
@@ -185,7 +185,7 @@
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
   font-weight: 400;
-  color: black;
+  color: #555555;
   line-height: 18px;
   margin: 0;
 }
@@ -314,7 +314,7 @@
   margin: 0;
   padding: 12px 14px;
   background: #fff;
-  border: 1px solid #0a0a0a;
+  border: 1px solid #555555;
   border-radius: 8px;
 }
 
@@ -714,4 +714,50 @@
   text-transform: uppercase;
   cursor: pointer;
   margin-top: 4px;
+}
+
+.shopBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.shopBtn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 89px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .overlay {
+    align-items: stretch;
+    justify-content: flex-end;
+  }
+
+  .sheet {
+    max-width: 480px;
+    width: 480px;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
 }

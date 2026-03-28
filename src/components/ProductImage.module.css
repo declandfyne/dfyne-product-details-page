@@ -268,3 +268,31 @@
   color: black;
   font-family: 'Raleway', sans-serif;
 }
+
+@media (min-width: 1024px) {
+  .wrap {
+    aspect-ratio: auto;
+  }
+
+  .carousel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .slide {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    scroll-snap-align: unset;
+  }
+
+  .counter {
+    display: none;
+  }
+
+  .thumbnailStrip {
+    display: none;
+  }
+}

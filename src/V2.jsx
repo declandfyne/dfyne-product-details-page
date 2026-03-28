@@ -14,7 +14,7 @@ import InfoModal     from './components/InfoModal'
 import CompleteLook  from './components/CompleteLook'
 import PaymentModal  from './components/PaymentModal'
 
-import styles from './V1.module.css'
+import styles from './page.module.css'
 
 const DEFAULT_COLOR = COLORS.find(c => c.id === 'midnight-black')
 const DEFAULT_SIZE  = SIZES.find(s => s.id === 'xs')
@@ -30,31 +30,41 @@ export default function V2() {
       <Header />
       <ImpactBanner />
 
-      <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Longline Strappy Top – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
+      <div className={styles.twoCol}>
+        <div className={styles.colLeft}>
+          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Longline Strappy Top – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
+        </div>
 
-      <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={selectedColor.id === 'navy'} />
+        <div className={styles.colRight}>
+          <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={selectedColor.id === 'navy'} />
+
+          <hr className={styles.divider} />
+
+          <ColorSelector
+            selectedId={selectedColor.id}
+            onChange={setSelectedColor}
+          />
+
+          <SizeSelector
+            selectedId={selectedSize.id}
+            onChange={setSelectedSize}
+          />
+
+          <CartSection onOpenPayment={() => setPaymentOpen(true)} />
+
+          <hr className={styles.dividerNoTop} />
+
+          <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout={selectedColor.id === 'navy' ? 'hidden' : (selectedColor.id === 'teal' || selectedColor.id === 'midnight-black') ? 'standalone' : selectedColor.id === 'truffle' ? 'standalone-pills' : 'button'} />
+        </div>
+      </div>
 
       <hr className={styles.divider} />
 
-      <ColorSelector
-        selectedId={selectedColor.id}
-        onChange={setSelectedColor}
-      />
+      <CompleteLook />
 
-      <SizeSelector
-        selectedId={selectedSize.id}
-        onChange={setSelectedSize}
-      />
-
-      <CartSection onOpenPayment={() => setPaymentOpen(true)} />
-
+      {/* Modals (position:fixed, DOM location doesn't matter) */}
       <PaymentModal open={paymentOpen} onClose={() => setPaymentOpen(false)} />
 
-      <hr className={styles.dividerNoTop} />
-
-      <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout={selectedColor.id === 'navy' ? 'hidden' : (selectedColor.id === 'teal' || selectedColor.id === 'midnight-black') ? 'standalone' : selectedColor.id === 'truffle' ? 'standalone-pills' : 'button'} />
-
-      {/* V2: Tabbed modal for features/model/delivery */}
       <V2TabbedModal
         open={infoTab !== null && infoTab !== 'reviews'}
         initialTab={infoTab}
@@ -62,7 +72,6 @@ export default function V2() {
         model={selectedColor.model}
       />
 
-      {/* Reviews gets its own modal like V1 */}
       <InfoModal
         open={infoTab === 'reviews'}
         activeTab="reviews"
@@ -70,10 +79,6 @@ export default function V2() {
         model={selectedColor.model}
         productImg={ASSETS.modelPhoto}
       />
-
-      <hr className={styles.divider} />
-
-      <CompleteLook />
 
       <div className={styles.bottomPad} />
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS, ASSETS } from '../data/product'
 import styles from './V2TabbedModal.module.css'
@@ -66,6 +66,11 @@ function FeaturesContent() {
             <li key={item} className={styles.bulletItem}>{item}</li>
           ))}
         </ul>
+      </div>
+
+      <div className={styles.shopBtns}>
+        <a href="#" className={styles.shopBtn}>Shop All Impact Tops</a>
+        <a href="#" className={styles.shopBtn}>Shop All Tops</a>
       </div>
     </div>
   )
@@ -341,6 +346,8 @@ function ReviewsContent() {
 
 export default function V2TabbedModal({ open, initialTab, onClose, model }) {
   const [activeTab, setActiveTab] = useState(initialTab || 'features')
+  const swipeRef = useRef(null)
+  const scrollSource = useRef('tap') // 'tap' or 'swipe'
 
   useEffect(() => {
     if (open && initialTab) setActiveTab(initialTab)
@@ -349,6 +356,64 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  // On tab click: scroll to that panel
+  const handleTabClick = useCallback((tabId) => {
+    scrollSource.current = 'tap'
+    setActiveTab(tabId)
+    const el = swipeRef.current
+    if (!el) return
+    const idx = TABS.findIndex(t => t.id === tabId)
+    el.scrollTo({ left: idx * el.offsetWidth, behavior: 'smooth' })
+  }, [])
+
+  // Detect swipe start via touch
+  const handleTouchStart = useCallback(() => {
+    scrollSource.current = 'swipe'
+  }, [])
+
+  // After scroll settles, sync tab indicator to final position
+  useEffect(() => {
+    const el = swipeRef.current
+    if (!el) return
+
+    let debounceTimer = null
+
+    const syncTab = () => {
+      if (scrollSource.current !== 'swipe') return
+      const idx = Math.round(el.scrollLeft / el.offsetWidth)
+      const tab = TABS[idx]
+      if (tab && tab.id !== activeTab) setActiveTab(tab.id)
+    }
+
+    // Use scrollend where supported, debounced scroll as fallback
+    const handleScrollEnd = () => syncTab()
+    const handleScroll = () => {
+      clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(syncTab, 80)
+    }
+
+    el.addEventListener('scrollend', handleScrollEnd)
+    el.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      el.removeEventListener('scrollend', handleScrollEnd)
+      el.removeEventListener('scroll', handleScroll)
+      clearTimeout(debounceTimer)
+    }
+  }, [activeTab])
+
+  // Snap to correct panel when modal opens
+  useEffect(() => {
+    if (!open) return
+    const el = swipeRef.current
+    if (!el) return
+    const idx = TABS.findIndex(t => t.id === activeTab)
+    // Instant scroll on open (no animation)
+    requestAnimationFrame(() => {
+      el.scrollTo({ left: idx * el.offsetWidth, behavior: 'instant' })
+    })
   }, [open])
 
   if (!open) return null
@@ -367,17 +432,27 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
             <button
               key={tab.id}
               className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabClick(tab.id)}
             >
               {tab.label}
             </button>
           ))}
         </div>
 
-        <div className={styles.body}>
-          {activeTab === 'features' && <FeaturesContent />}
-          {activeTab === 'model'    && <ModelContent model={model} />}
-          {activeTab === 'delivery' && <DeliveryContent />}
+        <div
+          className={styles.swipeContainer}
+          ref={swipeRef}
+          onTouchStart={handleTouchStart}
+        >
+          <div className={styles.swipePanel}>
+            <div className={styles.body}><FeaturesContent /></div>
+          </div>
+          <div className={styles.swipePanel}>
+            <div className={styles.body}><ModelContent model={model} /></div>
+          </div>
+          <div className={styles.swipePanel}>
+            <div className={styles.body}><DeliveryContent /></div>
+          </div>
         </div>
       </div>
     </div>

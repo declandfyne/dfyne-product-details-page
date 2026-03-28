@@ -84,3 +84,15 @@
   background: black;
   color: white;
 }
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 0;
+  }
+
+  .swatches {
+    padding-right: 0;
+    overflow-x: visible;
+    flex-wrap: wrap;
+  }
+}

@@ -68,6 +68,30 @@
   font-weight: 700;
 }
 
+/* Swipeable container for mobile */
+.swipeContainer {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;
+}
+
+.swipeContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.swipePanel {
+  flex-shrink: 0;
+  width: 100%;
+  scroll-snap-align: start;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .body {
   overflow-y: auto;
   flex: 1;
@@ -163,7 +187,7 @@
 
 .fitCallout {
   background: #fff;
-  border: 1px solid #0a0a0a;
+  border: 1px solid #555555;
   border-radius: 8px;
   padding: 12px 14px;
   display: flex;
@@ -176,7 +200,7 @@
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 2px;
-  color: #0a0a0a;
+  color: #555555;
   margin: 0;
 }
 
@@ -184,7 +208,7 @@
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
   font-weight: 400;
-  color: black;
+  color: #555555;
   line-height: 18px;
   margin: 0;
 }
@@ -197,6 +221,7 @@
 
 .fitInfoIcon {
   flex-shrink: 0;
+  color: #555555;
 }
 
 .fitCalloutBold {
@@ -204,7 +229,7 @@
   font-weight: 700;
   font-size: 12px;
   line-height: 18px;
-  color: #000;
+  color: #555555;
 }
 
 .fitCalloutRegular {
@@ -212,7 +237,32 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
-  color: #000;
+  color: #555555;
+}
+
+/* Shop buttons */
+.shopBtns {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.shopBtn {
+  display: block;
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+  border-radius: 89px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 /* Model */
@@ -642,4 +692,29 @@
   color: #0a0a0a;
   letter-spacing: 0.3px;
   margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .overlay {
+    align-items: stretch;
+    justify-content: flex-end;
+  }
+
+  .sheet {
+    max-width: 480px;
+    width: 480px;
+    height: 100vh;
+    border-radius: 0;
+    animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+
+  .swipeContainer {
+    overflow-x: hidden;
+    scroll-snap-type: none;
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
 }

@@ -2,9 +2,9 @@ import styles from './InfoSection.module.css'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS, REVIEW_RATINGS } from '../data/product'
 
-const CaretRight = () => (
+const CaretDown = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M6 3L11 8L6 13" stroke="black" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M3 6L8 11L13 6" stroke="black" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
@@ -47,14 +47,19 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
                 </span>
               )}
             </span>
-            <CaretRight />
+            <CaretDown />
           </button>
           {LINKS.filter(link => link.id !== 'features').map(link => (
             <button key={link.id} className={styles.linkRow} onClick={() => onOpen(link.id)}>
               <span className={styles.linkLabel}>{link.label}</span>
-              <CaretRight />
+              <CaretDown />
             </button>
           ))}
+        </div>
+
+        <div className={styles.shopLinks}>
+          <a href="#" className={styles.shopLink}>Shop All Impact Tops</a>
+          <a href="#" className={styles.shopLink}>Shop All Tops</a>
         </div>
       </div>
 
@@ -67,7 +72,7 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
         <button className={styles.reviewScoreRow} onClick={onOpenReviews}>
           <span className={styles.reviewScoreBadge}>5.0</span>
           <span className={styles.reviewScoreText}>Excellent · 6,746 reviews</span>
-          <CaretRight />
+          <CaretDown />
         </button>
 
         <div className={styles.reviewBars}>

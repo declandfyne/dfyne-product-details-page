@@ -49,3 +49,40 @@
   letter-spacing: 1.5px;
   text-align: center;
 }
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 32px clamp(40px, calc(23.44vw - 200px), 250px);
+  }
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .scroll {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    overflow-x: visible;
+  }
+
+  .card {
+    width: auto;
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .name {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .color {
+    font-size: 9px;
+  }
+}

@@ -1,0 +1,76 @@
+.page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.featureList {
+  list-style: disc;
+  padding-left: 18px;
+  margin-bottom: 16px;
+}
+
+.featureList li {
+  font-size: 11px;
+  line-height: 19px;
+  color: black;
+  letter-spacing: 0.3px;
+}
+
+.desc {
+  font-size: 11px;
+  line-height: 19px;
+  color: black;
+  letter-spacing: 0.3px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e7e7e7;
+  margin: 24px 16px;
+}
+
+.dividerNoTop {
+  border: none;
+  border-top: 1px solid #e7e7e7;
+  margin: 24px 16px;
+}
+
+.bottomPad { height: 40px; }
+
+/* No-op on mobile */
+.twoCol { }
+.colLeft { }
+.colRight { }
+
+@media (min-width: 1024px) {
+  .page {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+
+  /* Padding scales linearly from 40px at 1024px to 250px at 1920px */
+  .twoCol {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 476px;
+    padding: 0 clamp(40px, calc(23.44vw - 200px), 250px);
+    align-items: start;
+    gap: 16px;
+  }
+
+  .colLeft {
+    position: sticky;
+    top: 0;
+  }
+
+  .colRight {
+    padding: 0 0 40px 0;
+  }
+
+  .divider {
+    margin: 24px clamp(40px, calc(23.44vw - 200px), 250px);
+  }
+
+  .dividerNoTop {
+    margin: 24px clamp(40px, calc(23.44vw - 200px), 250px);
+  }
+}

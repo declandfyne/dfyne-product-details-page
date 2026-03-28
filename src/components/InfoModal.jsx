@@ -186,6 +186,22 @@ function FeaturesContent() {
           <strong>Firm at True to Size.</strong> Size up for a more relaxed fit.
         </p>
       </div>
+
+
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>CARE INSTRUCTIONS</p>
+        <ul className={styles.bulletList}>
+          <li className={styles.bulletItem}>Machine wash cold on a gentle cycle</li>
+          <li className={styles.bulletItem}>Do not bleach</li>
+          <li className={styles.bulletItem}>Hang dry or tumble dry on low heat</li>
+          <li className={styles.bulletItem}>Do not iron directly on prints or logos</li>
+          <li className={styles.bulletItem}>Do not dry clean</li>
+        </ul>
+      </div>
+      <div className={styles.shopBtns}>
+        <a href="#" className={styles.shopBtn}>Shop All Impact Tops</a>
+        <a href="#" className={styles.shopBtn}>Shop All Tops</a>
+      </div>
     </div>
   )
 }

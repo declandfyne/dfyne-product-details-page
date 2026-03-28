@@ -162,3 +162,29 @@
   text-align: center;
   letter-spacing: 0.3px;
 }
+
+@media (min-width: 1024px) {
+  .overlay {
+    max-width: none;
+    left: 0;
+    transform: none;
+    align-items: stretch;
+    justify-content: flex-end;
+  }
+
+  .sheet {
+    max-width: 480px;
+    width: 480px;
+    border-radius: 0;
+    animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+
+  .handle {
+    display: none;
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+}
