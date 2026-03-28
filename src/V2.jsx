@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { COLORS, SIZES, ASSETS } from './data/product'
 
 import Header        from './components/Header'
-import ImpactBanner  from './components/ImpactBanner'
 import ProductImage  from './components/ProductImage'
 import ProductInfo   from './components/ProductInfo'
 import ColorSelector from './components/ColorSelector'
@@ -29,8 +28,6 @@ export default function V2() {
     <>
       <Header />
       <div className={styles.page}>
-      <ImpactBanner />
-
       <div className={styles.twoCol}>
         <div className={styles.colLeft}>
           <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />

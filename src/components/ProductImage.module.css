@@ -75,41 +75,19 @@
   display: block;
 }
 
-.counter {
+.progressTrack {
   position: absolute;
-  top: 8px;
-  right: 16px;
-  background: rgba(0, 0, 0, 0.84);
-  color: white;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  height: 26px;
-  padding: 0 12px;
-  border-radius: 73px;
-  line-height: 26px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #e0e0e0;
 }
 
-.total { color: #949494; }
-
-.dots {
-  display: none;
-}
-
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: width 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
-}
-
-.dot.dotActive {
-  width: 14px;
-  border-radius: 2.5px;
-  background: white;
+.progressFill {
+  height: 100%;
+  background: #0a0a0a;
+  transition: width 0.05s linear;
 }
 
 .modelBadgeWrap {
@@ -325,11 +303,7 @@
     scroll-snap-align: unset;
   }
 
-  .counter {
-    display: none;
-  }
-
-  .dots {
+  .progressTrack {
     display: none;
   }
 

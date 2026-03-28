@@ -97,10 +97,15 @@ export default function ProductImage({ src, images, alt, model, onModelClick }) 
 
   useEffect(() => { setOpen(false); setCurrentIndex(0) }, [model])
 
+  const [scrollProgress, setScrollProgress] = useState(0)
+
   const handleScroll = () => {
     if (!carouselRef.current) return
-    const index = Math.round(carouselRef.current.scrollLeft / carouselRef.current.offsetWidth)
+    const { scrollLeft, scrollWidth, offsetWidth } = carouselRef.current
+    const index = Math.round(scrollLeft / offsetWidth)
     setCurrentIndex(index)
+    const maxScroll = scrollWidth - offsetWidth
+    setScrollProgress(maxScroll > 0 ? scrollLeft / maxScroll : 0)
   }
 
   const imgList = images || [src]
@@ -120,21 +125,11 @@ export default function ProductImage({ src, images, alt, model, onModelClick }) 
         <img className={styles.img} src={src} alt={alt} />
       )}
 
-      <div className={styles.counter}>
-        {currentIndex + 1} <span className={styles.total}>/ {total}</span>
-      </div>
-
-      <div className={styles.dots}>
-        {imgList.map((_, i) => (
-          <button
-            key={i}
-            className={`${styles.dot} ${i === currentIndex ? styles.dotActive : ''}`}
-            onClick={() => {
-              carouselRef.current?.scrollTo({ left: i * carouselRef.current.offsetWidth, behavior: 'smooth' })
-            }}
-            aria-label={`Go to image ${i + 1}`}
-          />
-        ))}
+      <div className={styles.progressTrack}>
+        <div
+          className={styles.progressFill}
+          style={{ width: `${(1 / total + scrollProgress * (1 - 1 / total)) * 100}%` }}
+        />
       </div>
 
       {model && (
