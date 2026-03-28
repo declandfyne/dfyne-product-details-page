@@ -66,6 +66,11 @@
     padding: 0 0 40px 0;
   }
 
+  .colRight .divider,
+  .colRight .dividerNoTop {
+    margin: 24px 0;
+  }
+
   .divider {
     margin: 24px clamp(40px, calc(23.44vw - 200px), 250px);
   }

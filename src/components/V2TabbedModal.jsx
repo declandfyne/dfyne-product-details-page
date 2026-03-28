@@ -98,6 +98,16 @@ const getDefaultUnit = () => {
   return imperialLocales.some(l => lang.startsWith(l)) ? 'imperial' : 'metric'
 }
 
+const RulerIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+    <path d="M14.5 4.5L11.5 1.5L1.5 11.5L4.5 14.5L14.5 4.5Z" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M10 3L11.5 4.5" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
+    <path d="M7.5 5.5L9 7" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
+    <path d="M5 8L6.5 9.5" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
+    <path d="M2.5 10.5L4 12" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
+  </svg>
+)
+
 function ModelContent({ model }) {
   const [unit, setUnit] = useState(getDefaultUnit)
 
@@ -115,6 +125,11 @@ function ModelContent({ model }) {
 
   return (
     <div className={styles.content}>
+      <button className={styles.findSizeBtn} onClick={() => { /* Fitanalytics integration */ }}>
+        <span className={styles.findSizeBtnIcon}><RulerIcon /></span>
+        FIND MY SIZE
+      </button>
+
       <div className={styles.modelSideBySide}>
         <div className={styles.modelHeroSmall}>
           <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
@@ -133,39 +148,27 @@ function ModelContent({ model }) {
             </button>
           </div>
         </div>
-        <div className={styles.editorialStatsStacked}>
-          {EDITORIAL_STATS.map(({ value, label }) => (
-            <div key={label} className={styles.editorialStatRow}>
-              <span className={styles.editorialValue}>{value}</span>
-              <span className={styles.editorialLabel}>{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>ALEIAH'S MEASUREMENTS</p>
-        <div className={styles.modelTable}>
-          <div className={`${styles.modelRow} ${styles.modelHeader}`}>
-            <span className={styles.modelLabel} />
-            <span className={styles.modelColHead}>{unit === 'metric' ? 'CM' : 'INCHES'}</span>
+        <div className={styles.modelInfoRight}>
+          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS</p>
+          <p className={styles.modelWearing}>Wearing Size {model.size}</p>
+          <div className={styles.modelTableCompact}>
+            {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
+              <div key={label} className={styles.modelRowCompact}>
+                <span className={styles.modelLabelCompact}>{label}</span>
+                <span className={styles.modelValueCompact}>{unit === 'metric' ? cm : imperial}</span>
+              </div>
+            ))}
           </div>
-          {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
-            <div key={label} className={styles.modelRow}>
-              <span className={styles.modelLabel}>{label}</span>
-              <span className={styles.modelValue}>{unit === 'metric' ? cm : imperial}</span>
-            </div>
-          ))}
         </div>
       </div>
 
-      <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>DRESS SIZE CONVERSIONS</p>
-        <div className={styles.dressSizeChips}>
+      <div className={styles.dressSection}>
+        <p className={styles.modelName}>DRESS SIZE CONVERSIONS</p>
+        <div className={styles.modelTableCompact}>
           {REGIONAL_SIZES.map(({ region, size }) => (
-            <div key={region} className={styles.dressSizeChip}>
-              <span className={styles.dressSizeRegion}>{region}</span>
-              <span className={styles.dressSizeValue}>{size}</span>
+            <div key={region} className={styles.modelRowCompact}>
+              <span className={styles.modelLabelCompact}>{region}</span>
+              <span className={styles.modelValueCompact}>{size}</span>
             </div>
           ))}
         </div>
@@ -307,8 +310,26 @@ function ReviewCard({ review }) {
   )
 }
 
+const REVIEW_FILTERS = [
+  { id: 'all',     label: 'All',         keywords: null },
+  { id: 'sizing',  label: 'Sizing',      keywords: ['size', 'sizing', 'small', 'large', 'tight', 'loose', 'runs'] },
+  { id: 'fit',     label: 'Fit',         keywords: ['fit', 'flattering', 'contour', 'holds', 'shape'] },
+  { id: 'support', label: 'Bra Support', keywords: ['bra', 'support', 'cups', 'built-in'] },
+  { id: 'fabric',  label: 'Fabric',      keywords: ['soft', 'fabric', 'quality', 'material', 'wash'] },
+]
+
+function matchesFilter(review, filter) {
+  if (!filter.keywords) return true
+  const text = review.title.toLowerCase()
+  return filter.keywords.some(kw => text.includes(kw))
+}
+
 function ReviewsContent() {
+  const [activeFilter, setActiveFilter] = useState('all')
   const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
+  const currentFilter = REVIEW_FILTERS.find(f => f.id === activeFilter)
+  const filtered = MOCK_REVIEWS.filter(r => matchesFilter(r, currentFilter))
+
   return (
     <div className={styles.content}>
       <div className={styles.summaryRow}>
@@ -336,10 +357,26 @@ function ReviewsContent() {
         ))}
       </div>
 
-      <div className={styles.reviewsList}>
-        {MOCK_REVIEWS.map((review, i) => (
-          <ReviewCard key={i} review={review} />
+      <div className={styles.filterChips}>
+        {REVIEW_FILTERS.map(f => (
+          <button
+            key={f.id}
+            className={`${styles.filterChip} ${activeFilter === f.id ? styles.filterChipActive : ''}`}
+            onClick={() => setActiveFilter(f.id)}
+          >
+            {f.label}
+          </button>
         ))}
+      </div>
+
+      <div className={styles.reviewsList}>
+        {filtered.length > 0 ? (
+          filtered.map((review, i) => (
+            <ReviewCard key={i} review={review} />
+          ))
+        ) : (
+          <p className={styles.noResults}>No reviews matching "{currentFilter.label}" yet</p>
+        )}
       </div>
     </div>
   )
@@ -352,8 +389,17 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
   const tabsRef = useRef(null)
   const indicatorRef = useRef(null)
 
+  // When modal opens with a new tab, sync state + scroll + indicator in one effect
   useEffect(() => {
-    if (open && initialTab) setActiveTab(initialTab)
+    if (!open || !initialTab) return
+    setActiveTab(initialTab)
+    const el = swipeRef.current
+    if (!el) return
+    const idx = TABS.findIndex(t => t.id === initialTab)
+    requestAnimationFrame(() => {
+      el.scrollTo({ left: idx * el.offsetWidth, behavior: 'instant' })
+      positionIndicator(idx, false)
+    })
   }, [open, initialTab])
 
   useEffect(() => {
@@ -417,18 +463,6 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
     const tab = TABS[snappedIdx]
     if (tab) setActiveTab(prev => prev === tab.id ? prev : tab.id)
   }, [])
-
-  // Snap to correct panel + position indicator when modal opens
-  useEffect(() => {
-    if (!open) return
-    const el = swipeRef.current
-    if (!el) return
-    const idx = TABS.findIndex(t => t.id === activeTab)
-    requestAnimationFrame(() => {
-      el.scrollTo({ left: idx * el.offsetWidth, behavior: 'instant' })
-      positionIndicator(idx, false)
-    })
-  }, [open, positionIndicator])
 
   if (!open) return null
 

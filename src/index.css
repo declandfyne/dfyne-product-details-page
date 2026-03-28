@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Rawline';
+  src: url('./fonts/rawline/rawline-400.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rawline';
+  src: url('./fonts/rawline/rawline-600.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rawline';
+  src: url('./fonts/rawline/rawline-700.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -7,7 +31,7 @@
 body {
   background: white;
   min-height: 100vh;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
 }
 
 #root {

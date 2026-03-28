@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './InfoModal.module.css'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS } from '../data/product'
@@ -86,8 +86,26 @@ function ReviewCard({ review }) {
 
 const AGGREGATE_SCORES = { quality: 95, sizing: 78, fit: 72 }
 
+const REVIEW_FILTERS = [
+  { id: 'all',     label: 'All',         keywords: null },
+  { id: 'sizing',  label: 'Sizing',      keywords: ['size', 'sizing', 'small', 'large', 'tight', 'loose', 'runs'] },
+  { id: 'fit',     label: 'Fit',         keywords: ['fit', 'flattering', 'contour', 'holds', 'shape'] },
+  { id: 'support', label: 'Bra Support', keywords: ['bra', 'support', 'cups', 'built-in'] },
+  { id: 'fabric',  label: 'Fabric',      keywords: ['soft', 'fabric', 'quality', 'material', 'wash'] },
+]
+
+function matchesFilter(review, filter) {
+  if (!filter.keywords) return true
+  const text = review.title.toLowerCase()
+  return filter.keywords.some(kw => text.includes(kw))
+}
+
 function ReviewsContent() {
+  const [activeFilter, setActiveFilter] = useState('all')
   const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
+  const currentFilter = REVIEW_FILTERS.find(f => f.id === activeFilter)
+  const filtered = MOCK_REVIEWS.filter(r => matchesFilter(r, currentFilter))
+
   return (
     <div className={styles.content}>
       <div className={styles.summarySection}>
@@ -133,10 +151,26 @@ function ReviewsContent() {
         </div>
       </div>
 
-      <div className={styles.reviewsList}>
-        {MOCK_REVIEWS.map((review, i) => (
-          <ReviewCard key={i} review={review} />
+      <div className={styles.filterChips}>
+        {REVIEW_FILTERS.map(f => (
+          <button
+            key={f.id}
+            className={`${styles.filterChip} ${activeFilter === f.id ? styles.filterChipActive : ''}`}
+            onClick={() => setActiveFilter(f.id)}
+          >
+            {f.label}
+          </button>
         ))}
+      </div>
+
+      <div className={styles.reviewsList}>
+        {filtered.length > 0 ? (
+          filtered.map((review, i) => (
+            <ReviewCard key={i} review={review} />
+          ))
+        ) : (
+          <p className={styles.noResults}>No reviews matching "{currentFilter.label}" yet</p>
+        )}
       </div>
     </div>
   )

@@ -13,7 +13,7 @@
   width: 100%;
   max-width: 789px;
   border-radius: 16px 16px 0 0;
-  max-height: 75vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
 }
@@ -29,7 +29,7 @@
 }
 
 .headerTitle {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 2px;
@@ -66,7 +66,7 @@
   border-bottom: 3px solid transparent;
   cursor: pointer;
   padding: 10px 12px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 500;
   font-size: 10px;
   letter-spacing: 1.2px;
@@ -101,7 +101,7 @@
 }
 
 .featSectionLabel {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 2px;
@@ -118,7 +118,7 @@
 }
 
 .bulletItem {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: black;
@@ -151,7 +151,7 @@
 }
 
 .materialLabel {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 10px;
   font-weight: 600;
   color: white;
@@ -173,7 +173,7 @@
 }
 
 .fitCalloutTitle {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 2px;
@@ -182,7 +182,7 @@
 }
 
 .fitCalloutText {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #555555;
@@ -191,7 +191,7 @@
 }
 
 .tabTitle {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 1.5px;
@@ -204,14 +204,14 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 13px;
   line-height: 20px;
   color: black;
 }
 
 .text {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 13px;
   line-height: 20px;
   color: black;
@@ -234,7 +234,7 @@
 }
 
 .modelWearing {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 13px;
   font-weight: 400;
   color: #0a0a0a;
@@ -291,14 +291,14 @@
 }
 
 .editorialValue {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 600;
   font-size: 11px;
   color: black;
 }
 
 .editorialLabel {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 8px;
   letter-spacing: 1.5px;
@@ -306,7 +306,7 @@
 }
 
 .sizeWornNote {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #444;
@@ -324,7 +324,7 @@
   align-items: center;
   padding: 8px 14px;
   border-bottom: 1px solid #ebebeb;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 10px;
 }
 
@@ -363,7 +363,7 @@
 }
 
 .deliveryHeading {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 1.5px;
@@ -375,7 +375,7 @@
   border: 1px solid #ebebeb;
   border-radius: 8px;
   overflow: hidden;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 11px;
 }
 
@@ -423,7 +423,7 @@
 }
 
 .reviewBarLabel {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 600;
   font-size: 11px;
   color: #0a0a0a;
@@ -445,7 +445,7 @@
 }
 
 .reviewBarEnd {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-size: 9px;
   color: #888;
   letter-spacing: 0.3px;
@@ -460,7 +460,7 @@
   color: white;
   border: none;
   border-radius: 89px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 10px;
   letter-spacing: 2px;
@@ -511,7 +511,7 @@
 }
 
 .summaryScaleLabel {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 10px;
   color: #0a0a0a;
@@ -534,7 +534,7 @@
 .summaryScaleEnds {
   display: flex;
   justify-content: space-between;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 8px;
   color: #0a0a0a;
@@ -547,7 +547,7 @@
 }
 
 .avgScore {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 28px;
   color: #0a0a0a;
@@ -555,11 +555,52 @@
 }
 
 .reviewCount {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 500;
   font-size: 11px;
   color: #888;
   letter-spacing: 0.3px;
+}
+
+.filterChips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.filterChips::-webkit-scrollbar { display: none; }
+
+.filterChip {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 89px;
+  background: transparent;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.filterChipActive {
+  background: #0a0a0a;
+  color: white;
+  border-color: #0a0a0a;
+}
+
+.noResults {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  padding: 32px 0;
 }
 
 .reviewsList {
@@ -605,7 +646,7 @@
 }
 
 .userName {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 12px;
   color: #0a0a0a;
@@ -613,7 +654,7 @@
 }
 
 .verifiedBadge {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 10px;
   color: white;
@@ -624,7 +665,7 @@
 }
 
 .userLocation {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 500;
   font-size: 10px;
   color: #8a8a8a;
@@ -638,7 +679,7 @@
 }
 
 .reviewDate {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 9px;
   color: #707070;
@@ -646,7 +687,7 @@
 }
 
 .reviewTitle {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 12px;
   color: #0a0a0a;
@@ -668,7 +709,7 @@
 }
 
 .scoreLabel {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 10px;
   color: #0a0a0a;
@@ -691,7 +732,7 @@
 .scoreEnds {
   display: flex;
   justify-content: space-between;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 400;
   font-size: 8px;
   color: #0a0a0a;
@@ -705,7 +746,7 @@
   color: white;
   border: none;
   border-radius: 89px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 2.8px;
@@ -731,7 +772,7 @@
   color: white;
   border: none;
   border-radius: 89px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 2.8px;

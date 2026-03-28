@@ -3,7 +3,7 @@
 }
 
 .label {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 2px;
@@ -11,7 +11,7 @@
   margin-bottom: 10px;
 }
 
-.label strong { font-weight: 700; }
+.label strong { font-weight: 700; color: #0a0a0a; }
 
 .swatches {
   display: flex;
@@ -59,7 +59,7 @@
   font-size: 10px;
   padding: 2px 4px;
   border-radius: 2px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rawline', sans-serif;
 }
 
 .swatchName {
@@ -85,6 +85,14 @@
   color: white;
 }
 
+.carouselWrap {
+  position: relative;
+}
+
+.arrowBtn {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .section {
     padding: 0;
@@ -92,7 +100,38 @@
 
   .swatches {
     padding-right: 0;
-    overflow-x: visible;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+  }
+
+  .arrowBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #d0d0d0;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.15s;
+  }
+
+  .arrowBtn:hover {
+    opacity: 0.8;
+  }
+
+  .arrowLeft {
+    left: -14px;
+  }
+
+  .arrowRight {
+    right: -14px;
   }
 }
