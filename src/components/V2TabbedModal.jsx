@@ -128,20 +128,7 @@ function ModelContent({ model }) {
     <div className={styles.content}>
       <div className={styles.modelSideBySide}>
         <div className={styles.modelInfoRight}>
-          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS</p>
-          <p className={styles.modelWearing}>Wearing Size {model.size}</p>
-          <div className={styles.modelTableCompact}>
-            {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
-              <div key={label} className={styles.modelRowCompact}>
-                <span className={styles.modelLabelCompact}>{label}</span>
-                <span className={styles.modelValueCompact}>{unit === 'metric' ? cm : imperial}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.modelHeroSmall}>
-          <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
-          <div className={styles.unitToggleOverlay}>
+          <div className={styles.unitToggleFullWidth}>
             <button
               className={`${styles.unitBtn} ${unit === 'metric' ? styles.unitBtnActive : ''}`}
               onClick={() => setUnit('metric')}
@@ -155,6 +142,19 @@ function ModelContent({ model }) {
               IN
             </button>
           </div>
+          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS</p>
+          <p className={styles.modelWearing}>Wearing Size {model.size}</p>
+          <div className={styles.modelTableCompact}>
+            {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
+              <div key={label} className={styles.modelRowCompact}>
+                <span className={styles.modelLabelCompact}>{label}</span>
+                <span className={styles.modelValueCompact}>{unit === 'metric' ? cm : imperial}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.modelHeroSmall}>
+          <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
         </div>
       </div>
 
