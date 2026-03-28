@@ -137,8 +137,10 @@ export const REVIEW_RATINGS = [
   { label: 'Fit',             low: 'Loose',           high: 'Tight',      value: 72 },
 ]
 
+import dfyneLogo    from '../assets/dfyne-logo.svg'
+
 export const ASSETS = {
-  logo:       'https://www.figma.com/api/mcp/asset/4d673a14-695c-4c7f-9dbf-2bd93e068c7a',
+  logo:       dfyneLogo,
   klarna:     klarnaLogo,
   afterpay:   afterpayLogo,
   shopPay:    shopPayLogo,

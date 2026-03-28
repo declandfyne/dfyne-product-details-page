@@ -26,7 +26,7 @@
 
 .swatch {
   flex-shrink: 0;
-  width: 76px;
+  width: 66px;
   cursor: pointer;
   background: none;
   border: none;
@@ -35,8 +35,8 @@
 }
 
 .imgWrap {
-  width: 76px;
-  height: 114px;
+  width: 66px;
+  height: 99px;
   border-radius: 8px 8px 0 0;
   overflow: hidden;
   position: relative;

@@ -2,15 +2,17 @@ import styles from './ProductInfo.module.css'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS } from '../data/product'
 
-export default function ProductInfo({ price = '£44.99', onOpenReviews, showFeatures = false }) {
+export default function ProductInfo({ price = '£44.99', onOpenReviews, showFeatures = false, hideBreadcrumb = false }) {
   return (
     <div className={styles.info}>
-      <a href="#" className={styles.breadcrumb}>
-        <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
-          <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        IMPACT COLLECTION
-      </a>
+      {!hideBreadcrumb && (
+        <a href="#" className={styles.breadcrumb}>
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+            <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          IMPACT COLLECTION
+        </a>
+      )}
       <p className={styles.name}>Bandeau Strappy Bra</p>
       <p className={styles.price}>{price}</p>
       <div className={styles.ratingRow}>

@@ -30,11 +30,11 @@ export default function V2() {
       <div className={styles.page}>
       <div className={styles.twoCol}>
         <div className={styles.colLeft}>
-          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
+          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} showBreadcrumb={selectedColor.id === 'navy'} />
         </div>
 
         <div className={styles.colRight}>
-          <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={selectedColor.id === 'navy'} />
+          <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={false} hideBreadcrumb={selectedColor.id === 'navy'} />
 
           <hr className={styles.divider} />
 
@@ -52,7 +52,7 @@ export default function V2() {
 
           <hr className={styles.dividerNoTop} />
 
-          <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout={selectedColor.id === 'navy' ? 'hidden' : (selectedColor.id === 'teal' || selectedColor.id === 'midnight-black') ? 'standalone' : selectedColor.id === 'truffle' ? 'standalone-pills' : 'button'} />
+          <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout="standalone" />
         </div>
       </div>
 

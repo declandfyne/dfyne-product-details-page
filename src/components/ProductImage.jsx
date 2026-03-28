@@ -90,7 +90,7 @@ function MeasurementBanner({ model, onClose }) {
   )
 }
 
-export default function ProductImage({ src, images, alt, model, onModelClick }) {
+export default function ProductImage({ src, images, alt, model, onModelClick, showBreadcrumb = false }) {
   const [open, setOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const carouselRef = useRef(null)
@@ -123,6 +123,15 @@ export default function ProductImage({ src, images, alt, model, onModelClick }) 
         </div>
       ) : (
         <img className={styles.img} src={src} alt={alt} />
+      )}
+
+      {showBreadcrumb && (
+        <a href="#" className={styles.breadcrumbPill}>
+          <svg width="8" height="8" viewBox="0 0 16 16" fill="none">
+            <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          IMPACT COLLECTION
+        </a>
       )}
 
       <div className={styles.progressTrack}>
