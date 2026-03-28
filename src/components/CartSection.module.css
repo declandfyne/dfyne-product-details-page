@@ -101,44 +101,9 @@
   white-space: nowrap;
 }
 
-.stickyBar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 90;
-  background: white;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
-  animation: slideUp 0.2s ease-out;
-}
-
-.stickyAddToCart {
-  width: 100%;
-  height: 48px;
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 89px;
-  font-family: 'Rawline', sans-serif;
-  font-weight: 700;
-  font-size: 9px;
-  letter-spacing: 2.8px;
-  cursor: pointer;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
-}
-
 @media (min-width: 1024px) {
   .section {
     padding: 24px 0 0;
-  }
-
-  .stickyBar {
-    display: none;
   }
 }
 

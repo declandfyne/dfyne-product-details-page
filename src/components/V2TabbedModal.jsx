@@ -126,11 +126,6 @@ function ModelContent({ model }) {
 
   return (
     <div className={styles.content}>
-      <button className={styles.findSizeBtn} onClick={() => { /* Fitanalytics integration */ }}>
-        <span className={styles.findSizeBtnIcon}><RulerIcon /></span>
-        FIND MY SIZE
-      </button>
-
       <div className={styles.modelSideBySide}>
         <div className={styles.modelInfoRight}>
           <p className={styles.modelName}>ALEIAH'S MEASUREMENTS</p>
@@ -174,6 +169,11 @@ function ModelContent({ model }) {
           ))}
         </div>
       </div>
+
+      <button className={styles.findSizeBtn} onClick={() => { /* Fitanalytics integration */ }}>
+        <span className={styles.findSizeBtnIcon}><RulerIcon /></span>
+        WHAT'S MY FIT?
+      </button>
     </div>
   )
 }
