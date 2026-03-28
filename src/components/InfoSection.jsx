@@ -26,7 +26,7 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
 
       <div className={styles.block}>
         <p className={styles.description}>
-          Make your IMPACT in our Longline Strappy Top. Twill knit underbust and waist for contouring support, with a halterneck, open back and built-in bra.
+          Make your IMPACT in our Bandeau Strappy Bra. Twill knit underbust and waist for contouring support, with a halterneck, open back and built-in bra.
         </p>
       </div>
 
@@ -58,8 +58,8 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
         </div>
 
         <div className={styles.shopLinks}>
-          <a href="#" className={styles.shopLink}>Shop All Impact Tops</a>
-          <a href="#" className={styles.shopLink}>Shop All Tops</a>
+          <a href="#" className={styles.shopLink}>Shop All Impact Sports Bras</a>
+          <a href="#" className={styles.shopLink}>Shop All Sports Bras</a>
         </div>
       </div>
 

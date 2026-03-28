@@ -32,7 +32,7 @@ export default function V2() {
 
       <div className={styles.twoCol}>
         <div className={styles.colLeft}>
-          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Longline Strappy Top – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
+          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} />
         </div>
 
         <div className={styles.colRight}>

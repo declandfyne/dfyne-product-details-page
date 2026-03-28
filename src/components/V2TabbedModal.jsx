@@ -36,7 +36,7 @@ function FeaturesContent() {
   return (
     <div className={styles.content}>
       <p className={styles.text}>
-        Make your IMPACT in our Longline Strappy Top — built for women who train hard and want to look the part doing it. Designed to contour and support your core through every rep, squat and set while keeping you cool and confident.
+        Make your IMPACT in our Bandeau Strappy Bra — built for women who train hard and want to look the part doing it. Designed to contour and support your core through every rep, squat and set while keeping you cool and confident.
       </p>
 
       <div className={styles.featSection}>
@@ -70,8 +70,8 @@ function FeaturesContent() {
       </div>
 
       <div className={styles.shopBtns}>
-        <a href="#" className={styles.shopBtn}>Shop All Impact Tops</a>
-        <a href="#" className={styles.shopBtn}>Shop All Tops</a>
+        <a href="#" className={styles.shopBtn}>Shop All Impact Sports Bras</a>
+        <a href="#" className={styles.shopBtn}>Shop All Sports Bras</a>
       </div>
     </div>
   )

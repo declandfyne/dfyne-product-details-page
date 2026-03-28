@@ -233,8 +233,8 @@ function FeaturesContent() {
         </ul>
       </div>
       <div className={styles.shopBtns}>
-        <a href="#" className={styles.shopBtn}>Shop All Impact Tops</a>
-        <a href="#" className={styles.shopBtn}>Shop All Tops</a>
+        <a href="#" className={styles.shopBtn}>Shop All Impact Sports Bras</a>
+        <a href="#" className={styles.shopBtn}>Shop All Sports Bras</a>
       </div>
     </div>
   )

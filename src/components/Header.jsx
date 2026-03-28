@@ -15,8 +15,8 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <button className={styles.hamburger} aria-label="Menu">
         <span />
-        <span className={styles.short} />
-        <span />
+        <span className={styles.medium} />
+        <span className={styles.long} />
       </button>
 
       <img className={styles.logo} src={ASSETS.logo} alt="DFYNE" />

@@ -6,7 +6,7 @@ export default function ProductInfo({ price = '£44.99', onOpenReviews, showFeat
   return (
     <div className={styles.info}>
       <p className={styles.brand}>IMPACT</p>
-      <p className={styles.name}>Longline Strappy Top</p>
+      <p className={styles.name}>Bandeau Strappy Bra</p>
       <p className={styles.price}>{price}</p>
       <div className={styles.ratingRow}>
         <svg width="11.368" height="10.967" viewBox="0 0 14 14" fill="black">
