@@ -56,11 +56,6 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
             </button>
           ))}
         </div>
-
-        <div className={styles.shopLinks}>
-          <a href="#" className={styles.shopLink}>Shop All Impact Sports Bras</a>
-          <a href="#" className={styles.shopLink}>Shop All Sports Bras</a>
-        </div>
       </div>
 
       <hr className={styles.divider} />
