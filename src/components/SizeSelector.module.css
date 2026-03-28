@@ -13,7 +13,7 @@
   font-family: 'Rawline', sans-serif;
   font-weight: 700;
   font-size: 9px;
-  letter-spacing: 2px;
+  letter-spacing: 1.2px;
   color: #888;
 }
 
@@ -28,7 +28,7 @@
   font-size: 10px;
   color: black;
   text-decoration: underline;
-  letter-spacing: 0.3px;
+  letter-spacing: 1.2px;
   cursor: pointer;
   background: none;
   border: none;
