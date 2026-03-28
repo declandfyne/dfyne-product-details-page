@@ -67,9 +67,12 @@ function FeaturesContent() {
         </ul>
       </div>
 
-      <div className={styles.shopBtns}>
-        <a href="#" className={styles.shopBtn}>Impact Bras</a>
-        <a href="#" className={styles.shopBtn}>All Sports Bras</a>
+      <div className={styles.featSection}>
+        <p className={styles.featSectionLabel}>SHOP MORE</p>
+        <div className={styles.shopBtns}>
+          <a href="#" className={styles.shopBtn}>Impact Bras</a>
+          <a href="#" className={styles.shopBtn}>All Sports Bras</a>
+        </div>
       </div>
     </div>
   )
