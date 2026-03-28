@@ -128,6 +128,7 @@ function ModelContent({ model }) {
     <div className={styles.content}>
       <div className={styles.modelSideBySide}>
         <div className={styles.modelInfoRight}>
+          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS</p>
           <div className={styles.unitToggleFullWidth}>
             <button
               className={`${styles.unitBtn} ${unit === 'metric' ? styles.unitBtnActive : ''}`}
@@ -142,9 +143,11 @@ function ModelContent({ model }) {
               IN
             </button>
           </div>
-          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS</p>
-          <p className={styles.modelWearing}>Wearing Size {model.size}</p>
           <div className={styles.modelTableCompact}>
+            <div className={styles.modelRowCompact}>
+              <span className={styles.modelLabelCompact}>Wearing</span>
+              <span className={styles.modelValueCompact}>Size {model.size}</span>
+            </div>
             {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
               <div key={label} className={styles.modelRowCompact}>
                 <span className={styles.modelLabelCompact}>{label}</span>
