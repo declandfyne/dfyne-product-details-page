@@ -126,6 +126,31 @@
   list-style: disc;
 }
 
+.careTips {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.careTip {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.careTip:last-child {
+  border-bottom: none;
+}
+
+.careText {
+  font-family: 'Rawline', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #333;
+  line-height: 18px;
+}
+
 .materialBar {
   display: flex;
   height: 28px;
@@ -767,15 +792,15 @@
 .shopBtn {
   display: block;
   width: 100%;
-  padding: 12px;
+  padding: 8px;
   background: black;
   color: white;
   border: none;
   border-radius: 89px;
   font-family: 'Rawline', sans-serif;
-  font-weight: 700;
-  font-size: 9px;
-  letter-spacing: 2.8px;
+  font-weight: 600;
+  font-size: 8px;
+  letter-spacing: 2px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;

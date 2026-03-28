@@ -153,7 +153,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick }) 
               )
           )}
 
-          {/* Banner variant — static pill on right, no chevron, not clickable */}
+          {/* Banner variant — static pill on right */}
           {model.variant === 'banner' && (
             open
               ? <MeasurementBanner model={model} onClose={() => setOpen(false)} />
@@ -161,7 +161,6 @@ export default function ProductImage({ src, images, alt, model, onModelClick }) 
                 <div className={styles.modelBadgeWrapRight}>
                   <button className={styles.modelBadgeStatic} onClick={onModelClick}>
                     {model.badgeText}
-                    <ChevronDown />
                   </button>
                 </div>
               )

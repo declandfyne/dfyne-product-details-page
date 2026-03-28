@@ -223,18 +223,16 @@ function FeaturesContent() {
 
 
       <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>CARE INSTRUCTIONS</p>
+        <p className={styles.featSectionLabel}>EASY CARE</p>
         <ul className={styles.bulletList}>
-          <li className={styles.bulletItem}>Machine wash cold on a gentle cycle</li>
-          <li className={styles.bulletItem}>Do not bleach</li>
-          <li className={styles.bulletItem}>Hang dry or tumble dry on low heat</li>
-          <li className={styles.bulletItem}>Do not iron directly on prints or logos</li>
-          <li className={styles.bulletItem}>Do not dry clean</li>
+          <li className={styles.bulletItem}>Machine wash cold, gentle cycle</li>
+          <li className={styles.bulletItem}>Air dry flat — keeps its shape wash after wash</li>
+          <li className={styles.bulletItem}>Skip the fabric softener & bleach</li>
         </ul>
       </div>
       <div className={styles.shopBtns}>
-        <a href="#" className={styles.shopBtn}>Shop All Impact Sports Bras</a>
-        <a href="#" className={styles.shopBtn}>Shop All Sports Bras</a>
+        <a href="#" className={styles.shopBtn}>Impact Bras</a>
+        <a href="#" className={styles.shopBtn}>All Sports Bras</a>
       </div>
     </div>
   )

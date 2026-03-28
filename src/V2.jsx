@@ -26,8 +26,9 @@ export default function V2() {
   const [infoTab,        setInfoTab]        = useState(null)
 
   return (
-    <div className={styles.page}>
+    <>
       <Header />
+      <div className={styles.page}>
       <ImpactBanner />
 
       <div className={styles.twoCol}>
@@ -81,6 +82,7 @@ export default function V2() {
       />
 
       <div className={styles.bottomPad} />
-    </div>
+      </div>
+    </>
   )
 }

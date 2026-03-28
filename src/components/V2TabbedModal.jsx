@@ -24,12 +24,10 @@ const HIGHLIGHTS = [
   'Durable, shape-retaining fabric',
 ]
 
-const CARE_INSTRUCTIONS = [
-  'Machine wash cold, inside out — gentle/delicates cycle, mesh bag recommended.',
-  'Mild detergent only — no fabric softener, no bleach.',
-  'Air dry flat — away from direct heat and sunlight.',
-  'No tumble dryer, no iron, no dry cleaning.',
-  'Rinse in cold water after workouts if you can\'t wash straight away.',
+const CARE_TIPS = [
+  'Machine wash cold, gentle cycle',
+  'Air dry flat — keeps its shape wash after wash',
+  'Skip the fabric softener & bleach',
 ]
 
 function FeaturesContent() {
@@ -61,17 +59,17 @@ function FeaturesContent() {
       </div>
 
       <div className={styles.featSection}>
-        <p className={styles.featSectionLabel}>CARE INSTRUCTIONS</p>
+        <p className={styles.featSectionLabel}>EASY CARE</p>
         <ul className={styles.bulletList}>
-          {CARE_INSTRUCTIONS.map(item => (
-            <li key={item} className={styles.bulletItem}>{item}</li>
+          {CARE_TIPS.map(tip => (
+            <li key={tip} className={styles.bulletItem}>{tip}</li>
           ))}
         </ul>
       </div>
 
       <div className={styles.shopBtns}>
-        <a href="#" className={styles.shopBtn}>Shop All Impact Sports Bras</a>
-        <a href="#" className={styles.shopBtn}>Shop All Sports Bras</a>
+        <a href="#" className={styles.shopBtn}>Impact Bras</a>
+        <a href="#" className={styles.shopBtn}>All Sports Bras</a>
       </div>
     </div>
   )

@@ -8,7 +8,7 @@ export default function SizeSelector({ selectedId, onChange }) {
         <p className={styles.label}>
           SIZE: <strong>{selectedId?.toUpperCase()}</strong>
         </p>
-        <button className={styles.guideBtn}>WHAT'S MY SIZE?</button>
+        <button className={styles.guideBtn}>SIZE GUIDE</button>
       </div>
       <div className={styles.buttons}>
         {SIZES.map(size => (
