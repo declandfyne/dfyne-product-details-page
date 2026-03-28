@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { ASSETS } from '../data/product'
 import styles from './CartSection.module.css'
 
@@ -8,9 +9,33 @@ const ChevronDown = () => (
 )
 
 export default function CartSection({ onOpenPayment }) {
+  const btnRef = useRef(null)
+  const [showSticky, setShowSticky] = useState(false)
+
+  useEffect(() => {
+    const el = btnRef.current
+    if (!el) return
+    // Only enable on mobile (< 1024px)
+    const mq = window.matchMedia('(max-width: 1023px)')
+    if (!mq.matches) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowSticky(!entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className={styles.section}>
-      <button className={styles.addToCart}>ADD TO CART</button>
+      <button ref={btnRef} className={styles.addToCart}>ADD TO CART</button>
+
+      {showSticky && (
+        <div className={styles.stickyBar}>
+          <button className={styles.stickyAddToCart}>ADD TO CART</button>
+        </div>
+      )}
 
       <button className={styles.paymentBar} onClick={onOpenPayment}>
         <span className={styles.paymentText}>Split The Cost. Interest Free</span>

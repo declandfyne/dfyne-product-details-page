@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS, ASSETS } from '../data/product'
+import useDragToDismiss from '../hooks/useDragToDismiss'
 import styles from './V2TabbedModal.module.css'
 
 const TABS = [
@@ -346,8 +347,10 @@ function ReviewsContent() {
 
 export default function V2TabbedModal({ open, initialTab, onClose, model }) {
   const [activeTab, setActiveTab] = useState(initialTab || 'features')
+  const { sheetRef, handleProps } = useDragToDismiss(onClose)
   const swipeRef = useRef(null)
-  const scrollSource = useRef('tap') // 'tap' or 'swipe'
+  const tabsRef = useRef(null)
+  const indicatorRef = useRef(null)
 
   useEffect(() => {
     if (open && initialTab) setActiveTab(initialTab)
@@ -358,91 +361,108 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  // On tab click: scroll to that panel
+  // Position the sliding indicator over a tab button
+  const positionIndicator = useCallback((idx, animate = true) => {
+    const bar = indicatorRef.current
+    const tabsEl = tabsRef.current
+    if (!bar || !tabsEl) return
+    const btn = tabsEl.children[idx]
+    if (!btn) return
+    const tabsRect = tabsEl.getBoundingClientRect()
+    const btnRect = btn.getBoundingClientRect()
+    bar.style.transition = animate ? 'left 0.25s ease, width 0.25s ease' : 'none'
+    bar.style.left = `${btnRect.left - tabsRect.left}px`
+    bar.style.width = `${btnRect.width}px`
+  }, [])
+
+  // On tab click: scroll to panel + move indicator
   const handleTabClick = useCallback((tabId) => {
-    scrollSource.current = 'tap'
     setActiveTab(tabId)
     const el = swipeRef.current
     if (!el) return
     const idx = TABS.findIndex(t => t.id === tabId)
     el.scrollTo({ left: idx * el.offsetWidth, behavior: 'smooth' })
-  }, [])
+    positionIndicator(idx)
+  }, [positionIndicator])
 
-  // Detect swipe start via touch
-  const handleTouchStart = useCallback(() => {
-    scrollSource.current = 'swipe'
-  }, [])
-
-  // After scroll settles, sync tab indicator to final position
-  useEffect(() => {
+  // On swipe: update indicator in real-time + update active tab at snap points
+  const handleScroll = useCallback(() => {
     const el = swipeRef.current
-    if (!el) return
+    if (!el || !el.offsetWidth) return
+    const progress = el.scrollLeft / el.offsetWidth
+    const snappedIdx = Math.round(progress)
 
-    let debounceTimer = null
-
-    const syncTab = () => {
-      if (scrollSource.current !== 'swipe') return
-      const idx = Math.round(el.scrollLeft / el.offsetWidth)
-      const tab = TABS[idx]
-      if (tab && tab.id !== activeTab) setActiveTab(tab.id)
+    // Move indicator smoothly between tabs based on scroll fraction
+    const bar = indicatorRef.current
+    const tabsEl = tabsRef.current
+    if (bar && tabsEl) {
+      const floorIdx = Math.floor(progress)
+      const ceilIdx = Math.min(floorIdx + 1, TABS.length - 1)
+      const frac = progress - floorIdx
+      const floorBtn = tabsEl.children[floorIdx]
+      const ceilBtn = tabsEl.children[ceilIdx]
+      if (floorBtn && ceilBtn) {
+        const tabsRect = tabsEl.getBoundingClientRect()
+        const floorRect = floorBtn.getBoundingClientRect()
+        const ceilRect = ceilBtn.getBoundingClientRect()
+        const left = floorRect.left + (ceilRect.left - floorRect.left) * frac - tabsRect.left
+        const width = floorRect.width + (ceilRect.width - floorRect.width) * frac
+        bar.style.transition = 'none'
+        bar.style.left = `${left}px`
+        bar.style.width = `${width}px`
+      }
     }
 
-    // Use scrollend where supported, debounced scroll as fallback
-    const handleScrollEnd = () => syncTab()
-    const handleScroll = () => {
-      clearTimeout(debounceTimer)
-      debounceTimer = setTimeout(syncTab, 80)
-    }
+    // Update active tab text style at snap points
+    const tab = TABS[snappedIdx]
+    if (tab) setActiveTab(prev => prev === tab.id ? prev : tab.id)
+  }, [])
 
-    el.addEventListener('scrollend', handleScrollEnd)
-    el.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => {
-      el.removeEventListener('scrollend', handleScrollEnd)
-      el.removeEventListener('scroll', handleScroll)
-      clearTimeout(debounceTimer)
-    }
-  }, [activeTab])
-
-  // Snap to correct panel when modal opens
+  // Snap to correct panel + position indicator when modal opens
   useEffect(() => {
     if (!open) return
     const el = swipeRef.current
     if (!el) return
     const idx = TABS.findIndex(t => t.id === activeTab)
-    // Instant scroll on open (no animation)
     requestAnimationFrame(() => {
       el.scrollTo({ left: idx * el.offsetWidth, behavior: 'instant' })
+      positionIndicator(idx, false)
     })
-  }, [open])
+  }, [open, positionIndicator])
 
   if (!open) return null
 
   return (
     <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.sheet} onClick={e => e.stopPropagation()}>
+      <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
+        <div className={styles.dragHandle} {...handleProps}>
+          <div className={styles.dragBar} />
+        </div>
         <div className={styles.header}>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <CloseIcon />
           </button>
         </div>
 
-        <div className={styles.tabs}>
-          {TABS.map(tab => (
-            <button
-              key={tab.id}
-              className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
-              onClick={() => handleTabClick(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
+        <div className={styles.tabsWrap}>
+          <div className={styles.tabs} ref={tabsRef}>
+            {TABS.map(tab => (
+              <button
+                key={tab.id}
+                className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
+                onClick={() => handleTabClick(tab.id)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <div className={styles.tabIndicator} ref={indicatorRef} />
         </div>
 
         <div
           className={styles.swipeContainer}
           ref={swipeRef}
-          onTouchStart={handleTouchStart}
+          onScroll={handleScroll}
         >
           <div className={styles.swipePanel}>
             <div className={styles.body}><FeaturesContent /></div>

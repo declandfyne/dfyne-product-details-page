@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { ASSETS } from '../data/product'
+import useDragToDismiss from '../hooks/useDragToDismiss'
 import styles from './PaymentModal.module.css'
 
 const PAYMENT_OPTIONS = [
@@ -36,6 +37,8 @@ const PAYMENT_OPTIONS = [
 ]
 
 export default function PaymentModal({ open, onClose }) {
+  const { sheetRef, handleProps } = useDragToDismiss(onClose)
+
   // Close on Escape key
   useEffect(() => {
     if (!open) return
@@ -55,11 +58,12 @@ export default function PaymentModal({ open, onClose }) {
   return (
     <div className={styles.overlay} onClick={onClose} aria-modal="true" role="dialog">
       <div
+        ref={sheetRef}
         className={`${styles.sheet} ${open ? styles.sheetOpen : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Drag handle */}
-        <div className={styles.handle} />
+        <div className={styles.handle} {...handleProps} />
 
         {/* Header */}
         <div className={styles.header}>

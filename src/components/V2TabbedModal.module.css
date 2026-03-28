@@ -18,11 +18,27 @@
   flex-direction: column;
 }
 
+.dragHandle {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 0;
+  cursor: grab;
+  touch-action: none;
+  flex-shrink: 0;
+}
+
+.dragBar {
+  width: 36px;
+  height: 4px;
+  background: #d0d0d0;
+  border-radius: 2px;
+}
+
 .header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 14px 16px 0;
+  padding: 8px 16px 0;
   flex-shrink: 0;
 }
 
@@ -37,19 +53,22 @@
 }
 
 /* Tabs */
+.tabsWrap {
+  position: relative;
+  border-bottom: 1px solid #e7e7e7;
+  flex-shrink: 0;
+}
+
 .tabs {
   display: flex;
-  border-bottom: 1px solid #e7e7e7;
   padding: 0 16px;
   gap: 0;
   overflow-x: auto;
-  flex-shrink: 0;
 }
 
 .tab {
   background: none;
   border: none;
-  border-bottom: 3px solid transparent;
   cursor: pointer;
   padding: 12px 14px;
   font-family: 'Raleway', sans-serif;
@@ -58,14 +77,20 @@
   letter-spacing: 1.2px;
   color: #888;
   white-space: nowrap;
-  margin-bottom: -1px;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.15s;
 }
 
 .tab.tabActive {
   color: #0a0a0a;
-  border-bottom-color: #0a0a0a;
   font-weight: 700;
+}
+
+.tabIndicator {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background: #0a0a0a;
+  border-radius: 1.5px 1.5px 0 0;
 }
 
 /* Swipeable container for mobile */
@@ -706,6 +731,14 @@
     height: 100vh;
     border-radius: 0;
     animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+
+  .dragHandle {
+    display: none;
+  }
+
+  .header {
+    padding: 14px 16px 0;
   }
 
   .swipeContainer {

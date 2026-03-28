@@ -76,6 +76,7 @@
 }
 
 .counter {
+  display: none;
   position: absolute;
   top: 8px;
   right: 16px;
@@ -90,6 +91,37 @@
 }
 
 .total { color: #949494; }
+
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  padding: 6px 10px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ccc;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
+}
+
+.dot.dotActive {
+  width: 18px;
+  border-radius: 3px;
+  background: #0a0a0a;
+}
 
 .modelBadgeWrap {
   position: absolute;
@@ -289,6 +321,10 @@
   }
 
   .counter {
+    display: none;
+  }
+
+  .dots {
     display: none;
   }
 

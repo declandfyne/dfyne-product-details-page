@@ -124,6 +124,19 @@ export default function ProductImage({ src, images, alt, model, onModelClick }) 
         {currentIndex + 1} <span className={styles.total}>/ {total}</span>
       </div>
 
+      <div className={styles.dots}>
+        {imgList.map((_, i) => (
+          <button
+            key={i}
+            className={`${styles.dot} ${i === currentIndex ? styles.dotActive : ''}`}
+            onClick={() => {
+              carouselRef.current?.scrollTo({ left: i * carouselRef.current.offsetWidth, behavior: 'smooth' })
+            }}
+            aria-label={`Go to image ${i + 1}`}
+          />
+        ))}
+      </div>
+
       {model && (
         <>
           {/* Card variant — pill expands to inline banner */}

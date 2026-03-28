@@ -5,16 +5,13 @@
 }
 
 body {
-  background: #e8e8e8;
-  display: flex;
-  justify-content: center;
+  background: white;
   min-height: 100vh;
   font-family: 'Raleway', sans-serif;
 }
 
 #root {
   width: 100%;
-  max-width: 789px;
   background: white;
   min-height: 100vh;
 }
