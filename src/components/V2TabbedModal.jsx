@@ -145,8 +145,8 @@ function ModelContent({ model }) {
           </div>
           <div className={styles.modelTableCompact}>
             <div className={styles.modelRowCompact}>
-              <span className={styles.modelLabelCompact}>Wearing</span>
-              <span className={styles.modelValueCompact}>Size {model.size}</span>
+              <span className={styles.modelLabelCompact}>Size</span>
+              <span className={styles.modelValueCompact}>Small</span>
             </div>
             {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
               <div key={label} className={styles.modelRowCompact}>
