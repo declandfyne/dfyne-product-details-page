@@ -79,11 +79,11 @@ function FeaturesContent() {
 }
 
 const MODEL_MEASUREMENTS = [
-  { label: 'Height',   cm: '168cm',  imperial: '5\'6"' },
-  { label: 'Hips',     cm: '101cm',  imperial: '40"'   },
-  { label: 'Waist',    cm: '69cm',   imperial: '27"'   },
-  { label: 'Bust',     cm: '81.5cm', imperial: '32"'   },
-  { label: 'Cup Size', cm: 'B',      imperial: 'B'     },
+  { label: 'Height',   cm: '168',  imperial: '5\'6"' },
+  { label: 'Hips',     cm: '101',  imperial: '40"'   },
+  { label: 'Waist',    cm: '69',   imperial: '27"'   },
+  { label: 'Bust',     cm: '81.5', imperial: '32"'   },
+  { label: 'Cup Size', cm: 'B',    imperial: 'B'     },
 ]
 
 const REGIONAL_SIZES = [
@@ -128,8 +128,20 @@ function ModelContent({ model }) {
     <div className={styles.content}>
       <div className={styles.modelSideBySide}>
         <div className={styles.modelInfoRight}>
-          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS · SIZE {model.size.toUpperCase()}</p>
-          <div className={styles.unitToggleInline}>
+          <p className={styles.modelName}>ALEIAH'S MEASUREMENTS</p>
+          <p className={styles.modelWearing}>Wearing Size {model.size}</p>
+          <div className={styles.modelTableCompact}>
+            {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
+              <div key={label} className={styles.modelRowCompact}>
+                <span className={styles.modelLabelCompact}>{label}</span>
+                <span className={styles.modelValueCompact}>{unit === 'metric' ? cm : imperial}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.modelHeroSmall}>
+          <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
+          <div className={styles.unitToggleOverlay}>
             <button
               className={`${styles.unitBtn} ${unit === 'metric' ? styles.unitBtnActive : ''}`}
               onClick={() => setUnit('metric')}
@@ -143,17 +155,6 @@ function ModelContent({ model }) {
               IN
             </button>
           </div>
-          <div className={styles.modelTableCompact}>
-            {MODEL_MEASUREMENTS.map(({ label, cm, imperial }) => (
-              <div key={label} className={styles.modelRowCompact}>
-                <span className={styles.modelLabelCompact}>{label}</span>
-                <span className={styles.modelValueCompact}>{unit === 'metric' ? cm : imperial}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.modelHeroSmall}>
-          <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
         </div>
       </div>
 

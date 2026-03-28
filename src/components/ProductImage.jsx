@@ -94,22 +94,18 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
   const [open, setOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const carouselRef = useRef(null)
-  const progressRef = useRef(null)
 
   useEffect(() => { setOpen(false); setCurrentIndex(0) }, [model])
+
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   const handleScroll = () => {
     if (!carouselRef.current) return
     const { scrollLeft, scrollWidth, offsetWidth } = carouselRef.current
     const index = Math.round(scrollLeft / offsetWidth)
     setCurrentIndex(index)
-    const total = scrollWidth / offsetWidth
     const maxScroll = scrollWidth - offsetWidth
-    const progress = maxScroll > 0 ? scrollLeft / maxScroll : 0
-    const width = (1 / total + progress * (1 - 1 / total)) * 100
-    if (progressRef.current) {
-      progressRef.current.style.width = `${width}%`
-    }
+    setScrollProgress(maxScroll > 0 ? scrollLeft / maxScroll : 0)
   }
 
   const imgList = images || [src]
@@ -140,9 +136,8 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
 
       <div className={styles.progressTrack}>
         <div
-          ref={progressRef}
           className={styles.progressFill}
-          style={{ width: `${100 / total}%` }}
+          style={{ width: `${(1 / total + scrollProgress * (1 - 1 / total)) * 100}%` }}
         />
       </div>
 
