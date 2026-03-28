@@ -16,7 +16,7 @@
   text-transform: uppercase;
   color: #000;
   text-decoration: none;
-  margin-bottom: 0;
+  padding: 6px 0;
 }
 
 .breadcrumb:hover {
