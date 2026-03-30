@@ -15,6 +15,12 @@ const StarIcon = () => (
   </svg>
 )
 
+const ReviewChevron = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 const LINKS = [
   { id: 'features', label: 'PRODUCT FEATURES' },
   { id: 'model',    label: 'MODEL SIZE' },
@@ -62,15 +68,14 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
       </div>
 
       <div className={styles.reviewSection}>
-        <button type="button" className={styles.reviewBox} onClick={onOpenReviews}>
-          <span className={styles.reviewBoxHeader}>
-            <span className={styles.reviewBoxTitle}>
-              <span className={styles.linkLabel}>CUSTOMER REVIEWS</span>
-              <span className={styles.reviewScoreInline}>
-                <StarIcon /> 5.0 · 6,746 reviews
-              </span>
-            </span>
+        <p className={styles.reviewTitle}>CUSTOMER REVIEWS</p>
+
+        <button type="button" className={styles.reviewScoreRow} onClick={onOpenReviews}>
+          <span className={styles.reviewScoreSummary}>
+            <span className={styles.reviewScoreBadge}>5.0</span>
+            <span className={styles.reviewScoreText}>Excellent · 6,746 reviews</span>
           </span>
+          <ReviewChevron />
         </button>
 
         <div className={styles.reviewBoxContent}>

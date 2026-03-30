@@ -175,7 +175,7 @@ export const FEATURE_RATINGS = [
 // Review ratings from Judge.me — replace with API data
 export const REVIEW_RATINGS = [
   { label: 'Product Quality', low: 'Not as expected', high: 'Incredible', value: 95 },
-  { label: 'True to Size',    low: 'Size Down',       high: 'Size Up',    value: 78 },
+  { label: 'Sizing',          low: 'Size Down',       high: 'Size Up',    value: 78 },
   { label: 'Fit',             low: 'Loose',           high: 'Tight',      value: 72 },
 ]
 
