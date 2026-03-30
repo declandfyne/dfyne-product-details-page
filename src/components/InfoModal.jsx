@@ -22,14 +22,14 @@ function Stars({ count }) {
 const MOCK_REVIEWS = [
   { name: 'Reyna V.', verified: true, location: 'United States', date: '14/01/2026', stars: 5, title: 'Love this jacket!', scores: { quality: 100, sizing: 74, fit: 74 } },
   { name: 'Sophie L.', verified: true, location: 'United Kingdom', date: '09/01/2026', stars: 5, title: 'Best workout top I own', scores: { quality: 95, sizing: 50, fit: 60 } },
-  { name: 'Megan T.', verified: true, location: 'Canada', date: '02/01/2026', stars: 5, title: 'Super cute, runs a little small', scores: { quality: 90, sizing: 85, fit: 80 } },
+  { name: 'Megan T.', verified: true, location: 'Canada', date: '02/01/2026', stars: 4, title: 'Super cute, runs a little small', scores: { quality: 90, sizing: 85, fit: 80 } },
   { name: 'Aisha K.', verified: true, location: 'Australia', date: '28/12/2025', stars: 5, title: 'Incredibly soft fabric', scores: null },
-  { name: 'Emma R.', verified: true, location: 'United Kingdom', date: '20/12/2025', stars: 5, title: 'Perfect for the gym and brunch after', scores: { quality: 100, sizing: 50, fit: 55 } },
-  { name: 'Chloe B.', verified: false, location: 'Ireland', date: '15/12/2025', stars: 5, title: 'Great quality, wished it came in more colours', scores: null },
+  { name: 'Emma R.', verified: true, location: 'United Kingdom', date: '20/12/2025', stars: 4, title: 'Perfect for the gym and brunch after', scores: { quality: 100, sizing: 50, fit: 55 } },
+  { name: 'Chloe B.', verified: false, location: 'Ireland', date: '15/12/2025', stars: 3, title: 'Great quality, wished it came in more colours', scores: null },
   { name: 'Jasmine P.', verified: true, location: 'United States', date: '10/12/2025', stars: 5, title: 'The built-in bra is a game changer', scores: { quality: 100, sizing: 55, fit: 65 } },
-  { name: 'Nina W.', verified: true, location: 'Germany', date: '05/12/2025', stars: 5, title: 'Flattering fit, holds everything in place', scores: null },
+  { name: 'Nina W.', verified: true, location: 'Germany', date: '05/12/2025', stars: 4, title: 'Flattering fit, holds everything in place', scores: null },
   { name: 'Olivia D.', verified: true, location: 'Canada', date: '28/11/2025', stars: 5, title: 'Ordered two more after my first', scores: { quality: 95, sizing: 50, fit: 50 } },
-  { name: 'Priya S.', verified: true, location: 'United Kingdom', date: '20/11/2025', stars: 5, title: 'Washes beautifully, no shape loss', scores: null },
+  { name: 'Priya S.', verified: true, location: 'United Kingdom', date: '20/11/2025', stars: 3, title: 'Washes beautifully, no shape loss', scores: null },
 ]
 
 function ReviewScores({ scores }) {
@@ -102,9 +102,22 @@ function matchesFilter(review, filter) {
 
 function ReviewsContent() {
   const [activeFilter, setActiveFilter] = useState('all')
+  const [starFilter, setStarFilter] = useState(null)
   const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
   const currentFilter = REVIEW_FILTERS.find(f => f.id === activeFilter)
-  const filtered = MOCK_REVIEWS.filter(r => matchesFilter(r, currentFilter))
+
+  const starCounts = [5, 4, 3, 2, 1].map(s => ({
+    star: s,
+    count: MOCK_REVIEWS.filter(r => r.stars === s).length,
+  }))
+
+  const filtered = MOCK_REVIEWS
+    .filter(r => matchesFilter(r, currentFilter))
+    .filter(r => starFilter === null || r.stars === starFilter)
+
+  const handleStarClick = (star) => {
+    setStarFilter(prev => prev === star ? null : star)
+  }
 
   return (
     <div className={styles.content}>
@@ -151,6 +164,22 @@ function ReviewsContent() {
         </div>
       </div>
 
+      <p className={styles.filterSectionLabel}>FILTER BY RATING</p>
+      <div className={styles.starFilterChips}>
+        {starCounts.map(({ star, count }) => (
+          <button
+            key={star}
+            className={`${styles.starFilterChip} ${starFilter === star ? styles.starFilterChipActive : ''}`}
+            onClick={() => handleStarClick(star)}
+          >
+            <span className={styles.starFilterStars}>
+              {[...Array(star)].map((_, i) => <StarIcon key={i} filled />)}
+            </span>
+            <span className={styles.starFilterCount}>({count})</span>
+          </button>
+        ))}
+      </div>
+
       <div className={styles.filterChips}>
         {REVIEW_FILTERS.map(f => (
           <button
@@ -169,7 +198,7 @@ function ReviewsContent() {
             <ReviewCard key={i} review={review} />
           ))
         ) : (
-          <p className={styles.noResults}>No reviews matching "{currentFilter.label}" yet</p>
+          <p className={styles.noResults}>No reviews match the selected filters</p>
         )}
       </div>
     </div>

@@ -30,11 +30,11 @@ export default function V2() {
       <div className={styles.page}>
       <div className={styles.twoCol}>
         <div className={styles.colLeft}>
-          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} showBreadcrumb={selectedColor.id === 'navy'} />
+          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} showBreadcrumb />
         </div>
 
         <div className={styles.colRight}>
-          <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={false} hideBreadcrumb={selectedColor.id === 'navy'} />
+          <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={false} hideBreadcrumb />
 
           <hr className={styles.divider} />
 
