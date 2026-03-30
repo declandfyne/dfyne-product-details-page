@@ -46,7 +46,7 @@
 .links {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .linkRow {
@@ -105,28 +105,49 @@
   color: #555;
 }
 
-/* Review Summary */
-.divider {
-  border: none;
-  border-top: 1px solid #e7e7e7;
-  margin: 0;
+/* Review Box */
+.reviewBox {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 14px;
+  transition: border-color 0.2s ease;
+  margin-top: -8px;
 }
 
-.reviewSummary {
+.reviewBox:hover {
+  border-color: #0a0a0a;
+}
+
+.reviewBoxHeader {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.reviewScoreRow {
+.reviewBoxTitle {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  text-align: left;
+}
+
+.reviewScoreInline {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #555;
+  letter-spacing: 0.3px;
+}
+
+.reviewBoxContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .reviewScoreBadge {

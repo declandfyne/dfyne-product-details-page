@@ -58,32 +58,32 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
         </div>
       </div>
 
-      <hr className={styles.divider} />
-
-      {/* Customer Reviews summary section */}
-      <div className={styles.reviewSummary}>
-        <p className={styles.sectionLabel}>CUSTOMER REVIEWS</p>
-
-        <button className={styles.reviewScoreRow} onClick={onOpenReviews}>
-          <span className={styles.reviewScoreBadge}>5.0</span>
-          <span className={styles.reviewScoreText}>Excellent · 6,746 reviews</span>
-          <CaretDown />
-        </button>
-
-        <div className={styles.reviewBars}>
-          {REVIEW_RATINGS.map(({ label, value }) => (
-            <div key={label} className={styles.reviewBarItem}>
-              <span className={styles.reviewBarLabel}>{label}</span>
-              <div className={styles.reviewBarTrack}>
-                <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
-              </div>
-            </div>
-          ))}
+      <div className={styles.reviewBox} onClick={onOpenReviews}>
+        <div className={styles.reviewBoxHeader}>
+          <span className={styles.reviewBoxTitle}>
+            <span className={styles.linkLabel}>CUSTOMER REVIEWS</span>
+            <span className={styles.reviewScoreInline}>
+              <StarIcon /> 5.0 · 6,746 reviews
+            </span>
+          </span>
         </div>
 
-        <button className={styles.readAllLink} onClick={onOpenReviews}>
-          Read all reviews
-        </button>
+        <div className={styles.reviewBoxContent}>
+          <div className={styles.reviewBars}>
+            {REVIEW_RATINGS.map(({ label, value }) => (
+              <div key={label} className={styles.reviewBarItem}>
+                <span className={styles.reviewBarLabel}>{label}</span>
+                <div className={styles.reviewBarTrack}>
+                  <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button className={styles.readAllLink} onClick={onOpenReviews}>
+            Read all customer reviews
+          </button>
+        </div>
       </div>
 
     </div>

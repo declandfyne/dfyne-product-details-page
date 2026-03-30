@@ -60,10 +60,11 @@
   .colLeft {
     position: sticky;
     top: 0;
+    padding-top: 32px;
   }
 
   .colRight {
-    padding: 0 0 40px 0;
+    padding: 16px 0 40px 0;
   }
 
   .colRight .divider,

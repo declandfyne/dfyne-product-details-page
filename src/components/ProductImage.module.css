@@ -100,15 +100,17 @@
 .progressTrack {
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #e0e0e0;
+  left: 16px;
+  right: 16px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
 }
 
 .progressFill {
   height: 100%;
   background: #0a0a0a;
+  border-radius: 2px;
   transition: width 0.05s linear;
 }
 
@@ -333,5 +335,20 @@
 
   .thumbnailStrip {
     display: none;
+  }
+
+  .modelBadgeWrapRight {
+    top: calc(50% - 2px);
+    bottom: auto;
+    right: 16px;
+    transform: translateY(-100%) translateY(-16px);
+  }
+
+  .modelBadgeWrap {
+    top: calc(50% - 2px);
+    bottom: auto;
+    left: auto;
+    right: 16px;
+    transform: translateY(-100%) translateY(-16px);
   }
 }
