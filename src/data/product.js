@@ -1,14 +1,37 @@
+import afterpayLogo from '../assets/afterpay.svg'
+import shopPayLogo  from '../assets/shoppay.svg'
+import klarnaLogo   from '../assets/klarna.svg'
+import modelPhoto   from '../assets/modelfullbody.jpg'
+import dfyneLogo    from '../assets/dfyne-logo.svg'
+import packageIcon  from '../assets/package-icon.svg'
+
+import midnightBlackImg from '../assets/midnight-black.jpg'
+import midnightBlack2   from '../assets/midnight-black-2.png'
+import midnightBlack3   from '../assets/midnight-black-3.png'
+import midnightBlack4   from '../assets/midnight-black-4.png'
+import navyImg          from '../assets/navy.png'
+import tealImg          from '../assets/teal.png'
+import truffleImg       from '../assets/truffle.png'
+import opticWhiteImg    from '../assets/optic-white.png'
+import blueImg          from '../assets/blue.png'
+import rangersImg       from '../assets/rangers.png'
+
+import lookLeggings from '../assets/look-leggings.png'
+import lookCoat     from '../assets/look-coat.jpg'
+import lookTop      from '../assets/look-top.jpg'
+import lookShorts   from '../assets/look-shorts.png'
+
 export const COLORS = [
   {
     id: 'midnight-black',
     label: 'Midnight B...',
     name: 'MIDNIGHT BLACK',
-    img: 'https://www.figma.com/api/mcp/asset/3bbbdcc0-d662-47f8-b8e7-47ad10be407c',
+    img: midnightBlackImg,
     images: [
-      'https://www.figma.com/api/mcp/asset/3bbbdcc0-d662-47f8-b8e7-47ad10be407c',
-      mbImg2,
-      mbImg3,
-      mbImg4,
+      midnightBlackImg,
+      midnightBlack2,
+      midnightBlack3,
+      midnightBlack4,
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '149cm', bust: '81cm', waist: '54cm', hips: '91cm' },
@@ -17,9 +40,9 @@ export const COLORS = [
     id: 'navy',
     label: 'Navy',
     name: 'NAVY',
-    img: 'https://www.figma.com/api/mcp/asset/5ce4669e-7b50-4402-a497-3b8e95897b8d',
+    img: navyImg,
     images: [
-      'https://www.figma.com/api/mcp/asset/5ce4669e-7b50-4402-a497-3b8e95897b8d',
+      navyImg,
     ],
     isNew: true,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -28,9 +51,9 @@ export const COLORS = [
     id: 'teal',
     label: 'Teal',
     name: 'TEAL',
-    img: 'https://www.figma.com/api/mcp/asset/c1eaa29a-d01d-4297-b585-c5903b8a5e16',
+    img: tealImg,
     images: [
-      'https://www.figma.com/api/mcp/asset/c1eaa29a-d01d-4297-b585-c5903b8a5e16',
+      tealImg,
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -39,9 +62,9 @@ export const COLORS = [
     id: 'truffle',
     label: 'Truffle',
     name: 'TRUFFLE',
-    img: 'https://www.figma.com/api/mcp/asset/ada6f9e8-47f9-4a8c-a9ab-75d18b026441',
+    img: truffleImg,
     images: [
-      'https://www.figma.com/api/mcp/asset/ada6f9e8-47f9-4a8c-a9ab-75d18b026441',
+      truffleImg,
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -50,9 +73,9 @@ export const COLORS = [
     id: 'optic-white',
     label: 'Optic White',
     name: 'OPTIC WHITE',
-    img: 'https://www.figma.com/api/mcp/asset/698eb3ed-d387-4912-8d64-bf7a6b83adf0',
+    img: opticWhiteImg,
     images: [
-      'https://www.figma.com/api/mcp/asset/698eb3ed-d387-4912-8d64-bf7a6b83adf0',
+      opticWhiteImg,
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -61,9 +84,9 @@ export const COLORS = [
     id: 'blue',
     label: 'Blue',
     name: 'BLUE',
-    img: 'https://www.figma.com/api/mcp/asset/6fd3209b-e290-4e89-911f-1ff72225ac45',
+    img: blueImg,
     images: [
-      'https://www.figma.com/api/mcp/asset/6fd3209b-e290-4e89-911f-1ff72225ac45',
+      blueImg,
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -72,9 +95,9 @@ export const COLORS = [
     id: 'rangers',
     label: 'Rangers',
     name: 'RANGERS',
-    img: 'https://www.figma.com/api/mcp/asset/c5ffc7ba-f75e-450c-a0eb-1df17b836ef4',
+    img: rangersImg,
     images: [
-      'https://www.figma.com/api/mcp/asset/c5ffc7ba-f75e-450c-a0eb-1df17b836ef4',
+      rangersImg,
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -94,35 +117,27 @@ export const LOOK_ITEMS = [
     id: 1,
     name: 'Impact Leggings',
     color: 'MIDNIGHT BLACK',
-    img: 'https://www.figma.com/api/mcp/asset/acee031e-9a5d-4b51-b875-482a71000ec3',
+    img: lookLeggings,
   },
   {
     id: 2,
     name: 'Impact Coat',
     color: 'MIDNIGHT BLACK',
-    img: 'https://www.figma.com/api/mcp/asset/0e520ae1-bfb1-45a8-bf51-68b5353d5207',
+    img: lookCoat,
   },
   {
     id: 3,
     name: 'Impact Top',
     color: 'MIDNIGHT BLACK',
-    img: 'https://www.figma.com/api/mcp/asset/d6633979-36a3-4d98-bb31-52b3b5e55876',
+    img: lookTop,
   },
   {
     id: 4,
     name: "Impact Shorts | 4.5'",
     color: 'MIDNIGHT BLACK',
-    img: 'https://www.figma.com/api/mcp/asset/fa4561b7-57b0-497c-a6e2-62ff5695e70d',
+    img: lookShorts,
   },
 ]
-
-import afterpayLogo from '../assets/afterpay.svg'
-import shopPayLogo  from '../assets/shoppay.svg'
-import klarnaLogo   from '../assets/klarna.svg'
-import modelPhoto   from '../assets/modelfullbody.jpg'
-import mbImg2 from '../assets/IMG_1313_1-Edit-1.webp'
-import mbImg3 from '../assets/IMG_1331_1-Edit-2.webp'
-import mbImg4 from '../assets/IMG_1341_1-Edit-3.webp'
 
 export const FEATURE_RATINGS = [
   { label: 'Bra Support',  value: 1 },
@@ -137,13 +152,11 @@ export const REVIEW_RATINGS = [
   { label: 'Fit',             low: 'Loose',           high: 'Tight',      value: 72 },
 ]
 
-import dfyneLogo    from '../assets/dfyne-logo.svg'
-
 export const ASSETS = {
   logo:       dfyneLogo,
   klarna:     klarnaLogo,
   afterpay:   afterpayLogo,
   shopPay:    shopPayLogo,
-  package:    'https://www.figma.com/api/mcp/asset/0fb87a78-48ee-4a9b-9295-96f22e839dae',
+  package:    packageIcon,
   modelPhoto: modelPhoto,
 }
