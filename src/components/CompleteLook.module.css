@@ -1,52 +1,160 @@
 .section {
-  padding: 16px;
+  padding: 24px 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .title {
+  font-family: 'Rawline', sans-serif;
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 1.2px;
-  color: black;
-  margin-bottom: 16px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.itemCount {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #0a0a0a;
+  letter-spacing: 0.03em;
 }
 
 .scroll {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   overflow-x: auto;
   scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 .scroll::-webkit-scrollbar { display: none; }
 
-.card {
-  flex-shrink: 0;
-  width: 103px;
+.cardButton {
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: left;
   cursor: pointer;
 }
 
-.card img {
-  width: 103px;
-  height: 103px;
-  border-radius: 8px;
+.cardButton:focus-visible {
+  outline: 2px solid #0a0a0a;
+  outline-offset: 4px;
+  border-radius: 5px;
+}
+
+.card {
+  flex-shrink: 0;
+  width: 160px;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 209 / 261;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
+.currentBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: white;
+  color: #0a0a0a;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 7px;
+  letter-spacing: 0.035em;
+  padding: 4px 8px;
+  border-radius: 0 5px 0 8px;
+}
+
+.meta {
+  padding: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .name {
-  font-size: 10px;
-  line-height: 16px;
-  color: black;
-  letter-spacing: 0.3px;
-  margin-top: 3px;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  color: #0a0a0a;
+  letter-spacing: 0.025em;
+  margin: 0;
 }
 
 .color {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #0a0a0a;
+  opacity: 0.65;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.price {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+.reviewRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.stars {
+  display: flex;
+  gap: 1px;
+}
+
+.reviewCount {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 9px;
+  color: #0a0a0a;
+  letter-spacing: 0.027em;
+}
+
+.ctaBtn {
   display: block;
+  width: 100%;
+  margin-top: 20px;
+  height: 48px;
+  padding: 0 20px;
+  background: white;
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+  border-radius: 89px;
+  font-family: 'Rawline', sans-serif;
   font-weight: 600;
-  font-size: 8px;
-  color: black;
-  letter-spacing: 1.5px;
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  cursor: pointer;
   text-align: center;
 }
 
@@ -57,7 +165,6 @@
 
   .title {
     font-size: 14px;
-    margin-bottom: 24px;
   }
 
   .scroll {
@@ -71,18 +178,9 @@
     width: auto;
   }
 
-  .card img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1;
-  }
-
-  .name {
-    font-size: 12px;
-    margin-top: 8px;
-  }
-
-  .color {
-    font-size: 9px;
+  .ctaBtn {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

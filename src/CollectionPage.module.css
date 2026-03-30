@@ -1,0 +1,261 @@
+.page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Collection Header */
+.collectionHeader {
+  padding: 24px 17px 20px;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 3.125%;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  margin: 0 0 4px;
+}
+
+.title {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+/* Filter Bar */
+.filterBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 17px 16px;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #e8e8e1;
+  border-radius: 50px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #0a0a0a;
+}
+
+.filterRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.productCount {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #0a0a0a;
+  letter-spacing: 0.03em;
+}
+
+.gridToggles {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gridToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Product Grid */
+.grid, .grid1, .grid3 {
+  display: grid;
+  gap: 20px 8px;
+  padding: 0 17px;
+}
+
+.grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid1 {
+  grid-template-columns: 1fr;
+}
+
+.grid3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Product Card */
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.productImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.newBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #111;
+  color: white;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 8px;
+  letter-spacing: 0.035em;
+  padding: 4px 8px;
+  border-radius: 0 8px 0 8px;
+}
+
+.quickAdd {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Meta */
+.meta {
+  padding: 10px 2px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.productName {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #0a0a0a;
+  letter-spacing: 0.025em;
+  margin: 0;
+}
+
+.productColor {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #0a0a0a;
+  opacity: 0.65;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.price {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #1c1d1d;
+  letter-spacing: 0.027em;
+}
+
+.reviewInfo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stars {
+  display: flex;
+  gap: 1px;
+}
+
+.reviewCount {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #1c1d1d;
+  letter-spacing: 0.027em;
+}
+
+.bottomPad {
+  height: 40px;
+}
+
+@media (min-width: 768px) {
+  .grid, .grid1, .grid3 {
+    gap: 24px 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .collectionHeader {
+    padding: 32px 32px 24px;
+  }
+
+  .filterBar {
+    padding: 0 32px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid, .grid1, .grid3 {
+    gap: 28px 16px;
+    padding: 0 clamp(40px, calc(23.44vw - 200px), 250px);
+    max-width: 1920px;
+  }
+
+  .collectionHeader {
+    padding: 40px 0 28px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .filterBar {
+    padding: 0 clamp(40px, calc(23.44vw - 200px), 250px) 24px;
+    max-width: 1920px;
+  }
+}

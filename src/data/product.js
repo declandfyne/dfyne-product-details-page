@@ -20,6 +20,9 @@ import lookLeggings from '../assets/look-leggings.png'
 import lookCoat     from '../assets/look-coat.jpg'
 import lookTop      from '../assets/look-top.jpg'
 import lookShorts   from '../assets/look-shorts.png'
+import lookShortsNew from '../assets/look-shorts-new.png'
+import lookHalfZippy from '../assets/look-half-zippy.png'
+import lookFlares    from '../assets/look-flares.png'
 
 export const COLORS = [
   {
@@ -115,27 +118,51 @@ export const SIZES = [
 export const LOOK_ITEMS = [
   {
     id: 1,
-    name: 'Impact Leggings',
-    color: 'MIDNIGHT BLACK',
-    img: lookLeggings,
+    name: 'Impact Backless Bandeau',
+    color: 'Midnight Black',
+    price: '$49.00',
+    priceNum: 49,
+    reviews: 52866,
+    img: midnightBlackImg,
+    current: true,
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    lengths: null,
   },
   {
     id: 2,
-    name: 'Impact Coat',
-    color: 'MIDNIGHT BLACK',
-    img: lookCoat,
+    name: 'Impact Shorts | 4.5"',
+    color: 'Midnight Black',
+    price: '$49.00',
+    priceNum: 49,
+    reviews: 52866,
+    img: lookShortsNew,
+    current: false,
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    lengths: null,
   },
   {
     id: 3,
-    name: 'Impact Top',
-    color: 'MIDNIGHT BLACK',
-    img: lookTop,
+    name: 'Impact Half Zippy',
+    color: 'Midnight Black',
+    price: '$69.00',
+    priceNum: 69,
+    reviews: 52866,
+    img: lookHalfZippy,
+    current: false,
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    lengths: null,
   },
   {
     id: 4,
-    name: "Impact Shorts | 4.5'",
-    color: 'MIDNIGHT BLACK',
-    img: lookShorts,
+    name: 'Origin Flares',
+    color: 'Midnight Black',
+    price: '$69.00',
+    priceNum: 69,
+    reviews: 52866,
+    img: lookFlares,
+    current: false,
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    lengths: ['SHORT', 'REGULAR', 'LONG'],
   },
 ]
 

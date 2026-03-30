@@ -7,10 +7,13 @@ const ChevronDown = () => (
   </svg>
 )
 
-export default function CartSection({ onOpenPayment }) {
+export default function CartSection({ onOpenPayment, onOpenCompleteLook }) {
   return (
     <div className={styles.section}>
       <button className={styles.addToCart}>ADD TO CART</button>
+      <button type="button" className={styles.completeLookBtn} onClick={onOpenCompleteLook}>
+        COMPLETE THE LOOK
+      </button>
 
       <button className={styles.paymentBar} onClick={onOpenPayment}>
         <span className={styles.paymentText}>Split The Cost. Interest Free</span>

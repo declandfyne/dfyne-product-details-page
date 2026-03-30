@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './ProductImage.module.css'
 
 const ChevronDown = () => (
@@ -126,12 +127,12 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
       )}
 
       {showBreadcrumb && (
-        <a href="#" className={styles.breadcrumbPill}>
+        <Link to="/" className={styles.breadcrumbPill}>
           <svg width="8" height="8" viewBox="0 0 16 16" fill="none">
             <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           IMPACT COLLECTION
-        </a>
+        </Link>
       )}
 
       <div className={styles.progressTrack}>
