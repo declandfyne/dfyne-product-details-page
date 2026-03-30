@@ -339,7 +339,7 @@ const SHIPPING_ROWS = [
 
 function DeliveryContent() {
   return (
-    <div className={styles.content}>
+    <div className={styles.deliveryContent}>
       <p className={styles.text}>
         We offer <strong>free returns</strong> for all orders from the UK, Mainland USA, Canada, EU, and Australia. See more <u>here</u>.
       </p>
@@ -404,11 +404,14 @@ export default function InfoModal({ open, activeTab, onClose, model, productImg 
           </button>
         </div>
 
-        <div className={styles.body}>
-          {activeTab === 'features' && <FeaturesContent />}
-          {activeTab === 'model'    && <ModelContent model={model} productImg={productImg} />}
-          {activeTab === 'delivery' && <DeliveryContent />}
-          {activeTab === 'reviews'  && <ReviewsContent />}
+        <div className={styles.bodyWrap}>
+          <div className={styles.body}>
+            {activeTab === 'features' && <FeaturesContent />}
+            {activeTab === 'model'    && <ModelContent model={model} productImg={productImg} />}
+            {activeTab === 'delivery' && <DeliveryContent />}
+            {activeTab === 'reviews'  && <ReviewsContent />}
+          </div>
+          <div className={styles.scrollFade} />
         </div>
       </div>
     </div>

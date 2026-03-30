@@ -101,10 +101,10 @@ const getDefaultUnit = () => {
 
 const RulerIcon = () => (
   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-    <path d="M14.5 4.5L11.5 1.5L1.5 11.5L4.5 14.5L14.5 4.5Z" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M10 3L11.5 4.5" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
-    <path d="M7.5 5.5L9 7" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
-    <path d="M5 8L6.5 9.5" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
+    <path d="M14.5 4.5L11.5 1.5L1.5 11.5L4.5 14.5L14.5 4.5Z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M10 3L11.5 4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <path d="M7.5 5.5L9 7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <path d="M5 8L6.5 9.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
     <path d="M2.5 10.5L4 12" stroke="#0a0a0a" strokeWidth="1.3" strokeLinecap="round" />
   </svg>
 )
@@ -196,7 +196,7 @@ const SHIPPING_ROWS = [
 
 function DeliveryContent() {
   return (
-    <div className={styles.content}>
+    <div className={styles.deliveryContent}>
       <p className={styles.text}>
         We offer <strong>free returns</strong> for all orders from the UK, Mainland USA, Canada, EU, and Australia. See more <u>here</u>.
       </p>
@@ -501,20 +501,23 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
           <div className={styles.tabIndicator} ref={indicatorRef} />
         </div>
 
-        <div
-          className={styles.swipeContainer}
-          ref={swipeRef}
-          onScroll={handleScroll}
-        >
-          <div className={styles.swipePanel}>
-            <div className={styles.body}><FeaturesContent /></div>
+        <div className={styles.swipeWrap}>
+          <div
+            className={styles.swipeContainer}
+            ref={swipeRef}
+            onScroll={handleScroll}
+          >
+            <div className={styles.swipePanel}>
+              <div className={styles.body}><FeaturesContent /></div>
+            </div>
+            <div className={styles.swipePanel}>
+              <div className={styles.body}><ModelContent model={model} /></div>
+            </div>
+            <div className={styles.swipePanel}>
+              <div className={styles.body}><DeliveryContent /></div>
+            </div>
           </div>
-          <div className={styles.swipePanel}>
-            <div className={styles.body}><ModelContent model={model} /></div>
-          </div>
-          <div className={styles.swipePanel}>
-            <div className={styles.body}><DeliveryContent /></div>
-          </div>
+          <div className={styles.scrollFade} />
         </div>
       </div>
     </div>

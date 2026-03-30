@@ -101,12 +101,17 @@
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  flex: 1;
-  min-height: 0;
+  height: 100%;
 }
 
 .swipeContainer::-webkit-scrollbar {
   display: none;
+}
+
+.swipeWrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
 }
 
 .swipePanel {
@@ -116,6 +121,17 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.scrollFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  pointer-events: none;
+  z-index: 2;
 }
 
 .body {
@@ -129,6 +145,12 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+.deliveryContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .text {
@@ -322,16 +344,16 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: transparent;
-  border: 1px solid #d0d0d0;
+  background: #0a0a0a;
+  border: none;
   border-radius: 89px;
-  padding: 8px;
+  padding: 12px;
   cursor: pointer;
   font-family: 'Rawline', sans-serif;
-  font-weight: 600;
-  font-size: 8px;
+  font-weight: 700;
+  font-size: 9px;
   letter-spacing: 1.2px;
-  color: #0a0a0a;
+  color: white;
   text-transform: uppercase;
   margin-bottom: 6px;
 }
