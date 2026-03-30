@@ -1,12 +1,24 @@
 .section {
-  padding: 24px 16px;
+  padding: 0 16px 24px;
+}
+
+.box {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.box:hover {
+  border-color: #0a0a0a;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .title {
@@ -139,28 +151,9 @@
   letter-spacing: 0.027em;
 }
 
-.ctaBtn {
-  display: block;
-  width: 100%;
-  margin-top: 20px;
-  height: 48px;
-  padding: 0 20px;
-  background: white;
-  color: #0a0a0a;
-  border: 1px solid #0a0a0a;
-  border-radius: 89px;
-  font-family: 'Rawline', sans-serif;
-  font-weight: 600;
-  font-size: 9px;
-  letter-spacing: 2.8px;
-  text-transform: uppercase;
-  cursor: pointer;
-  text-align: center;
-}
-
 @media (min-width: 1024px) {
   .section {
-    padding: 32px clamp(40px, calc(23.44vw - 200px), 250px);
+    padding: 0 clamp(40px, calc(23.44vw - 200px), 250px) 32px;
   }
 
   .title {
@@ -176,11 +169,5 @@
 
   .card {
     width: auto;
-  }
-
-  .ctaBtn {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }

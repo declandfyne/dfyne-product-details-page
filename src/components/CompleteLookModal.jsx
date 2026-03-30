@@ -17,18 +17,20 @@ const CheckIcon = () => (
 
 const createInitialSelection = () => ({ step: 'idle', size: '', length: '' })
 
-function SelectedThumbnail({ item, onRemove }) {
+function SelectedThumbnail({ item, onRemove, removable = true }) {
   return (
     <div className={styles.selectedThumb}>
       <img src={item.img} alt={item.name} className={styles.selectedThumbImg} />
-      <button
-        type="button"
-        className={styles.selectedThumbRemove}
-        aria-label={`Remove ${item.name}`}
-        onClick={() => onRemove(item.id)}
-      >
-        <CloseIcon />
-      </button>
+      {removable && (
+        <button
+          type="button"
+          className={styles.selectedThumbRemove}
+          aria-label={`Remove ${item.name}`}
+          onClick={() => onRemove(item.id)}
+        >
+          <CloseIcon />
+        </button>
+      )}
     </div>
   )
 }
@@ -299,9 +301,11 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
     }))
   }
 
+  const hasCurrentProductSelected = Boolean(currentSize)
   const selectedItems = otherItems.filter(i => selections[i.id].size)
-  const selectedCount = selectedItems.length
-  const subtotal = selectedItems.reduce((sum, i) => sum + i.priceNum, 0)
+  const selectedCount = selectedItems.length + (hasCurrentProductSelected ? 1 : 0)
+  const subtotal = selectedItems.reduce((sum, i) => sum + i.priceNum, hasCurrentProductSelected ? currentItem.priceNum : 0)
+  const canSubmit = hasCurrentProductSelected && selectedItems.length > 0
   const title = 'COMPLETE THE LOOK'
   const sectionTitle = 'COMPLETE THE LOOK'
 
@@ -351,6 +355,9 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
         <div className={styles.footer}>
           {selectedCount > 0 && (
             <div className={styles.selectedThumbRow}>
+              {hasCurrentProductSelected && currentItem && (
+                <SelectedThumbnail item={currentItem} removable={false} />
+              )}
               {selectedItems.map(item => (
                 <SelectedThumbnail key={item.id} item={item} onRemove={handleResetItem} />
               ))}
@@ -364,9 +371,9 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
           </div>
           <button
             type="button"
-            className={`${styles.ctaBtn} ${selectedCount > 0 ? styles.ctaBtnActive : ''}`}
+            className={`${styles.ctaBtn} ${canSubmit ? styles.ctaBtnActive : ''}`}
           >
-            {selectedCount > 0 ? 'ADD SELECTED ITEMS TO CART' : 'SELECT SIZES'}
+            {canSubmit ? 'ADD SELECTED ITEMS TO CART' : 'SELECT SIZES'}
           </button>
           <p className={styles.footerMeta}>
             <img src={ASSETS.klarna} alt="Klarna" className={styles.footerLogo} />

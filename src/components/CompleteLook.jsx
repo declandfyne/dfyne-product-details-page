@@ -41,28 +41,28 @@ export default function CompleteLook({ onOpen }) {
 
   return (
     <div className={styles.section}>
-      <div className={styles.header}>
-        <p className={styles.title}>COMPLETE THE LOOK</p>
-        <span className={styles.itemCount}>{LOOK_ITEMS.length} items</span>
-      </div>
+      <div className={styles.box}>
+        <div className={styles.header}>
+          <p className={styles.title}>COMPLETE THE LOOK</p>
+          <span className={styles.itemCount}>{LOOK_ITEMS.length} items</span>
+        </div>
 
-      <div className={styles.scroll}>
-        {LOOK_ITEMS.map(item => (
-          <div
-            key={item.id}
-            className={styles.cardButton}
-            role="button"
-            tabIndex={0}
-            onClick={onOpen}
-            onKeyDown={handleKeyDown}
-            aria-label={`Open shop the look for ${item.name}`}
-          >
-            <LookCard item={item} />
-          </div>
-        ))}
+        <div className={styles.scroll}>
+          {LOOK_ITEMS.map(item => (
+            <div
+              key={item.id}
+              className={styles.cardButton}
+              role="button"
+              tabIndex={0}
+              onClick={onOpen}
+              onKeyDown={handleKeyDown}
+              aria-label={`Open shop the look for ${item.name}`}
+            >
+              <LookCard item={item} />
+            </div>
+          ))}
+        </div>
       </div>
-
-      <button type="button" className={styles.ctaBtn} onClick={onOpen}>COMPLETE THE LOOK</button>
     </div>
   )
 }
