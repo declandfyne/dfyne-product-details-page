@@ -94,9 +94,18 @@ function MeasurementBanner({ model, onClose }) {
 export default function ProductImage({ src, images, alt, model, onModelClick, showBreadcrumb = false }) {
   const [open, setOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+  const [zoomedIndex, setZoomedIndex] = useState(null)
+  const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 })
   const carouselRef = useRef(null)
 
-  useEffect(() => { setOpen(false); setCurrentIndex(0) }, [model])
+  useEffect(() => {
+    setOpen(false)
+    setCurrentIndex(0)
+    setZoomedIndex(null)
+    setZoomPosition({ x: 50, y: 50 })
+  }, [model, src, images])
 
   const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -112,18 +121,90 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
   const imgList = images || [src]
   const total = imgList.length
 
+  const handlePointerMove = (event, index) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    setHoveredIndex(index)
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    const y = ((event.clientY - rect.top) / rect.height) * 100
+    setCursorPosition({
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    })
+    setZoomPosition({
+      x: Math.max(0, Math.min(100, x)),
+      y: Math.max(0, Math.min(100, y)),
+    })
+  }
+
+  const handlePointerLeave = (index) => {
+    setHoveredIndex(null)
+    if (zoomedIndex !== index) {
+      setZoomPosition({ x: 50, y: 50 })
+    }
+  }
+
+  const toggleZoom = (index) => {
+    setZoomedIndex(prev => (prev === index ? null : index))
+  }
+
   return (
     <div className={styles.wrap}>
       {images ? (
         <div className={styles.carousel} ref={carouselRef} onScroll={handleScroll}>
           {imgList.map((imgSrc, i) => (
             <div key={i} className={styles.slide}>
-              <img className={styles.img} src={imgSrc} alt={`${alt} ${i + 1}`} />
+              <button
+                type="button"
+                className={`${styles.slideTrigger} ${zoomedIndex === i ? styles.slideTriggerZoomed : ''}`}
+                onClick={() => toggleZoom(i)}
+                onMouseMove={(event) => handlePointerMove(event, i)}
+                onMouseLeave={() => handlePointerLeave(i)}
+                aria-label={zoomedIndex === i ? `Zoom out image ${i + 1} of ${total}` : `Zoom in image ${i + 1} of ${total}`}
+              >
+                <img
+                  className={`${styles.img} ${zoomedIndex === i ? styles.imgZoomed : ''}`}
+                  src={imgSrc}
+                  alt={`${alt} ${i + 1}`}
+                  style={zoomedIndex === i ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
+                />
+                {hoveredIndex === i && (
+                  <span
+                    className={styles.cursorPlus}
+                    style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}
+                    aria-hidden="true"
+                  >
+                    {zoomedIndex === i ? '−' : '+'}
+                  </span>
+                )}
+              </button>
             </div>
           ))}
         </div>
       ) : (
-        <img className={styles.img} src={src} alt={alt} />
+        <button
+          type="button"
+          className={`${styles.slideTrigger} ${styles.singleImageTrigger} ${zoomedIndex === 0 ? styles.slideTriggerZoomed : ''}`}
+          onClick={() => toggleZoom(0)}
+          onMouseMove={(event) => handlePointerMove(event, 0)}
+          onMouseLeave={() => handlePointerLeave(0)}
+          aria-label={zoomedIndex === 0 ? 'Zoom out image' : 'Zoom in image'}
+        >
+          <img
+            className={`${styles.img} ${zoomedIndex === 0 ? styles.imgZoomed : ''}`}
+            src={src}
+            alt={alt}
+            style={zoomedIndex === 0 ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
+          />
+          {hoveredIndex === 0 && (
+            <span
+              className={styles.cursorPlus}
+              style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}
+              aria-hidden="true"
+            >
+              {zoomedIndex === 0 ? '−' : '+'}
+            </span>
+          )}
+        </button>
       )}
 
       {showBreadcrumb && (

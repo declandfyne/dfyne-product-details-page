@@ -2,6 +2,10 @@
   padding: 0 16px 24px;
 }
 
+.sectionEmbedded {
+  padding: 0;
+}
+
 .box {
   background: white;
   border: 1px solid #ddd;
@@ -24,7 +28,7 @@
 .title {
   font-family: 'Rawline', sans-serif;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 1.2px;
   color: #0a0a0a;
   margin: 0;
@@ -40,7 +44,7 @@
 
 .scroll {
   display: flex;
-  gap: 10px;
+  gap: 4px;
   overflow-x: auto;
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
@@ -156,14 +160,14 @@
     padding: 0 clamp(40px, calc(23.44vw - 200px), 250px) 32px;
   }
 
-  .title {
-    font-size: 14px;
+  .sectionEmbedded {
+    padding: 0;
   }
 
   .scroll {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 4px;
     overflow-x: visible;
   }
 

@@ -10,7 +10,6 @@ import CartSection   from './components/CartSection'
 import InfoSection   from './components/InfoSection'
 import V2TabbedModal from './components/V2TabbedModal'
 import InfoModal     from './components/InfoModal'
-import CompleteLook  from './components/CompleteLook'
 import CompleteLookModal from './components/CompleteLookModal'
 import PaymentModal  from './components/PaymentModal'
 
@@ -56,13 +55,14 @@ export default function V2() {
 
           <hr className={styles.dividerNoTop} />
 
-          <InfoSection onOpen={tab => setInfoTab(tab)} onOpenReviews={() => setInfoTab('reviews')} featureLayout="standalone" />
+          <InfoSection
+            onOpen={tab => setInfoTab(tab)}
+            onOpenReviews={() => setInfoTab('reviews')}
+            onOpenCompleteLook={() => setCompleteLookOpen(true)}
+            featureLayout="standalone"
+          />
         </div>
       </div>
-
-      <hr className={styles.divider} />
-
-      <CompleteLook onOpen={() => setCompleteLookOpen(true)} />
 
       {/* Modals (position:fixed, DOM location doesn't matter) */}
       <PaymentModal open={paymentOpen} onClose={() => setPaymentOpen(false)} />

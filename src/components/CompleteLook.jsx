@@ -31,7 +31,7 @@ function LookCard({ item }) {
   )
 }
 
-export default function CompleteLook({ onOpen }) {
+export default function CompleteLook({ onOpen, embedded = false }) {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
@@ -40,7 +40,7 @@ export default function CompleteLook({ onOpen }) {
   }
 
   return (
-    <div className={styles.section}>
+    <div className={`${styles.section} ${embedded ? styles.sectionEmbedded : ''}`}>
       <div className={styles.box}>
         <div className={styles.header}>
           <p className={styles.title}>COMPLETE THE LOOK</p>

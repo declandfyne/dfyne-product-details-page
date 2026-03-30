@@ -1,5 +1,6 @@
 import styles from './InfoSection.module.css'
 import FeatureRatings from './FeatureRatings'
+import CompleteLook from './CompleteLook'
 import { FEATURE_RATINGS, REVIEW_RATINGS } from '../data/product'
 
 const CaretDown = () => (
@@ -20,7 +21,7 @@ const LINKS = [
   { id: 'delivery', label: 'DELIVERY & RETURNS' },
 ]
 
-export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'button', featureVariant = 'default' }) {
+export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook, featureLayout = 'button', featureVariant = 'default' }) {
   return (
     <div className={styles.section}>
 
@@ -36,7 +37,7 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
         </div>
       )}
 
-      <div className={styles.block}>
+      <div className={`${styles.block} ${styles.completeLookBlock}`}>
         <div className={styles.links}>
           <button className={styles.linkRow} onClick={() => onOpen('features')}>
             <span className={styles.featuresLinkContent}>
@@ -56,6 +57,8 @@ export default function InfoSection({ onOpen, onOpenReviews, featureLayout = 'bu
             </button>
           ))}
         </div>
+
+        <CompleteLook onOpen={onOpenCompleteLook} embedded />
       </div>
 
       <div className={styles.reviewBox} onClick={onOpenReviews}>

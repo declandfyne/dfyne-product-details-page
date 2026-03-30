@@ -11,6 +11,10 @@
   gap: 10px;
 }
 
+.completeLookBlock {
+  gap: 12px;
+}
+
 .sectionLabel {
   font-family: 'Rawline', sans-serif;
   font-weight: 600;

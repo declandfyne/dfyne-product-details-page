@@ -530,3 +530,26 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+@media (min-width: 1024px) {
+  .overlay {
+    align-items: stretch;
+    justify-content: flex-end;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .sheet {
+    max-width: 480px;
+    width: 480px;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+}
