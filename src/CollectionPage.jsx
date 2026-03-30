@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ImpactBanner from './components/ImpactBanner'
 import Header from './components/Header'
 import { COLLECTION_PRODUCTS } from './data/collection'
 import styles from './CollectionPage.module.css'
@@ -77,6 +78,7 @@ export default function CollectionPage() {
 
   return (
     <>
+      <ImpactBanner />
       <Header />
       <div className={styles.page}>
         <div className={styles.collectionHeader}>

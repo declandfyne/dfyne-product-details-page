@@ -61,15 +61,17 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
         <CompleteLook onOpen={onOpenCompleteLook} embedded />
       </div>
 
-      <div className={styles.reviewBox} onClick={onOpenReviews}>
-        <div className={styles.reviewBoxHeader}>
-          <span className={styles.reviewBoxTitle}>
-            <span className={styles.linkLabel}>CUSTOMER REVIEWS</span>
-            <span className={styles.reviewScoreInline}>
-              <StarIcon /> 5.0 · 6,746 reviews
+      <div className={styles.reviewSection}>
+        <button type="button" className={styles.reviewBox} onClick={onOpenReviews}>
+          <span className={styles.reviewBoxHeader}>
+            <span className={styles.reviewBoxTitle}>
+              <span className={styles.linkLabel}>CUSTOMER REVIEWS</span>
+              <span className={styles.reviewScoreInline}>
+                <StarIcon /> 5.0 · 6,746 reviews
+              </span>
             </span>
           </span>
-        </div>
+        </button>
 
         <div className={styles.reviewBoxContent}>
           <div className={styles.reviewBars}>

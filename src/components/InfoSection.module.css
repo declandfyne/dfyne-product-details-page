@@ -109,6 +109,13 @@
   color: #555;
 }
 
+.reviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: -8px;
+}
+
 /* Review Box */
 .reviewBox {
   background: white;
@@ -117,7 +124,9 @@
   cursor: pointer;
   padding: 14px;
   transition: border-color 0.2s ease;
-  margin-top: -8px;
+  width: 100%;
+  appearance: none;
+  text-align: left;
 }
 
 .reviewBox:hover {
@@ -151,7 +160,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 12px;
+  padding: 0 14px;
 }
 
 .reviewScoreBadge {

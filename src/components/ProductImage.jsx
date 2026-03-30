@@ -8,6 +8,12 @@ const ChevronDown = () => (
   </svg>
 )
 
+const BreadcrumbChevronDown = () => (
+  <svg width="8" height="8" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 const ChevronUp = () => (
   <svg width="9.5" height="5.5" viewBox="0 0 9.5 5.5" fill="none">
     <path d="M8.5 4.5L4.75 1L1 4.5" stroke="black" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -208,7 +214,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
       )}
 
       {showBreadcrumb && (
-        <Link to="/" className={styles.breadcrumbPill}>
+        <Link to="/collection" className={styles.breadcrumbPill}>
           <svg width="8" height="8" viewBox="0 0 16 16" fill="none">
             <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -247,6 +253,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
                 <div className={styles.modelBadgeWrapRight}>
                   <button className={styles.modelBadgeStatic} onClick={onModelClick}>
                     {model.badgeText}
+                    <BreadcrumbChevronDown />
                   </button>
                 </div>
               )

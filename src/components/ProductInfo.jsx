@@ -13,7 +13,7 @@ export default function ProductInfo({ price = '£44.99', onOpenReviews, showFeat
           IMPACT COLLECTION
         </a>
       )}
-      <p className={styles.name}>Bandeau Strappy Bra</p>
+      <p className={styles.name}>Impact Bandeau Strappy Bra</p>
       <p className={styles.price}>{price}</p>
       <div className={styles.ratingRow}>
         <svg width="11.368" height="10.967" viewBox="0 0 14 14" fill="black">

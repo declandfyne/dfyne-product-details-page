@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { COLORS, SIZES, ASSETS } from './data/product'
 
+import ImpactBanner from './components/ImpactBanner'
 import Header        from './components/Header'
 import ProductImage  from './components/ProductImage'
 import ProductInfo   from './components/ProductInfo'
@@ -26,11 +27,12 @@ export default function V2() {
 
   return (
     <>
+      <ImpactBanner />
       <Header />
       <div className={styles.page}>
       <div className={styles.twoCol}>
         <div className={styles.colLeft}>
-          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} showBreadcrumb />
+          <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Impact Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} showBreadcrumb />
         </div>
 
         <div className={styles.colRight}>

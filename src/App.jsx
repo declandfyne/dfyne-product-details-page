@@ -6,8 +6,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CollectionPage />} />
+        <Route path="/" element={<V2 />} />
         <Route path="/product" element={<V2 />} />
+        <Route path="/collection" element={<CollectionPage />} />
       </Routes>
     </BrowserRouter>
   )
