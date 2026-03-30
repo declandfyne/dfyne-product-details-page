@@ -322,14 +322,14 @@
 .shopBtn {
   display: block;
   flex: 1;
-  padding: 8px;
-  background: transparent;
+  padding: 12px;
+  background: white;
   color: #0a0a0a;
-  border: 1px solid #d0d0d0;
+  border: 1px solid #0a0a0a;
   border-radius: 89px;
   font-family: 'Rawline', sans-serif;
-  font-weight: 600;
-  font-size: 8px;
+  font-weight: 700;
+  font-size: 9px;
   letter-spacing: 1.2px;
   text-align: center;
   text-decoration: none;
