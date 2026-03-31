@@ -190,9 +190,6 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
                 <span>{hasLength ? `${selection.length} / ${selection.size}` : selection.size}</span>
               </span>
             </button>
-            <button type="button" className={styles.clearPill} onClick={() => onReset(item.id)}>
-              CLEAR
-            </button>
           </div>
         )}
 
