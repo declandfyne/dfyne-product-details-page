@@ -19,6 +19,17 @@
   box-shadow: 0 14px 28px rgba(10, 10, 10, 0.05);
 }
 
+.boxEmbedded {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.boxEmbedded:hover {
+  border-color: transparent;
+  box-shadow: none;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -53,6 +64,33 @@
 }
 
 .scroll::-webkit-scrollbar { display: none; }
+
+.ctaBtn {
+  width: 100%;
+  height: 48px;
+  margin-top: 16px;
+  border: 1px solid #0a0a0a;
+  border-radius: 999px;
+  background: white;
+  color: #0a0a0a;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 2.8px;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.ctaBtn:hover {
+  background: #f7f7f7;
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.ctaBtn:active {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .cardButton {
   border: none;

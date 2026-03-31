@@ -35,7 +35,7 @@ const FEATURE_BULLETS = [
   'Durable, shape-retaining fabric',
 ]
 
-export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook, featureLayout = 'button', featureVariant = 'default' }) {
+export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook, onOpenCompleteLookItem, featureLayout = 'button', featureVariant = 'default' }) {
   return (
     <div className={styles.section}>
 
@@ -52,7 +52,7 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
           </ul>
       </div>
 
-      <div className={`${styles.block} ${styles.completeLookBlock}`}>
+      <div className={styles.block}>
         <div className={styles.links}>
           <button className={styles.linkRow} onClick={() => onOpen('features')}>
             <span className={styles.linkLabel}>FULL DETAILS</span>
@@ -65,9 +65,9 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
             </button>
           ))}
         </div>
-
-        <CompleteLook onOpen={onOpenCompleteLook} embedded />
       </div>
+
+      <CompleteLook onOpen={onOpenCompleteLook} onOpenItem={onOpenCompleteLookItem} embedded />
 
       <div className={styles.reviewSection}>
         <p className={styles.reviewTitle}>CUSTOMER REVIEWS</p>

@@ -30,17 +30,17 @@ function LookCard({ item }) {
   )
 }
 
-export default function CompleteLook({ onOpen, embedded = false }) {
-  const handleKeyDown = (event) => {
+export default function CompleteLook({ onOpen, onOpenItem, embedded = false }) {
+  const handleKeyDown = (event, item) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
-      onOpen()
+      onOpenItem?.(item)
     }
   }
 
   return (
     <div className={`${styles.section} ${embedded ? styles.sectionEmbedded : ''}`}>
-      <div className={styles.box}>
+      <div className={`${styles.box} ${embedded ? styles.boxEmbedded : ''}`}>
         <div className={styles.header}>
           <p className={styles.title}>COMPLETE THE LOOK</p>
           <span className={styles.itemCount}>{LOOK_ITEMS.length} items</span>
@@ -53,14 +53,18 @@ export default function CompleteLook({ onOpen, embedded = false }) {
               className={styles.cardButton}
               role="button"
               tabIndex={0}
-              onClick={onOpen}
-              onKeyDown={handleKeyDown}
+              onClick={() => onOpenItem?.(item)}
+              onKeyDown={(event) => handleKeyDown(event, item)}
               aria-label={`Open shop the look for ${item.name}`}
             >
               <LookCard item={item} />
             </div>
           ))}
         </div>
+
+        <button type="button" className={styles.ctaBtn} onClick={onOpen}>
+          COMPLETE THE LOOK
+        </button>
       </div>
     </div>
   )

@@ -17,6 +17,12 @@ const CheckIcon = () => (
 
 const createInitialSelection = () => ({ step: 'idle', size: '', length: '' })
 
+const createSelectionForItem = (item) => ({
+  step: item.lengths?.length ? 'length' : 'size',
+  size: '',
+  length: '',
+})
+
 function SelectedThumbnail({ item, onRemove, removable = true }) {
   return (
     <div className={styles.selectedThumb}>
@@ -203,7 +209,7 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
   )
 }
 
-export default function CompleteLookModal({ open, onClose, currentSize = '', onChangeCurrentSize }) {
+export default function CompleteLookModal({ open, onClose, currentSize = '', onChangeCurrentSize, preselectedItemId = null }) {
   const currentItem = LOOK_ITEMS.find(i => i.current)
   const otherItems = LOOK_ITEMS.filter(i => !i.current)
 
@@ -228,6 +234,18 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
   }, [open])
 
   useEffect(() => {
+    if (!open || !preselectedItemId) return
+
+    const targetItem = otherItems.find(item => item.id === preselectedItemId)
+    if (!targetItem) return
+
+    setSelections(prev => ({
+      ...prev,
+      [targetItem.id]: createSelectionForItem(targetItem),
+    }))
+  }, [open, preselectedItemId])
+
+  useEffect(() => {
     if (open) {
       setIsCurrentEditing(!currentSize)
     }
@@ -249,11 +267,7 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
   const handleStartItem = (item) => {
     setSelections(prev => ({
       ...prev,
-      [item.id]: {
-        step: item.lengths?.length ? 'length' : 'size',
-        size: '',
-        length: '',
-      }
+      [item.id]: createSelectionForItem(item)
     }))
   }
 

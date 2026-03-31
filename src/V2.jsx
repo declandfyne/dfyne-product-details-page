@@ -23,7 +23,18 @@ export default function V2() {
   const [selectedSize,   setSelectedSize]   = useState(null)
   const [paymentOpen,    setPaymentOpen]    = useState(false)
   const [completeLookOpen, setCompleteLookOpen] = useState(false)
+  const [preselectedLookItemId, setPreselectedLookItemId] = useState(null)
   const [infoTab,        setInfoTab]        = useState(null)
+
+  const handleOpenCompleteLook = () => {
+    setPreselectedLookItemId(null)
+    setCompleteLookOpen(true)
+  }
+
+  const handleOpenCompleteLookItem = (item) => {
+    setPreselectedLookItemId(item.id)
+    setCompleteLookOpen(true)
+  }
 
   return (
     <>
@@ -52,7 +63,7 @@ export default function V2() {
 
           <CartSection
             onOpenPayment={() => setPaymentOpen(true)}
-            onOpenCompleteLook={() => setCompleteLookOpen(true)}
+            onOpenCompleteLook={handleOpenCompleteLook}
           />
 
           <hr className={styles.dividerNoTop} />
@@ -60,7 +71,8 @@ export default function V2() {
           <InfoSection
             onOpen={tab => setInfoTab(tab)}
             onOpenReviews={() => setInfoTab('reviews')}
-            onOpenCompleteLook={() => setCompleteLookOpen(true)}
+            onOpenCompleteLook={handleOpenCompleteLook}
+            onOpenCompleteLookItem={handleOpenCompleteLookItem}
             featureLayout="button"
           />
         </div>
@@ -70,8 +82,12 @@ export default function V2() {
       <PaymentModal open={paymentOpen} onClose={() => setPaymentOpen(false)} />
       <CompleteLookModal
         open={completeLookOpen}
-        onClose={() => setCompleteLookOpen(false)}
+        onClose={() => {
+          setCompleteLookOpen(false)
+          setPreselectedLookItemId(null)
+        }}
         currentSize={selectedSize?.label ?? ''}
+        preselectedItemId={preselectedLookItemId}
         onChangeCurrentSize={(sizeLabel) => {
           setSelectedSize(sizeLabel ? SIZES.find(size => size.label === sizeLabel) ?? null : null)
         }}
