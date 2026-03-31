@@ -42,7 +42,10 @@ function CurrentlyViewingCard({ item, selectedSize, isEditing, onSelectSize, onE
         <img src={item.img} alt={item.name} className={styles.currentImg} />
       </div>
       <div className={styles.currentInfo}>
-        <span className={styles.viewingLabel}>CURRENTLY VIEWING</span>
+        <span className={styles.viewingLabel}>
+          <span className={styles.viewingDot} aria-hidden="true" />
+          CURRENTLY VIEWING
+        </span>
         <p className={styles.currentName}>{item.name}</p>
         <p className={styles.currentColor}>{item.color.toUpperCase()}</p>
         <p className={styles.currentPrice}>{item.price}</p>
