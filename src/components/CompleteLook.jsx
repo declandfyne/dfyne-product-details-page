@@ -21,10 +21,9 @@ function LookCard({ item }) {
         <p className={styles.color}>{item.color}</p>
         <p className={styles.price}>{item.price}</p>
         <div className={styles.reviewRow}>
-          <div className={styles.stars}>
-            {[1, 2, 3, 4, 5].map(i => <StarIcon key={i} />)}
-          </div>
-          <span className={styles.reviewCount}>{item.reviews.toLocaleString()}</span>
+          <span className={styles.stars}><StarIcon /></span>
+          <span className={styles.reviewAverage}>5.0</span>
+          <span className={styles.reviewCount}>({item.reviews.toLocaleString()})</span>
         </div>
       </div>
     </div>

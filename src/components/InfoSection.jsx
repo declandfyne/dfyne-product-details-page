@@ -22,9 +22,17 @@ const ReviewChevron = () => (
 )
 
 const LINKS = [
-  { id: 'features', label: 'PRODUCT FEATURES' },
+  { id: 'features', label: 'PRODUCT DETAILS' },
   { id: 'model',    label: 'MODEL SIZE' },
   { id: 'delivery', label: 'DELIVERY & RETURNS' },
+]
+
+const FEATURE_BULLETS = [
+  'Built-in bra with removable cups & pads',
+  'Twill knit underbust & waist for contouring',
+  'Strappy halterneck with open back',
+  'High scoop, incredibly soft feel',
+  'Durable, shape-retaining fabric',
 ]
 
 export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook, featureLayout = 'button', featureVariant = 'default' }) {
@@ -32,28 +40,29 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
     <div className={styles.section}>
 
       <div className={styles.block}>
+        <p className={styles.sectionLabel}>PRODUCT DETAILS</p>
         <p className={styles.description}>
           Make your IMPACT in our Bandeau Strappy Bra. Twill knit underbust and waist for contouring support, with a halterneck, open back and built-in bra.
         </p>
       </div>
 
-      {(featureLayout === 'standalone' || featureLayout === 'standalone-pills') && (
-        <div className={styles.block}>
-          <FeatureRatings ratings={FEATURE_RATINGS} variant={featureLayout === 'standalone-pills' ? 'pills' : featureVariant} />
+      {((featureLayout === 'standalone' || featureLayout === 'standalone-pills') || featureLayout === 'button') && (
+        <div className={`${styles.block} ${styles.featureBulletBlock}`}>
+          {(featureLayout === 'standalone' || featureLayout === 'standalone-pills') && (
+            <FeatureRatings ratings={FEATURE_RATINGS} variant={featureLayout === 'standalone-pills' ? 'pills' : featureVariant} />
+          )}
+          <ul className={styles.featureBulletList}>
+            {FEATURE_BULLETS.map(item => (
+              <li key={item} className={styles.featureBulletItem}>{item}</li>
+            ))}
+          </ul>
         </div>
       )}
 
       <div className={`${styles.block} ${styles.completeLookBlock}`}>
         <div className={styles.links}>
           <button className={styles.linkRow} onClick={() => onOpen('features')}>
-            <span className={styles.featuresLinkContent}>
-              <span className={styles.linkLabel}>PRODUCT FEATURES</span>
-              {featureLayout === 'button' && (
-                <span className={styles.featuresSubline}>
-                  <FeatureRatings ratings={FEATURE_RATINGS} compact />
-                </span>
-              )}
-            </span>
+            <span className={styles.linkLabel}>FULL DETAILS</span>
             <CaretDown />
           </button>
           {LINKS.filter(link => link.id !== 'features').map(link => (

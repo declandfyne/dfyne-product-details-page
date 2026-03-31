@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { COLORS, SIZES, ASSETS } from './data/product'
+import { COLORS, SIZES, ASSETS, FEATURE_RATINGS } from './data/product'
 
 import ImpactBanner from './components/ImpactBanner'
 import Header        from './components/Header'
 import ProductImage  from './components/ProductImage'
 import ProductInfo   from './components/ProductInfo'
+import FeatureRatings from './components/FeatureRatings'
 import ColorSelector from './components/ColorSelector'
 import SizeSelector  from './components/SizeSelector'
 import CartSection   from './components/CartSection'
@@ -38,6 +39,10 @@ export default function V2() {
         <div className={styles.colRight}>
           <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={false} hideBreadcrumb />
 
+          <div className={styles.topFeatureBlock}>
+            <FeatureRatings ratings={FEATURE_RATINGS} />
+          </div>
+
           <hr className={styles.divider} />
 
           <ColorSelector
@@ -61,7 +66,7 @@ export default function V2() {
             onOpen={tab => setInfoTab(tab)}
             onOpenReviews={() => setInfoTab('reviews')}
             onOpenCompleteLook={() => setCompleteLookOpen(true)}
-            featureLayout="standalone"
+            featureLayout="button"
           />
         </div>
       </div>

@@ -166,7 +166,15 @@
 
 .stars {
   display: flex;
-  gap: 1px;
+  align-items: center;
+}
+
+.reviewAverage {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  color: #0a0a0a;
+  letter-spacing: 0.027em;
 }
 
 .reviewCount {

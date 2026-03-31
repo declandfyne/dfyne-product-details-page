@@ -380,7 +380,7 @@ function DeliveryContent() {
 }
 
 const TITLES = {
-  features: 'PRODUCT FEATURES',
+  features: 'PRODUCT DETAILS',
   model: 'MODEL SIZE',
   delivery: 'DELIVERY & RETURNS',
   reviews: 'CUSTOMER REVIEWS',

@@ -11,6 +11,11 @@
   gap: 10px;
 }
 
+.featureBulletBlock {
+  gap: 6px;
+  margin-top: -4px;
+}
+
 .completeLookBlock {
   gap: 12px;
 }
@@ -32,6 +37,23 @@
   letter-spacing: 0.3px;
   color: black;
   margin: 0;
+}
+
+.featureBulletList {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featureBulletItem {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  color: #0a0a0a;
 }
 
 .learnMore {
@@ -92,17 +114,6 @@
   letter-spacing: 1.2px;
   color: black;
   text-decoration: none;
-}
-
-.featuresLinkContent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-}
-
-.featuresSubline {
-  display: block;
 }
 
 .reviewLinkContent {

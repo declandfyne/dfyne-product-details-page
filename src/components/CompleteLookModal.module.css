@@ -251,7 +251,6 @@
 .clearPill {
   min-width: auto;
   padding: 0;
-  margin-left: auto;
   border: none;
   background: none;
   color: #0a0a0a;
@@ -268,7 +267,6 @@
   justify-content: center;
   width: 14px;
   height: 14px;
-  margin-left: auto;
 }
 
 .clearLength svg {

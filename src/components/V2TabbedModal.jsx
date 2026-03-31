@@ -5,7 +5,7 @@ import useDragToDismiss from '../hooks/useDragToDismiss'
 import styles from './V2TabbedModal.module.css'
 
 const TABS = [
-  { id: 'features', label: 'PRODUCT FEATURES' },
+  { id: 'features', label: 'PRODUCT DETAILS' },
   { id: 'model',    label: 'MODEL SIZE' },
   { id: 'delivery', label: 'DELIVERY & RETURNS' },
 ]
