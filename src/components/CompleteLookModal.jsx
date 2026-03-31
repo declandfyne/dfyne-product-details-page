@@ -78,7 +78,7 @@ function CurrentlyViewingCard({ item, selectedSize, isEditing, onSelectSize, onE
                 <span>{selectedSize}</span>
               </span>
             </button>
-            <span className={styles.editHint}>EDIT</span>
+            <button type="button" className={styles.editHint} onClick={onEdit}>EDIT</button>
           </div>
         )}
       </div>
@@ -191,7 +191,7 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
                 <span>{hasLength ? `${selection.length} / ${selection.size}` : selection.size}</span>
               </span>
             </button>
-            <span className={styles.editHint}>EDIT</span>
+            <button type="button" className={styles.editHint} onClick={() => onEditSize(item.id)}>EDIT</button>
           </div>
         )}
 
