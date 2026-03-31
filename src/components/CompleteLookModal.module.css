@@ -258,6 +258,15 @@
   gap: 6px;
 }
 
+.editHint {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #777;
+  text-transform: uppercase;
+}
+
 .clearLength {
   background: none;
   border: none;
