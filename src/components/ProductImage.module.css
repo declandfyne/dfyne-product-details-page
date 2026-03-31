@@ -69,7 +69,23 @@
 }
 
 .cursorPlus {
+  position: absolute;
+  z-index: 3;
   display: none;
+  width: 32px;
+  height: 32px;
+  margin-left: -16px;
+  margin-top: -16px;
+  color: #0a0a0a;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursorPlus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .thumbnailStrip {

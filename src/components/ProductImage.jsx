@@ -40,6 +40,15 @@ const ChevronLeft = () => (
   </svg>
 )
 
+const ZoomCursorIcon = ({ zoomed = false }) => (
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <circle cx="11.5" cy="11.5" r="6.75" stroke="currentColor" strokeWidth="1.8" />
+    <path d="M16.5 16.5L22.25 22.25" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <path d="M8.5 11.5H14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    {!zoomed && <path d="M11.5 8.5V14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
+  </svg>
+)
+
 const MEASURE_ROWS = ['height', 'bust', 'waist', 'hips']
 
 function MeasurementInlineBanner({ model, onCollapse }) {
@@ -179,7 +188,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
                     style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}
                     aria-hidden="true"
                   >
-                    {zoomedIndex === i ? '−' : '+'}
+                    <ZoomCursorIcon zoomed={zoomedIndex === i} />
                   </span>
                 )}
               </button>
@@ -207,7 +216,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
               style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}
               aria-hidden="true"
             >
-              {zoomedIndex === 0 ? '−' : '+'}
+              <ZoomCursorIcon zoomed={zoomedIndex === 0} />
             </span>
           )}
         </button>
