@@ -39,25 +39,18 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
   return (
     <div className={styles.section}>
 
-      <div className={styles.block}>
+      <div className={`${styles.block} ${styles.productDetailsBlock}`}>
         <p className={styles.sectionLabel}>PRODUCT DETAILS</p>
         <p className={styles.description}>
           Make your IMPACT in our Bandeau Strappy Bra. Twill knit underbust and waist for contouring support, with a halterneck, open back and built-in bra.
         </p>
-      </div>
-
-      {((featureLayout === 'standalone' || featureLayout === 'standalone-pills') || featureLayout === 'button') && (
-        <div className={`${styles.block} ${styles.featureBulletBlock}`}>
-          {(featureLayout === 'standalone' || featureLayout === 'standalone-pills') && (
-            <FeatureRatings ratings={FEATURE_RATINGS} variant={featureLayout === 'standalone-pills' ? 'pills' : featureVariant} />
-          )}
+          <FeatureRatings ratings={FEATURE_RATINGS} variant={featureLayout === 'standalone-pills' ? 'pills' : featureVariant} />
           <ul className={styles.featureBulletList}>
             {FEATURE_BULLETS.map(item => (
               <li key={item} className={styles.featureBulletItem}>{item}</li>
             ))}
           </ul>
-        </div>
-      )}
+      </div>
 
       <div className={`${styles.block} ${styles.completeLookBlock}`}>
         <div className={styles.links}>

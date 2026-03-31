@@ -11,9 +11,8 @@
   gap: 10px;
 }
 
-.featureBulletBlock {
-  gap: 6px;
-  margin-top: -4px;
+.productDetailsBlock {
+  gap: 16px;
 }
 
 .completeLookBlock {
@@ -40,7 +39,7 @@
 }
 
 .featureBulletList {
-  margin: 4px 0 0;
+  margin: 0;
   padding-left: 18px;
   display: flex;
   flex-direction: column;
