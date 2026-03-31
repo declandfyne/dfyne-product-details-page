@@ -11,11 +11,12 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 14px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .box:hover {
   border-color: #0a0a0a;
+  box-shadow: 0 14px 28px rgba(10, 10, 10, 0.05);
 }
 
 .header {
@@ -59,6 +60,16 @@
   padding: 0;
   text-align: left;
   cursor: pointer;
+  transform: translateY(0);
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.cardButton:hover {
+  transform: translateY(-2px);
+}
+
+.cardButton:active {
+  transform: translateY(0);
 }
 
 .cardButton:focus-visible {
@@ -78,6 +89,12 @@
   aspect-ratio: 209 / 261;
   border-radius: 5px;
   overflow: hidden;
+  box-shadow: 0 0 0 rgba(10, 10, 10, 0);
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.cardButton:hover .imageWrap {
+  box-shadow: 0 12px 24px rgba(10, 10, 10, 0.1);
 }
 
 .cardImg {
@@ -85,6 +102,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.28s ease;
+}
+
+.cardButton:hover .cardImg {
+  transform: scale(1.02);
 }
 
 .currentBadge {

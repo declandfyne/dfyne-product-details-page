@@ -32,6 +32,13 @@
   cursor: pointer;
   background: none;
   border: none;
+  text-underline-offset: 2px;
+  transition: color 0.18s ease, text-underline-offset 0.18s ease, opacity 0.18s ease;
+}
+
+.guideBtn:hover {
+  opacity: 0.72;
+  text-underline-offset: 4px;
 }
 
 .buttons {
@@ -54,7 +61,13 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transform: translateY(0);
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.btn:hover:not(.soldOut):not(.active) {
+  border-color: #0a0a0a;
+  transform: translateY(-1px);
 }
 
 .btn.active {
@@ -62,6 +75,14 @@
   border-color: black;
   color: white;
   font-weight: 700;
+}
+
+.btn.active:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active:not(.soldOut) {
+  transform: translateY(0);
 }
 
 .btn.soldOut {

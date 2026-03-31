@@ -32,6 +32,16 @@
   border: none;
   padding: 0;
   text-align: left;
+  transform: translateY(0);
+  transition: transform 0.18s ease;
+}
+
+.swatch:hover {
+  transform: translateY(-2px);
+}
+
+.swatch:active {
+  transform: translateY(0);
 }
 
 .imgWrap {
@@ -77,11 +87,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.18s ease, color 0.18s ease;
 }
 
 .swatch.active .swatchName {
   background: black;
+  color: white;
+}
+
+.swatch:hover .swatchName {
+  background: #111;
   color: white;
 }
 
@@ -119,12 +134,13 @@
     border: 1px solid #d0d0d0;
     cursor: pointer;
     z-index: 2;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.15s;
+    transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
   }
 
   .arrowBtn:hover {
-    opacity: 0.8;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.04);
+    border-color: #0a0a0a;
   }
 
   .arrowLeft {

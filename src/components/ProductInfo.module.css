@@ -17,10 +17,13 @@
   color: #333;
   text-decoration: none;
   padding: 6px 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
 .breadcrumb:hover {
   text-decoration: underline;
+  opacity: 0.72;
+  transform: translateX(-1px);
 }
 
 .name {
@@ -62,6 +65,13 @@
   text-decoration: underline;
   letter-spacing: 0.3px;
   cursor: pointer;
+  text-underline-offset: 2px;
+  transition: opacity 0.18s ease, text-underline-offset 0.18s ease;
+}
+
+.reviews:hover {
+  opacity: 0.72;
+  text-underline-offset: 4px;
 }
 
 .featuresBox {
