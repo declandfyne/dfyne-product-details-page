@@ -67,7 +67,11 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
         </div>
       </div>
 
+      <div className={styles.sectionDivider} aria-hidden="true" />
+
       <CompleteLook onOpen={onOpenCompleteLook} onOpenItem={onOpenCompleteLookItem} embedded />
+
+      <div className={styles.sectionDivider} aria-hidden="true" />
 
       <div className={styles.reviewSection}>
         <p className={styles.reviewTitle}>CUSTOMER REVIEWS</p>

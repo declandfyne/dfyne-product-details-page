@@ -276,6 +276,11 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
     setIsCurrentEditing(false)
   }
 
+  const handleResetCurrentItem = () => {
+    onChangeCurrentSize?.('')
+    setIsCurrentEditing(true)
+  }
+
   const handleSelectSize = (id, size) => {
     setSelections(prev => ({
       ...prev,
@@ -321,7 +326,7 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
   const selectedItems = otherItems.filter(i => selections[i.id].size)
   const selectedCount = selectedItems.length + (hasCurrentProductSelected ? 1 : 0)
   const subtotal = selectedItems.reduce((sum, i) => sum + i.priceNum, hasCurrentProductSelected ? currentItem.priceNum : 0)
-  const canSubmit = hasCurrentProductSelected && selectedItems.length > 0
+  const canSubmit = selectedCount > 0
   const title = 'COMPLETE THE LOOK'
   const sectionTitle = 'COMPLETE THE LOOK'
 
@@ -372,7 +377,7 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
           {selectedCount > 0 && (
             <div className={styles.selectedThumbRow}>
               {hasCurrentProductSelected && currentItem && (
-                <SelectedThumbnail item={currentItem} removable={false} />
+                <SelectedThumbnail item={currentItem} onRemove={handleResetCurrentItem} />
               )}
               {selectedItems.map(item => (
                 <SelectedThumbnail key={item.id} item={item} onRemove={handleResetItem} />
