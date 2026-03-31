@@ -1,8 +1,6 @@
 import styles from './ProductInfo.module.css'
-import FeatureRatings from './FeatureRatings'
-import { FEATURE_RATINGS } from '../data/product'
 
-export default function ProductInfo({ price = '£44.99', onOpenReviews, showFeatures = false, hideBreadcrumb = false }) {
+export default function ProductInfo({ price = '£44.99', onOpenReviews, hideBreadcrumb = false }) {
   return (
     <div className={styles.info}>
       {!hideBreadcrumb && (
@@ -22,11 +20,6 @@ export default function ProductInfo({ price = '£44.99', onOpenReviews, showFeat
         <span className={styles.average}>5.0</span>
         <button className={styles.reviews} onClick={onOpenReviews}>(6746)</button>
       </div>
-      {showFeatures && (
-        <div className={styles.featuresBox}>
-          <FeatureRatings ratings={FEATURE_RATINGS} />
-        </div>
-      )}
     </div>
   )
 }

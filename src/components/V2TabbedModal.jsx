@@ -38,6 +38,10 @@ function FeaturesContent() {
       </p>
 
       <div className={styles.featSection}>
+        <FeatureRatings ratings={FEATURE_RATINGS} />
+      </div>
+
+      <div className={styles.featSection}>
         <p className={styles.featSectionLabel}>FEATURES</p>
         <ul className={styles.bulletList}>
           {HIGHLIGHTS.map(h => (
