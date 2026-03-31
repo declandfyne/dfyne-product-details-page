@@ -35,6 +35,7 @@ export const COLORS = [
       midnightBlack2,
       midnightBlack3,
       midnightBlack4,
+      midnightBlack2,
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '149cm', bust: '81cm', waist: '54cm', hips: '91cm' },

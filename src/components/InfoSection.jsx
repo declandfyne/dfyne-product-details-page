@@ -1,23 +1,11 @@
 import styles from './InfoSection.module.css'
 import FeatureRatings from './FeatureRatings'
 import CompleteLook from './CompleteLook'
-import { FEATURE_RATINGS, REVIEW_RATINGS } from '../data/product'
+import { FEATURE_RATINGS } from '../data/product'
 
 const CaretDown = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
     <path d="M3 6L8 11L13 6" stroke="black" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
-
-const StarIcon = () => (
-  <svg width="10" height="10" viewBox="0 0 24 24" fill="#0a0a0a" stroke="none">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-  </svg>
-)
-
-const ReviewChevron = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
@@ -35,7 +23,7 @@ const FEATURE_BULLETS = [
   'Durable, shape-retaining fabric',
 ]
 
-export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook, onOpenCompleteLookItem, featureLayout = 'button', featureVariant = 'default' }) {
+export default function InfoSection({ onOpen, onOpenCompleteLook, onOpenCompleteLookItem, featureLayout = 'button', featureVariant = 'default' }) {
   return (
     <div className={styles.section}>
 
@@ -70,37 +58,6 @@ export default function InfoSection({ onOpen, onOpenReviews, onOpenCompleteLook,
       <div className={styles.sectionDivider} aria-hidden="true" />
 
       <CompleteLook onOpen={onOpenCompleteLook} onOpenItem={onOpenCompleteLookItem} embedded />
-
-      <div className={styles.sectionDivider} aria-hidden="true" />
-
-      <div className={styles.reviewSection}>
-        <p className={styles.reviewTitle}>CUSTOMER REVIEWS</p>
-
-        <button type="button" className={styles.reviewScoreRow} onClick={onOpenReviews}>
-          <span className={styles.reviewScoreSummary}>
-            <span className={styles.reviewScoreBadge}>5.0</span>
-            <span className={styles.reviewScoreText}>Excellent · 6,746 reviews</span>
-          </span>
-          <ReviewChevron />
-        </button>
-
-        <div className={styles.reviewBoxContent}>
-          <div className={styles.reviewBars}>
-            {REVIEW_RATINGS.map(({ label, value }) => (
-              <div key={label} className={styles.reviewBarItem}>
-                <span className={styles.reviewBarLabel}>{label}</span>
-                <div className={styles.reviewBarTrack}>
-                  <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <button className={styles.readAllLink} onClick={onOpenReviews}>
-            Read all customer reviews
-          </button>
-        </div>
-      </div>
 
     </div>
   )

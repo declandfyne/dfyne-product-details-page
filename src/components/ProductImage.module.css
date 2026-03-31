@@ -25,6 +25,7 @@
   height: 100%;
   scroll-snap-align: start;
   overflow: hidden;
+  position: relative;
 }
 
 .slideTrigger {
@@ -422,6 +423,10 @@
     scroll-snap-align: unset;
   }
 
+  .slide:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
   .slideTrigger {
     cursor: none;
   }
@@ -436,20 +441,12 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
-    width: 34px;
-    height: 34px;
-    margin-left: -17px;
-    margin-top: -17px;
-    border-radius: 50%;
-    border: 1px solid rgba(10, 10, 10, 0.1);
-    background: rgba(255, 255, 255, 0.94);
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    margin-top: -12px;
     color: #0a0a0a;
-    font-family: 'Rawline', sans-serif;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 1;
     pointer-events: none;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   }
 
   .progressTrack {
@@ -461,10 +458,7 @@
   }
 
   .modelBadgeWrapRight {
-    top: calc(50% - 2px);
-    bottom: auto;
-    right: 16px;
-    transform: translateY(-100%) translateY(-16px);
+    display: none;
   }
 
   .modelBadgeWrap {
@@ -473,5 +467,12 @@
     left: auto;
     right: 16px;
     transform: translateY(-100%) translateY(-16px);
+  }
+
+  .modelBadgeWrapDesktopImage {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 3;
   }
 }

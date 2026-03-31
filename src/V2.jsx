@@ -9,6 +9,7 @@ import ColorSelector from './components/ColorSelector'
 import SizeSelector  from './components/SizeSelector'
 import CartSection   from './components/CartSection'
 import InfoSection   from './components/InfoSection'
+import ReviewsSection from './components/ReviewsSection'
 import V2TabbedModal from './components/V2TabbedModal'
 import InfoModal     from './components/InfoModal'
 import CompleteLookModal from './components/CompleteLookModal'
@@ -70,13 +71,14 @@ export default function V2() {
 
           <InfoSection
             onOpen={tab => setInfoTab(tab)}
-            onOpenReviews={() => setInfoTab('reviews')}
             onOpenCompleteLook={handleOpenCompleteLook}
             onOpenCompleteLookItem={handleOpenCompleteLookItem}
             featureLayout="button"
           />
         </div>
       </div>
+
+      <ReviewsSection onOpenReviews={() => setInfoTab('reviews')} />
 
       {/* Modals (position:fixed, DOM location doesn't matter) */}
       <PaymentModal open={paymentOpen} onClose={() => setPaymentOpen(false)} />

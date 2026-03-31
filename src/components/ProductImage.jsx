@@ -41,11 +41,9 @@ const ChevronLeft = () => (
 )
 
 const ZoomCursorIcon = ({ zoomed = false }) => (
-  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-    <circle cx="11.5" cy="11.5" r="6.75" stroke="currentColor" strokeWidth="1.8" />
-    <path d="M16.5 16.5L22.25 22.25" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    <path d="M8.5 11.5H14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    {!zoomed && <path d="M11.5 8.5V14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <path d="M5 10H15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    {!zoomed && <path d="M10 5V15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
   </svg>
 )
 
@@ -192,6 +190,15 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
                   </span>
                 )}
               </button>
+
+              {model?.variant === 'banner' && !open && i === 1 && (
+                <div className={styles.modelBadgeWrapDesktopImage}>
+                  <button className={styles.modelBadgeStatic} onClick={onModelClick}>
+                    {model.badgeText}
+                    <BreadcrumbChevronDown />
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
