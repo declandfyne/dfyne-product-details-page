@@ -5,6 +5,24 @@
   gap: 6px;
 }
 
+.collectionName {
+  margin: 0;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 18px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #555555;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .breadcrumb {
   display: inline-flex;
   align-items: center;
@@ -29,6 +47,7 @@
 .name {
   font-weight: 600;
   font-size: 18px;
+  line-height: 1.15;
   letter-spacing: 0.3px;
   color: black;
   margin: 0;
@@ -46,6 +65,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
+  padding-top: 2px;
 }
 
 .average {
@@ -78,5 +99,9 @@
 @media (min-width: 1024px) {
   .info {
     padding: 16px 0 0;
+  }
+
+  .titleRow {
+    align-items: flex-start;
   }
 }
