@@ -48,13 +48,12 @@
     margin: 0 auto;
   }
 
-  /* Padding scales linearly from 40px at 1024px to 250px at 1920px */
   .twoCol {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 476px;
-    padding: 0 clamp(40px, calc(23.44vw - 200px), 250px);
+    padding: 0 50px;
     align-items: start;
-    gap: 16px;
+    gap: 40px;
   }
 
   .colLeft {
@@ -66,7 +65,7 @@
     align-self: start;
     position: sticky;
     top: var(--sticky-top, 0px);
-    padding: 16px 0 0 0;
+    padding: 16px 0 0;
   }
 
   .colRight .divider,
@@ -75,10 +74,10 @@
   }
 
   .divider {
-    margin: 24px clamp(40px, calc(23.44vw - 200px), 250px);
+    margin: 24px 50px;
   }
 
   .dividerNoTop {
-    margin: 24px clamp(40px, calc(23.44vw - 200px), 250px);
+    margin: 24px 50px;
   }
 }

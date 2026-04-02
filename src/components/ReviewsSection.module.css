@@ -425,7 +425,7 @@
 @media (min-width: 1024px) {
   .section {
     margin-top: 32px;
-    padding: 32px clamp(40px, calc(23.44vw - 200px), 250px) 0;
+    padding: 32px 50px 0;
   }
 
   .reviewLayout {

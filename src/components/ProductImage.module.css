@@ -50,6 +50,10 @@
   height: 100%;
 }
 
+.videoTrigger {
+  cursor: default;
+}
+
 .img {
   position: relative;
   z-index: 0;

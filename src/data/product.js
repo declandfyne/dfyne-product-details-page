@@ -9,6 +9,7 @@ import midnightBlackImg from '../assets/midnight-black.jpg'
 import midnightBlack2   from '../assets/midnight-black-2.png'
 import midnightBlack3   from '../assets/midnight-black-3.png'
 import midnightBlack4   from '../assets/midnight-black-4.png'
+import reelVideo        from '../assets/reel.mp4'
 import navyImg          from '../assets/navy.png'
 import tealImg          from '../assets/teal.png'
 import truffleImg       from '../assets/truffle.png'
@@ -31,11 +32,11 @@ export const COLORS = [
     name: 'MIDNIGHT BLACK',
     img: midnightBlackImg,
     images: [
-      midnightBlackImg,
-      midnightBlack2,
-      midnightBlack3,
-      midnightBlack4,
-      midnightBlack2,
+      { type: 'image', src: midnightBlackImg },
+      { type: 'image', src: midnightBlack2 },
+      { type: 'image', src: midnightBlack3 },
+      { type: 'image', src: midnightBlack4 },
+      { type: 'video', src: reelVideo },
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '149cm', bust: '81cm', waist: '54cm', hips: '91cm' },
@@ -46,7 +47,7 @@ export const COLORS = [
     name: 'NAVY',
     img: navyImg,
     images: [
-      navyImg,
+      { type: 'image', src: navyImg },
     ],
     isNew: true,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -57,7 +58,7 @@ export const COLORS = [
     name: 'TEAL',
     img: tealImg,
     images: [
-      tealImg,
+      { type: 'image', src: tealImg },
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -68,7 +69,7 @@ export const COLORS = [
     name: 'TRUFFLE',
     img: truffleImg,
     images: [
-      truffleImg,
+      { type: 'image', src: truffleImg },
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -79,7 +80,7 @@ export const COLORS = [
     name: 'OPTIC WHITE',
     img: opticWhiteImg,
     images: [
-      opticWhiteImg,
+      { type: 'image', src: opticWhiteImg },
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -90,7 +91,7 @@ export const COLORS = [
     name: 'BLUE',
     img: blueImg,
     images: [
-      blueImg,
+      { type: 'image', src: blueImg },
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },
@@ -101,7 +102,7 @@ export const COLORS = [
     name: 'RANGERS',
     img: rangersImg,
     images: [
-      rangersImg,
+      { type: 'image', src: rangersImg },
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '170cm', bust: '81cm', waist: '64cm', hips: '91cm' },

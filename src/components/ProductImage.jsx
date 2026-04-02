@@ -131,8 +131,10 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
     setScrollProgress(maxScroll > 0 ? scrollLeft / maxScroll : 0)
   }
 
-  const imgList = images || [src]
-  const total = imgList.length
+  const mediaList = (images && images.length ? images : [{ type: 'image', src }]).map(item => (
+    typeof item === 'string' ? { type: 'image', src: item } : item
+  ))
+  const total = mediaList.length
 
   const handlePointerMove = (event, index) => {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -164,32 +166,47 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
     <div className={styles.wrap}>
       {images ? (
         <div className={styles.carousel} ref={carouselRef} onScroll={handleScroll}>
-          {imgList.map((imgSrc, i) => (
+          {mediaList.map((item, i) => (
             <div key={i} className={styles.slide}>
-              <button
-                type="button"
-                className={`${styles.slideTrigger} ${zoomedIndex === i ? styles.slideTriggerZoomed : ''}`}
-                onClick={() => toggleZoom(i)}
-                onMouseMove={(event) => handlePointerMove(event, i)}
-                onMouseLeave={() => handlePointerLeave(i)}
-                aria-label={zoomedIndex === i ? `Zoom out image ${i + 1} of ${total}` : `Zoom in image ${i + 1} of ${total}`}
-              >
-                <img
-                  className={`${styles.img} ${zoomedIndex === i ? styles.imgZoomed : ''}`}
-                  src={imgSrc}
-                  alt={`${alt} ${i + 1}`}
-                  style={zoomedIndex === i ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
-                />
-                {hoveredIndex === i && (
-                  <span
-                    className={styles.cursorPlus}
-                    style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}
-                    aria-hidden="true"
-                  >
-                    <ZoomCursorIcon zoomed={zoomedIndex === i} />
-                  </span>
-                )}
-              </button>
+              {item.type === 'video' ? (
+                <div className={`${styles.slideTrigger} ${styles.videoTrigger}`}>
+                  <video
+                    className={styles.img}
+                    src={item.src}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls={false}
+                    aria-label={`${alt} video ${i + 1}`}
+                  />
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className={`${styles.slideTrigger} ${zoomedIndex === i ? styles.slideTriggerZoomed : ''}`}
+                  onClick={() => toggleZoom(i)}
+                  onMouseMove={(event) => handlePointerMove(event, i)}
+                  onMouseLeave={() => handlePointerLeave(i)}
+                  aria-label={zoomedIndex === i ? `Zoom out image ${i + 1} of ${total}` : `Zoom in image ${i + 1} of ${total}`}
+                >
+                  <img
+                    className={`${styles.img} ${zoomedIndex === i ? styles.imgZoomed : ''}`}
+                    src={item.src}
+                    alt={`${alt} ${i + 1}`}
+                    style={zoomedIndex === i ? { transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%` } : undefined}
+                  />
+                  {hoveredIndex === i && (
+                    <span
+                      className={styles.cursorPlus}
+                      style={{ left: `${cursorPosition.x}px`, top: `${cursorPosition.y}px` }}
+                      aria-hidden="true"
+                    >
+                      <ZoomCursorIcon zoomed={zoomedIndex === i} />
+                    </span>
+                  )}
+                </button>
+              )}
 
               {model?.variant === 'banner' && !open && i === 1 && (
                 <div className={styles.modelBadgeWrapDesktopImage}>
