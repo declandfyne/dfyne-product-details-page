@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { COLORS, SIZES, ASSETS } from './data/product'
 
 import ImpactBanner from './components/ImpactBanner'
@@ -26,6 +26,43 @@ export default function V2() {
   const [completeLookOpen, setCompleteLookOpen] = useState(false)
   const [preselectedLookItemId, setPreselectedLookItemId] = useState(null)
   const [infoTab,        setInfoTab]        = useState(null)
+  const [rightRailStickyTop, setRightRailStickyTop] = useState(0)
+  const rightRailRef = useRef(null)
+
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 1024px)')
+    const RIGHT_RAIL_BOTTOM_GAP = 20
+    let frameId = null
+
+    const update = () => {
+      if (!media.matches || !rightRailRef.current) {
+        setRightRailStickyTop(0)
+        return
+      }
+
+      const railHeight = rightRailRef.current.getBoundingClientRect().height
+      setRightRailStickyTop(Math.round(window.innerHeight - railHeight - RIGHT_RAIL_BOTTOM_GAP))
+    }
+
+    const scheduleUpdate = () => {
+      if (frameId) cancelAnimationFrame(frameId)
+      frameId = requestAnimationFrame(update)
+    }
+
+    scheduleUpdate()
+    window.addEventListener('resize', scheduleUpdate)
+    media.addEventListener('change', scheduleUpdate)
+
+    const observer = new ResizeObserver(scheduleUpdate)
+    if (rightRailRef.current) observer.observe(rightRailRef.current)
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId)
+      window.removeEventListener('resize', scheduleUpdate)
+      media.removeEventListener('change', scheduleUpdate)
+      observer.disconnect()
+    }
+  }, [])
 
   const handleOpenCompleteLook = () => {
     setPreselectedLookItemId(null)
@@ -47,7 +84,11 @@ export default function V2() {
           <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Impact Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} showBreadcrumb />
         </div>
 
-        <div className={styles.colRight}>
+        <div
+          className={styles.colRight}
+          ref={rightRailRef}
+          style={{ '--sticky-top': `${rightRailStickyTop}px` }}
+        >
           <ProductInfo onOpenReviews={() => setInfoTab('reviews')} showFeatures={false} hideBreadcrumb />
 
           <hr className={styles.divider} />

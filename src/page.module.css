@@ -1,6 +1,6 @@
 .page {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .featureList {
@@ -58,13 +58,15 @@
   }
 
   .colLeft {
-    position: sticky;
-    top: 0;
+    align-self: start;
     padding-top: 16px;
   }
 
   .colRight {
-    padding: 16px 0 40px 0;
+    align-self: start;
+    position: sticky;
+    top: var(--sticky-top, 0px);
+    padding: 16px 0 0 0;
   }
 
   .colRight .divider,
