@@ -118,7 +118,17 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
             </div>
           )}
           {!isIdle && (
-            <span className={styles.itemPrice}>{item.price}</span>
+            <div className={styles.itemActions}>
+              <span className={styles.itemPrice}>{item.price}</span>
+              <button
+                type="button"
+                className={styles.resetBtn}
+                aria-label={`Reset ${item.name}`}
+                onClick={() => onReset(item.id)}
+              >
+                <CloseIcon />
+              </button>
+            </div>
           )}
         </div>
 
