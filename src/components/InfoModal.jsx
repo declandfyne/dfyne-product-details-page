@@ -395,17 +395,17 @@ export default function InfoModal({ open, activeTab, onClose, model, productImg 
   if (!open) return null
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.sheet} onClick={e => e.stopPropagation()}>
-        <div className={styles.header}>
+    <div className={styles.overlay} onClick={onClose} id="info-modal-overlay" data-analytics-id="info-modal-overlay" data-info-modal-tab={activeTab}>
+      <div className={styles.sheet} onClick={e => e.stopPropagation()} id="info-modal" data-analytics-id="info-modal" data-info-modal-tab={activeTab}>
+        <div className={styles.header} id="info-modal-header" data-analytics-id="info-modal-header">
           <p className={styles.headerTitle}>{TITLES[activeTab]}</p>
-          <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+          <button className={styles.closeBtn} onClick={onClose} aria-label="Close" id="info-modal-close" data-analytics-id="info-modal-close">
             <CloseIcon />
           </button>
         </div>
 
-        <div className={styles.bodyWrap}>
-          <div className={styles.body}>
+        <div className={styles.bodyWrap} id="info-modal-body-wrap" data-analytics-id="info-modal-body-wrap">
+          <div className={styles.body} id="info-modal-body" data-analytics-id="info-modal-body">
             {activeTab === 'features' && <FeaturesContent />}
             {activeTab === 'model'    && <ModelContent model={model} productImg={productImg} />}
             {activeTab === 'delivery' && <DeliveryContent />}

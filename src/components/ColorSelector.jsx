@@ -45,21 +45,26 @@ export default function ColorSelector({ selectedId, onChange }) {
   }
 
   return (
-    <div className={styles.section}>
-      <p className={styles.label}>COLOR: <strong>{COLORS.find(c => c.id === selectedId)?.name}</strong></p>
-      <div className={styles.carouselWrap}>
+    <section className={styles.section} id="pdp-color-selector" data-analytics-id="pdp-color-selector">
+      <p className={styles.label} id="pdp-color-label" data-analytics-id="pdp-color-label">COLOR: <strong>{COLORS.find(c => c.id === selectedId)?.name}</strong></p>
+      <div className={styles.carouselWrap} id="pdp-color-carousel" data-analytics-id="pdp-color-carousel">
         {canScrollLeft && (
-          <button className={`${styles.arrowBtn} ${styles.arrowLeft}`} onClick={() => scroll(-1)} aria-label="Scroll left">
+          <button className={`${styles.arrowBtn} ${styles.arrowLeft}`} onClick={() => scroll(-1)} aria-label="Scroll left" data-analytics-id="pdp-color-scroll-left">
             <ArrowIcon direction="left" />
           </button>
         )}
-        <div className={styles.swatches} ref={scrollRef}>
+        <div className={styles.swatches} ref={scrollRef} data-analytics-id="pdp-color-swatch-list">
           {COLORS.map(color => (
             <button
               key={color.id}
               className={`${styles.swatch} ${selectedId === color.id ? styles.active : ''}`}
               onClick={() => onChange(color)}
               aria-label={color.name}
+              id={`pdp-color-${color.id}`}
+              data-analytics-id="pdp-color-swatch"
+              data-color-id={color.id}
+              data-color-name={color.name}
+              data-selected={selectedId === color.id}
             >
               <div className={styles.imgWrap}>
                 <img src={color.img} alt={color.label} />
@@ -70,11 +75,11 @@ export default function ColorSelector({ selectedId, onChange }) {
           ))}
         </div>
         {canScrollRight && (
-          <button className={`${styles.arrowBtn} ${styles.arrowRight}`} onClick={() => scroll(1)} aria-label="Scroll right">
+          <button className={`${styles.arrowBtn} ${styles.arrowRight}`} onClick={() => scroll(1)} aria-label="Scroll right" data-analytics-id="pdp-color-scroll-right">
             <ArrowIcon direction="right" />
           </button>
         )}
       </div>
-    </div>
+    </section>
   )
 }

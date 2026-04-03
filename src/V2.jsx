@@ -78,14 +78,16 @@ export default function V2() {
     <>
       <ImpactBanner />
       <Header />
-      <div className={styles.page}>
-      <div className={styles.twoCol}>
-        <div className={styles.colLeft}>
+      <div className={styles.page} id="pdp-page" data-analytics-id="pdp-page">
+      <div className={styles.twoCol} id="pdp-main-content" data-analytics-id="pdp-main-content">
+        <div className={styles.colLeft} id="pdp-media-column" data-analytics-id="pdp-media-column">
           <ProductImage src={selectedColor.img} images={selectedColor.images} alt={`Impact Bandeau Strappy Bra – ${selectedColor.name}`} model={selectedColor.model} onModelClick={() => setInfoTab('model')} showBreadcrumb />
         </div>
 
         <div
           className={styles.colRight}
+          id="pdp-info-column"
+          data-analytics-id="pdp-info-column"
           ref={rightRailRef}
           style={{ '--sticky-top': `${rightRailStickyTop}px` }}
         >

@@ -60,9 +60,9 @@ const FacebookIcon = () => (
 
 export default function Header() {
   return (
-    <header className={styles.header}>
-      <div className={styles.mobileBar}>
-        <button type="button" className={styles.hamburger} aria-label="Menu">
+    <header className={styles.header} id="site-header" data-analytics-id="site-header">
+      <div className={styles.mobileBar} id="mobile-header" data-analytics-id="mobile-header">
+        <button type="button" className={styles.hamburger} aria-label="Menu" id="mobile-menu-button" data-analytics-id="mobile-menu-button">
           <span />
           <span className={styles.medium} />
           <span className={styles.long} />
@@ -71,46 +71,46 @@ export default function Header() {
         <img className={styles.logo} src={ASSETS.logo} alt="DFYNE" />
 
         <div className={styles.actions}>
-          <button type="button" className={styles.iconBtn} aria-label="Search">
+          <button type="button" className={styles.iconBtn} aria-label="Search" id="mobile-search-button" data-analytics-id="mobile-search-button">
             <SearchIcon />
           </button>
-          <button type="button" className={styles.iconBtn} aria-label="Cart">
+          <button type="button" className={styles.iconBtn} aria-label="Cart" id="mobile-cart-button" data-analytics-id="mobile-cart-button">
             <CartIcon />
             <div className={styles.cartBadge}><span>1</span></div>
           </button>
         </div>
       </div>
 
-      <div className={styles.desktopShell}>
-        <div className={styles.utilityBar}>
-          <div className={styles.utilityLinks}>
+      <div className={styles.desktopShell} id="desktop-header" data-analytics-id="desktop-header">
+        <div className={styles.utilityBar} id="header-utility-bar" data-analytics-id="header-utility-bar">
+          <div className={styles.utilityLinks} id="header-utility-links" data-analytics-id="header-utility-links">
             {UTILITY_LINKS.map(label => (
-              <button key={label} type="button" className={styles.utilityLink}>
+              <button key={label} type="button" className={styles.utilityLink} data-analytics-id="header-utility-link" data-analytics-label={label}>
                 {label}
               </button>
             ))}
           </div>
 
-          <div className={styles.socials} aria-label="Social links">
-            <button type="button" className={styles.socialBtn} aria-label="Instagram">
+          <div className={styles.socials} aria-label="Social links" id="header-social-links" data-analytics-id="header-social-links">
+            <button type="button" className={styles.socialBtn} aria-label="Instagram" data-analytics-id="header-social-button" data-analytics-label="instagram">
               <InstagramIcon />
             </button>
-            <button type="button" className={styles.socialBtn} aria-label="TikTok">
+            <button type="button" className={styles.socialBtn} aria-label="TikTok" data-analytics-id="header-social-button" data-analytics-label="tiktok">
               <TikTokIcon />
             </button>
-            <button type="button" className={styles.socialBtn} aria-label="YouTube">
+            <button type="button" className={styles.socialBtn} aria-label="YouTube" data-analytics-id="header-social-button" data-analytics-label="youtube">
               <YouTubeIcon />
             </button>
-            <button type="button" className={styles.socialBtn} aria-label="Facebook">
+            <button type="button" className={styles.socialBtn} aria-label="Facebook" data-analytics-id="header-social-button" data-analytics-label="facebook">
               <FacebookIcon />
             </button>
           </div>
         </div>
 
-        <div className={styles.mainBar}>
-          <nav className={styles.desktopNav} aria-label="Primary">
+        <div className={styles.mainBar} id="header-main-bar" data-analytics-id="header-main-bar">
+          <nav className={styles.desktopNav} aria-label="Primary" id="primary-navigation" data-analytics-id="primary-navigation">
             {NAV_ITEMS.map(item => (
-              <button key={item} type="button" className={styles.navTrigger}>
+              <button key={item} type="button" className={styles.navTrigger} data-analytics-id="primary-nav-item" data-analytics-label={item}>
                 <span>{item}</span>
                 <CaretDown />
               </button>
@@ -119,14 +119,14 @@ export default function Header() {
 
           <img className={styles.desktopLogo} src={ASSETS.logo} alt="DFYNE" />
 
-          <div className={styles.desktopActions}>
-            <button type="button" className={`${styles.iconBtn} ${styles.desktopActionBtn}`} aria-label="Account">
+          <div className={styles.desktopActions} id="header-actions" data-analytics-id="header-actions">
+            <button type="button" className={`${styles.iconBtn} ${styles.desktopActionBtn}`} aria-label="Account" id="desktop-account-button" data-analytics-id="desktop-account-button">
               <ProfileIcon />
             </button>
-            <button type="button" className={`${styles.iconBtn} ${styles.desktopActionBtn}`} aria-label="Search">
+            <button type="button" className={`${styles.iconBtn} ${styles.desktopActionBtn}`} aria-label="Search" id="desktop-search-button" data-analytics-id="desktop-search-button">
               <SearchIcon />
             </button>
-            <button type="button" className={`${styles.iconBtn} ${styles.desktopActionBtn}`} aria-label="Cart">
+            <button type="button" className={`${styles.iconBtn} ${styles.desktopActionBtn}`} aria-label="Cart" id="desktop-cart-button" data-analytics-id="desktop-cart-button">
               <CartIcon />
               <div className={`${styles.cartBadge} ${styles.desktopCartBadge}`}><span>1</span></div>
             </button>

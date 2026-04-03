@@ -479,24 +479,28 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
   if (!open) return null
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
+    <div className={styles.overlay} onClick={onClose} id="details-modal-overlay" data-analytics-id="details-modal-overlay">
+      <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()} id="details-modal" data-analytics-id="details-modal">
         <div className={styles.dragHandle} {...handleProps}>
           <div className={styles.dragBar} />
         </div>
-        <div className={styles.header}>
-          <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+        <div className={styles.header} id="details-modal-header" data-analytics-id="details-modal-header">
+          <button className={styles.closeBtn} onClick={onClose} aria-label="Close" id="details-modal-close" data-analytics-id="details-modal-close">
             <CloseIcon />
           </button>
         </div>
 
-        <div className={styles.tabsWrap}>
-          <div className={styles.tabs} ref={tabsRef}>
+        <div className={styles.tabsWrap} id="details-modal-tabs-wrap" data-analytics-id="details-modal-tabs-wrap">
+          <div className={styles.tabs} ref={tabsRef} id="details-modal-tabs" data-analytics-id="details-modal-tabs">
             {TABS.map(tab => (
               <button
                 key={tab.id}
                 className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
                 onClick={() => handleTabClick(tab.id)}
+                id={`details-modal-tab-${tab.id}`}
+                data-analytics-id="details-modal-tab"
+                data-detail-tab={tab.id}
+                data-selected={activeTab === tab.id}
               >
                 {tab.label}
               </button>
@@ -505,11 +509,13 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
           <div className={styles.tabIndicator} ref={indicatorRef} />
         </div>
 
-        <div className={styles.swipeWrap}>
+        <div className={styles.swipeWrap} id="details-modal-swipe-wrap" data-analytics-id="details-modal-swipe-wrap">
           <div
             className={styles.swipeContainer}
             ref={swipeRef}
             onScroll={handleScroll}
+            id="details-modal-swipe-container"
+            data-analytics-id="details-modal-swipe-container"
           >
             <div className={styles.swipePanel}>
               <div className={styles.body}><FeaturesContent /></div>

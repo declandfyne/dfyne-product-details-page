@@ -56,19 +56,21 @@ export default function PaymentModal({ open, onClose }) {
   if (!open) return null
 
   return (
-    <div className={styles.overlay} onClick={onClose} aria-modal="true" role="dialog">
+    <div className={styles.overlay} onClick={onClose} aria-modal="true" role="dialog" id="payment-modal-overlay" data-analytics-id="payment-modal-overlay">
       <div
         ref={sheetRef}
         className={`${styles.sheet} ${open ? styles.sheetOpen : ''}`}
         onClick={(e) => e.stopPropagation()}
+        id="payment-modal"
+        data-analytics-id="payment-modal"
       >
         {/* Drag handle */}
         <div className={styles.handle} {...handleProps} />
 
         {/* Header */}
-        <div className={styles.header}>
+        <div className={styles.header} id="payment-modal-header" data-analytics-id="payment-modal-header">
           <h2 className={styles.title}>Buy Now, Pay Later</h2>
-          <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+          <button className={styles.closeBtn} onClick={onClose} aria-label="Close" id="payment-modal-close" data-analytics-id="payment-modal-close">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M5 5L15 15M15 5L5 15" stroke="#0a0a0a" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -81,9 +83,9 @@ export default function PaymentModal({ open, onClose }) {
         </p>
 
         {/* Payment rows */}
-        <div className={styles.options}>
+        <div className={styles.options} id="payment-options-list" data-analytics-id="payment-options-list">
           {PAYMENT_OPTIONS.map((opt) => (
-            <div key={opt.id} className={styles.optionRow}>
+            <div key={opt.id} className={styles.optionRow} id={`payment-option-${opt.id}`} data-analytics-id="payment-option" data-payment-provider={opt.id}>
               <div className={styles.optionLeft}>
                 <div className={styles.logoWrap}>
                   <img

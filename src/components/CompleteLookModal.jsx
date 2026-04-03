@@ -25,7 +25,7 @@ const createSelectionForItem = (item) => ({
 
 function SelectedThumbnail({ item, onRemove, removable = true }) {
   return (
-    <div className={styles.selectedThumb}>
+    <div className={styles.selectedThumb} data-analytics-id="complete-look-selected-item" data-look-item-id={item.id} data-look-item-name={item.name}>
       <img src={item.img} alt={item.name} className={styles.selectedThumbImg} />
       {removable && (
         <button
@@ -33,6 +33,7 @@ function SelectedThumbnail({ item, onRemove, removable = true }) {
           className={styles.selectedThumbRemove}
           aria-label={`Remove ${item.name}`}
           onClick={() => onRemove(item.id)}
+          data-analytics-id="complete-look-remove-selected-item"
         >
           <CloseIcon />
         </button>
@@ -43,7 +44,7 @@ function SelectedThumbnail({ item, onRemove, removable = true }) {
 
 function CurrentlyViewingCard({ item, selectedSize, isEditing, onSelectSize, onEdit }) {
   return (
-    <div className={styles.currentCard}>
+    <div className={styles.currentCard} id="complete-look-current-item" data-analytics-id="complete-look-current-item">
       <div className={styles.currentImageWrap}>
         <img src={item.img} alt={item.name} className={styles.currentImg} />
       </div>
@@ -70,6 +71,9 @@ function CurrentlyViewingCard({ item, selectedSize, isEditing, onSelectSize, onE
                   className={`${styles.sizeBtn} ${selectedSize === size ? styles.sizeBtnActive : ''}`}
                   aria-pressed={selectedSize === size}
                   onClick={() => onSelectSize(size)}
+                  data-analytics-id="complete-look-current-size"
+                  data-size-label={size}
+                  data-selected={selectedSize === size}
                 >
                   {size}
                 </button>
@@ -78,13 +82,13 @@ function CurrentlyViewingCard({ item, selectedSize, isEditing, onSelectSize, onE
           </>
         ) : (
           <div className={styles.selectionSummary}>
-            <button type="button" className={styles.summaryPill} onClick={onEdit}>
+            <button type="button" className={styles.summaryPill} onClick={onEdit} data-analytics-id="complete-look-current-size-summary">
               <span className={styles.summaryPillContent}>
                 <CheckIcon />
                 <span>{selectedSize}</span>
               </span>
             </button>
-            <button type="button" className={styles.editHint} onClick={onEdit}>EDIT</button>
+            <button type="button" className={styles.editHint} onClick={onEdit} data-analytics-id="complete-look-current-edit">EDIT</button>
           </div>
         )}
       </div>
@@ -100,7 +104,7 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
   const isComplete = selection.step === 'complete'
 
   return (
-    <div className={styles.itemCard}>
+    <div className={styles.itemCard} id={`complete-look-modal-item-${item.id}`} data-analytics-id="complete-look-modal-item" data-look-item-id={item.id} data-look-item-name={item.name}>
       <div className={styles.itemImageWrap}>
         <img src={item.img} alt={item.name} className={styles.itemImg} />
       </div>
@@ -112,7 +116,7 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
           </div>
           {isIdle && (
             <div className={styles.itemRight}>
-              <button type="button" className={styles.addBtn} onClick={() => onStart(item)}>
+              <button type="button" className={styles.addBtn} onClick={() => onStart(item)} data-analytics-id="complete-look-item-add" data-look-item-id={item.id}>
                 ADD
               </button>
             </div>
@@ -125,6 +129,8 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
                 className={styles.resetBtn}
                 aria-label={`Reset ${item.name}`}
                 onClick={() => onReset(item.id)}
+                data-analytics-id="complete-look-item-reset"
+                data-look-item-id={item.id}
               >
                 <CloseIcon />
               </button>
@@ -146,6 +152,10 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
                   className={`${styles.sizeBtn} ${selection.size === size ? styles.sizeBtnActive : ''}`}
                   aria-pressed={selection.size === size}
                   onClick={() => onSelectSize(item.id, size)}
+                  data-analytics-id="complete-look-item-size"
+                  data-look-item-id={item.id}
+                  data-size-label={size}
+                  data-selected={selection.size === size}
                 >
                   {size}
                 </button>
@@ -160,7 +170,7 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
               <span className={styles.selectedValue}>{selection.length}</span>
               {' - SELECT SIZE:'}
               {selection.size && <span className={styles.selectedValue}> {selection.size}</span>}
-              <button type="button" className={styles.clearLength} onClick={() => onSelectLength(item.id, null)}>
+              <button type="button" className={styles.clearLength} onClick={() => onSelectLength(item.id, null)} data-analytics-id="complete-look-item-clear-length" data-look-item-id={item.id}>
                 <CloseIcon />
               </button>
             </p>
@@ -172,6 +182,10 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
                   className={`${styles.sizeBtn} ${selection.size === size ? styles.sizeBtnActive : ''}`}
                   aria-pressed={selection.size === size}
                   onClick={() => onSelectSize(item.id, size)}
+                  data-analytics-id="complete-look-item-size"
+                  data-look-item-id={item.id}
+                  data-size-label={size}
+                  data-selected={selection.size === size}
                 >
                   {size}
                 </button>
@@ -191,6 +205,10 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
                   className={`${styles.lengthBtn} ${selection.length === length ? styles.lengthBtnActive : ''}`}
                   aria-pressed={selection.length === length}
                   onClick={() => onSelectLength(item.id, length)}
+                  data-analytics-id="complete-look-item-length"
+                  data-look-item-id={item.id}
+                  data-length-label={length}
+                  data-selected={selection.length === length}
                 >
                   {length}
                 </button>
@@ -201,13 +219,13 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
 
         {isComplete && (
           <div className={styles.selectionSummary}>
-            <button type="button" className={styles.summaryPill} onClick={() => onEditSize(item.id)}>
+            <button type="button" className={styles.summaryPill} onClick={() => onEditSize(item.id)} data-analytics-id="complete-look-item-selection-summary" data-look-item-id={item.id}>
               <span className={styles.summaryPillContent}>
                 <CheckIcon />
                 <span>{hasLength ? `${selection.length} / ${selection.size}` : selection.size}</span>
               </span>
             </button>
-            <button type="button" className={styles.editHint} onClick={() => onEditSize(item.id)}>EDIT</button>
+            <button type="button" className={styles.editHint} onClick={() => onEditSize(item.id)} data-analytics-id="complete-look-item-edit" data-look-item-id={item.id}>EDIT</button>
           </div>
         )}
 
@@ -341,16 +359,16 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
   const sectionTitle = 'COMPLETE THE LOOK'
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.sheet} onClick={e => e.stopPropagation()}>
-        <div className={styles.header}>
+    <div className={styles.overlay} onClick={onClose} id="complete-look-modal-overlay" data-analytics-id="complete-look-modal-overlay">
+      <div className={styles.sheet} onClick={e => e.stopPropagation()} id="complete-look-modal" data-analytics-id="complete-look-modal">
+        <div className={styles.header} id="complete-look-modal-header" data-analytics-id="complete-look-modal-header">
           <h2 className={styles.headerTitle}>{title}</h2>
-          <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+          <button className={styles.closeBtn} onClick={onClose} aria-label="Close" id="complete-look-modal-close" data-analytics-id="complete-look-modal-close">
             <CloseIcon />
           </button>
         </div>
 
-        <div className={styles.content}>
+        <div className={styles.content} id="complete-look-modal-content" data-analytics-id="complete-look-modal-content">
           {currentItem && (
             <CurrentlyViewingCard
               item={currentItem}
@@ -361,12 +379,12 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
             />
           )}
 
-          <div className={styles.sectionHeader}>
+          <div className={styles.sectionHeader} id="complete-look-modal-list-header" data-analytics-id="complete-look-modal-list-header">
             <span className={styles.sectionTitle}>{sectionTitle}</span>
             <span className={styles.sectionCount}>{otherItems.length} ITEMS</span>
           </div>
 
-          <div className={styles.itemList}>
+          <div className={styles.itemList} id="complete-look-modal-list" data-analytics-id="complete-look-modal-list">
             {otherItems.map(item => (
               <LookItemCard
                 key={item.id}
@@ -383,9 +401,9 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
           </div>
         </div>
 
-        <div className={styles.footer}>
+        <div className={styles.footer} id="complete-look-modal-footer" data-analytics-id="complete-look-modal-footer">
           {selectedCount > 0 && (
-            <div className={styles.selectedThumbRow}>
+            <div className={styles.selectedThumbRow} id="complete-look-selected-items" data-analytics-id="complete-look-selected-items">
               {hasCurrentProductSelected && currentItem && (
                 <SelectedThumbnail item={currentItem} onRemove={handleResetCurrentItem} />
               )}
@@ -403,13 +421,16 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
           <button
             type="button"
             className={`${styles.ctaBtn} ${canSubmit ? styles.ctaBtnActive : ''}`}
+            id="complete-look-modal-submit"
+            data-analytics-id="complete-look-modal-submit"
+            data-enabled={canSubmit}
           >
             {canSubmit ? 'ADD SELECTED ITEMS TO CART' : 'SELECT SIZES'}
           </button>
           <p className={styles.footerMeta}>
             <img src={ASSETS.klarna} alt="Klarna" className={styles.footerLogo} />
             Pay in 3 interest-free installments.
-            <button type="button" className={styles.learnMoreBtn}>Learn more</button>
+            <button type="button" className={styles.learnMoreBtn} data-analytics-id="complete-look-modal-learn-more">Learn more</button>
           </p>
         </div>
       </div>

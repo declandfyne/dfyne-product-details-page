@@ -9,13 +9,13 @@ const ChevronDown = () => (
 
 export default function CartSection({ onOpenPayment, onOpenCompleteLook }) {
   return (
-    <div className={styles.section}>
-      <button className={styles.addToCart}>ADD TO CART</button>
-      <button type="button" className={styles.completeLookBtn} onClick={onOpenCompleteLook}>
+    <section className={styles.section} id="pdp-purchase-actions" data-analytics-id="pdp-purchase-actions">
+      <button className={styles.addToCart} id="pdp-add-to-cart" data-analytics-id="pdp-add-to-cart">ADD TO CART</button>
+      <button type="button" className={styles.completeLookBtn} onClick={onOpenCompleteLook} id="pdp-open-complete-look" data-analytics-id="pdp-open-complete-look">
         COMPLETE THE LOOK
       </button>
 
-      <button className={styles.paymentBar} onClick={onOpenPayment}>
+      <button className={styles.paymentBar} onClick={onOpenPayment} id="pdp-open-payment-options" data-analytics-id="pdp-open-payment-options">
         <span className={styles.paymentText}>Split The Cost. Interest Free</span>
         <div className={styles.paymentLogos}>
           <img style={{ width: 47, height: 20, objectFit: 'contain' }} src={ASSETS.klarna}   alt="Klarna" />
@@ -25,7 +25,7 @@ export default function CartSection({ onOpenPayment, onOpenCompleteLook }) {
         <ChevronDown />
       </button>
 
-      <div className={styles.deliveryRow}>
+      <div className={styles.deliveryRow} id="pdp-delivery-summary" data-analytics-id="pdp-delivery-summary">
         <div className={styles.deliveryInner}>
           <svg className={styles.pkgIcon} width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
@@ -43,6 +43,6 @@ export default function CartSection({ onOpenPayment, onOpenCompleteLook }) {
           <span className={styles.returnsText}>60 day returns</span>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

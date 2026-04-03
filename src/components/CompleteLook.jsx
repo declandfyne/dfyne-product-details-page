@@ -9,7 +9,7 @@ const StarIcon = () => (
 
 function LookCard({ item }) {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-analytics-id="complete-look-card" data-look-item-id={item.id} data-look-item-name={item.name}>
       <div className={styles.imageWrap}>
         <img src={item.img} alt={item.name} className={styles.cardImg} />
         {item.current && (
@@ -39,14 +39,14 @@ export default function CompleteLook({ onOpen, onOpenItem, embedded = false }) {
   }
 
   return (
-    <div className={`${styles.section} ${embedded ? styles.sectionEmbedded : ''}`}>
+    <section className={`${styles.section} ${embedded ? styles.sectionEmbedded : ''}`} id="pdp-complete-look-section" data-analytics-id="pdp-complete-look-section">
       <div className={`${styles.box} ${embedded ? styles.boxEmbedded : ''}`}>
-        <div className={styles.header}>
-          <p className={styles.title}>COMPLETE THE LOOK</p>
+        <div className={styles.header} id="pdp-complete-look-header" data-analytics-id="pdp-complete-look-header">
+          <p className={styles.title} id="pdp-complete-look-title" data-analytics-id="pdp-complete-look-title">COMPLETE THE LOOK</p>
           <span className={styles.itemCount}>{LOOK_ITEMS.length} items</span>
         </div>
 
-        <div className={styles.scroll}>
+        <div className={styles.scroll} id="pdp-complete-look-list" data-analytics-id="pdp-complete-look-list">
           {LOOK_ITEMS.map(item => (
             <div
               key={item.id}
@@ -56,16 +56,20 @@ export default function CompleteLook({ onOpen, onOpenItem, embedded = false }) {
               onClick={() => onOpenItem?.(item)}
               onKeyDown={(event) => handleKeyDown(event, item)}
               aria-label={`Open shop the look for ${item.name}`}
+              id={`pdp-complete-look-item-${item.id}`}
+              data-analytics-id="pdp-complete-look-item"
+              data-look-item-id={item.id}
+              data-look-item-name={item.name}
             >
               <LookCard item={item} />
             </div>
           ))}
         </div>
 
-        <button type="button" className={styles.ctaBtn} onClick={onOpen}>
+        <button type="button" className={styles.ctaBtn} onClick={onOpen} id="pdp-complete-look-cta" data-analytics-id="pdp-complete-look-cta">
           COMPLETE THE LOOK
         </button>
       </div>
-    </div>
+    </section>
   )
 }

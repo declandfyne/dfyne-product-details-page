@@ -163,11 +163,11 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
   }
 
   return (
-    <div className={styles.wrap}>
+    <section className={styles.wrap} id="pdp-media-gallery" data-analytics-id="pdp-media-gallery">
       {images ? (
-        <div className={styles.carousel} ref={carouselRef} onScroll={handleScroll}>
+        <div className={styles.carousel} ref={carouselRef} onScroll={handleScroll} id="pdp-media-carousel" data-analytics-id="pdp-media-carousel">
           {mediaList.map((item, i) => (
-            <div key={i} className={styles.slide}>
+            <div key={i} className={styles.slide} id={`pdp-media-item-${i + 1}`} data-analytics-id="pdp-media-item" data-media-index={i + 1} data-media-type={item.type}>
               {item.type === 'video' ? (
                 <div className={`${styles.slideTrigger} ${styles.videoTrigger}`}>
                   <video
@@ -179,6 +179,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
                     playsInline
                     controls={false}
                     aria-label={`${alt} video ${i + 1}`}
+                    data-analytics-id="pdp-media-video"
                   />
                 </div>
               ) : (
@@ -189,6 +190,8 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
                   onMouseMove={(event) => handlePointerMove(event, i)}
                   onMouseLeave={() => handlePointerLeave(i)}
                   aria-label={zoomedIndex === i ? `Zoom out image ${i + 1} of ${total}` : `Zoom in image ${i + 1} of ${total}`}
+                  data-analytics-id="pdp-media-image"
+                  data-media-index={i + 1}
                 >
                   <img
                     className={`${styles.img} ${zoomedIndex === i ? styles.imgZoomed : ''}`}
@@ -210,7 +213,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
 
               {model?.variant === 'banner' && !open && i === 1 && (
                 <div className={styles.modelBadgeWrapDesktopImage}>
-                  <button className={styles.modelBadgeStatic} onClick={onModelClick}>
+                  <button className={styles.modelBadgeStatic} onClick={onModelClick} id="pdp-model-size-trigger-desktop" data-analytics-id="pdp-model-size-trigger-desktop">
                     {model.badgeText}
                     <BreadcrumbChevronDown />
                   </button>
@@ -227,6 +230,8 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
           onMouseMove={(event) => handlePointerMove(event, 0)}
           onMouseLeave={() => handlePointerLeave(0)}
           aria-label={zoomedIndex === 0 ? 'Zoom out image' : 'Zoom in image'}
+          data-analytics-id="pdp-media-image"
+          data-media-index={1}
         >
           <img
             className={`${styles.img} ${zoomedIndex === 0 ? styles.imgZoomed : ''}`}
@@ -247,7 +252,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
       )}
 
       {showBreadcrumb && (
-        <Link to="/collection" className={styles.breadcrumbPill}>
+        <Link to="/collection" className={styles.breadcrumbPill} id="pdp-media-breadcrumb" data-analytics-id="pdp-media-breadcrumb">
           <svg width="8" height="8" viewBox="0 0 16 16" fill="none">
             <path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -255,7 +260,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
         </Link>
       )}
 
-      <div className={styles.progressTrack}>
+      <div className={styles.progressTrack} data-analytics-id="pdp-media-progress">
         <div
           className={styles.progressFill}
           style={{ width: `${(1 / total + scrollProgress * (1 - 1 / total)) * 100}%` }}
@@ -270,7 +275,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
               ? <MeasurementInlineBanner model={model} onCollapse={() => setOpen(false)} />
               : (
                 <div className={styles.modelBadgeWrap}>
-                  <button className={styles.modelBadge} onClick={() => setOpen(true)}>
+                  <button className={styles.modelBadge} onClick={() => setOpen(true)} id="pdp-model-badge" data-analytics-id="pdp-model-badge">
                     {model.badgeText}
                     <ChevronDown />
                   </button>
@@ -284,7 +289,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
               ? <MeasurementBanner model={model} onClose={() => setOpen(false)} />
               : (
                 <div className={styles.modelBadgeWrapRight}>
-                  <button className={styles.modelBadgeStatic} onClick={onModelClick}>
+                  <button className={styles.modelBadgeStatic} onClick={onModelClick} id="pdp-model-size-trigger" data-analytics-id="pdp-model-size-trigger">
                     {model.badgeText}
                     <BreadcrumbChevronDown />
                   </button>
@@ -298,7 +303,7 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
               {open
                 ? <MeasurementCard model={model} onCollapse={() => setOpen(false)} />
                 : (
-                  <button className={styles.modelBadge} onClick={() => setOpen(true)}>
+                  <button className={styles.modelBadge} onClick={() => setOpen(true)} id="pdp-model-badge" data-analytics-id="pdp-model-badge">
                     {model.badgeText}
                     <ChevronDown />
                   </button>
@@ -308,6 +313,6 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
           )}
         </>
       )}
-    </div>
+    </section>
   )
 }

@@ -61,14 +61,14 @@ const REVIEW_DISTRIBUTION = [
 
 export default function ReviewsSection({ onOpenReviews }) {
   return (
-    <section className={styles.section}>
-      <button type="button" className={styles.reviewHeader} onClick={onOpenReviews}>
+    <section className={styles.section} id="pdp-reviews-section" data-analytics-id="pdp-reviews-section">
+      <button type="button" className={styles.reviewHeader} onClick={onOpenReviews} id="pdp-reviews-header" data-analytics-id="pdp-reviews-header">
         <span className={styles.reviewTitle}>CUSTOMER REVIEWS</span>
         <ReviewChevron />
       </button>
 
-      <div className={styles.reviewLayout}>
-        <button type="button" className={styles.reviewScoreRow} onClick={onOpenReviews}>
+      <div className={styles.reviewLayout} id="pdp-reviews-layout" data-analytics-id="pdp-reviews-layout">
+        <button type="button" className={styles.reviewScoreRow} onClick={onOpenReviews} id="pdp-review-summary-card" data-analytics-id="pdp-review-summary-card">
           <div className={styles.reviewSnapshotCard}>
             <div className={styles.reviewSnapshotCenter}>
               <span className={styles.reviewSnapshotKicker}>Customer recommended</span>
@@ -81,11 +81,11 @@ export default function ReviewsSection({ onOpenReviews }) {
           </div>
         </button>
 
-        <div className={styles.reviewBreakdownCard}>
+        <div className={styles.reviewBreakdownCard} id="pdp-rating-breakdown" data-analytics-id="pdp-rating-breakdown">
           <p className={styles.reviewCardHeading}>Rating breakdown</p>
           <div className={styles.reviewDistributionList}>
             {REVIEW_DISTRIBUTION.map(({ label, count, share }) => (
-              <div key={label} className={styles.reviewDistributionRow}>
+               <div key={label} className={styles.reviewDistributionRow} data-analytics-id="pdp-rating-breakdown-row" data-rating-label={label}>
                 <span className={styles.reviewDistributionLabel}>{label}</span>
                 <div className={styles.reviewDistributionTrack}>
                   <div className={styles.reviewDistributionFill} style={{ width: `${share}%` }} />
@@ -96,11 +96,11 @@ export default function ReviewsSection({ onOpenReviews }) {
           </div>
         </div>
 
-        <div className={`${styles.reviewBreakdownCard} ${styles.fitRatingCard}`}>
+        <div className={`${styles.reviewBreakdownCard} ${styles.fitRatingCard}`} id="pdp-fit-rating" data-analytics-id="pdp-fit-rating">
           <p className={styles.reviewCardHeading}>Fit rating</p>
           <div className={styles.reviewBars}>
             {REVIEW_RATINGS.map(({ label, value }) => (
-              <div key={label} className={styles.reviewBarItem}>
+               <div key={label} className={styles.reviewBarItem} data-analytics-id="pdp-fit-rating-row" data-rating-label={label}>
                 <span className={styles.reviewBarLabel}>{label}</span>
                 <div className={styles.reviewBarTrack}>
                   <div className={styles.reviewBarFill} style={{ width: `${value}%` }} />
@@ -110,17 +110,20 @@ export default function ReviewsSection({ onOpenReviews }) {
           </div>
         </div>
 
-        <button type="button" className={styles.writeReviewBtn} onClick={onOpenReviews}>
+        <button type="button" className={styles.writeReviewBtn} onClick={onOpenReviews} id="pdp-write-review" data-analytics-id="pdp-write-review">
           WRITE A REVIEW
         </button>
 
-        <div className={styles.featuredReviews}>
+        <div className={styles.featuredReviews} id="pdp-featured-reviews" data-analytics-id="pdp-featured-reviews">
           {FEATURED_REVIEWS.map((review) => (
             <button
               key={review.name}
               type="button"
               className={styles.featuredReviewCard}
               onClick={onOpenReviews}
+              id={`pdp-featured-review-${review.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+              data-analytics-id="pdp-featured-review"
+              data-review-author={review.name}
             >
               <div className={styles.featuredReviewHeader}>
                 <div className={styles.featuredReviewAvatar}>
@@ -148,7 +151,7 @@ export default function ReviewsSection({ onOpenReviews }) {
           ))}
         </div>
 
-        <button className={styles.readAllBtn} onClick={onOpenReviews}>
+        <button className={styles.readAllBtn} onClick={onOpenReviews} id="pdp-read-all-reviews" data-analytics-id="pdp-read-all-reviews">
           Read all 6,746 reviews
         </button>
       </div>
