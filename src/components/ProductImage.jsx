@@ -111,16 +111,22 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
   const [zoomedIndex, setZoomedIndex] = useState(null)
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 })
+  const [scrollProgress, setScrollProgress] = useState(0)
   const carouselRef = useRef(null)
+
+  const mediaList = (images && images.length ? images : [{ type: 'image', src }]).map(item => (
+    typeof item === 'string' ? { type: 'image', src: item } : item
+  ))
+  const total = mediaList.length
 
   useEffect(() => {
     setOpen(false)
     setCurrentIndex(0)
+    setHoveredIndex(null)
     setZoomedIndex(null)
     setZoomPosition({ x: 50, y: 50 })
+    setScrollProgress(0)
   }, [model, src, images])
-
-  const [scrollProgress, setScrollProgress] = useState(0)
 
   const handleScroll = () => {
     if (!carouselRef.current) return
@@ -130,11 +136,6 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
     const maxScroll = scrollWidth - offsetWidth
     setScrollProgress(maxScroll > 0 ? scrollLeft / maxScroll : 0)
   }
-
-  const mediaList = (images && images.length ? images : [{ type: 'image', src }]).map(item => (
-    typeof item === 'string' ? { type: 'image', src: item } : item
-  ))
-  const total = mediaList.length
 
   const handlePointerMove = (event, index) => {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -167,15 +168,16 @@ export default function ProductImage({ src, images, alt, model, onModelClick, sh
       {images ? (
         <div className={styles.carousel} ref={carouselRef} onScroll={handleScroll} id="pdp-media-carousel" data-analytics-id="pdp-media-carousel">
           {mediaList.map((item, i) => (
-            <div key={i} className={styles.slide} id={`pdp-media-item-${i + 1}`} data-analytics-id="pdp-media-item" data-media-index={i + 1} data-media-type={item.type}>
+            <div key={item.key ?? i} className={styles.slide} id={`pdp-media-item-${i + 1}`} data-analytics-id="pdp-media-item" data-media-index={i + 1} data-media-type={item.type}>
               {item.type === 'video' ? (
                 <div className={`${styles.slideTrigger} ${styles.videoTrigger}`}>
                   <video
                     className={styles.img}
                     src={item.src}
-                    autoPlay
+                    poster={item.poster}
+                    autoPlay={item.autoPlay !== false}
                     muted
-                    loop
+                    loop={item.loop !== false}
                     playsInline
                     controls={false}
                     aria-label={`${alt} video ${i + 1}`}

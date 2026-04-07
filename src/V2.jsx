@@ -10,6 +10,7 @@ import SizeSelector  from './components/SizeSelector'
 import CartSection   from './components/CartSection'
 import InfoSection   from './components/InfoSection'
 import ReviewsSection from './components/ReviewsSection'
+import RelatedRangesSection from './components/RelatedRangesSection'
 import V2TabbedModal from './components/V2TabbedModal'
 import InfoModal     from './components/InfoModal'
 import CompleteLookModal from './components/CompleteLookModal'
@@ -122,6 +123,7 @@ export default function V2() {
       </div>
 
       <ReviewsSection onOpenReviews={() => setInfoTab('reviews')} />
+      <RelatedRangesSection />
 
       {/* Modals (position:fixed, DOM location doesn't matter) */}
       <PaymentModal open={paymentOpen} onClose={() => setPaymentOpen(false)} />

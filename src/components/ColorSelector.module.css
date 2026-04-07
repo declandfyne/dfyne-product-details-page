@@ -47,7 +47,7 @@
 .imgWrap {
   width: 66px;
   height: 99px;
-  border-radius: 8px 8px 0 0;
+  border-radius: 2px;
   overflow: hidden;
   position: relative;
 }
@@ -77,7 +77,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 2px 2px;
   font-weight: 600;
   font-size: 10px;
   text-align: center;

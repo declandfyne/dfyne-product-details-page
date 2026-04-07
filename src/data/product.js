@@ -6,10 +6,22 @@ import dfyneLogo    from '../assets/dfyne-logo.svg'
 import packageIcon  from '../assets/package-icon.svg'
 
 import midnightBlackImg from '../assets/midnight-black.jpg'
-import midnightBlack2   from '../assets/midnight-black-2.png'
-import midnightBlack3   from '../assets/midnight-black-3.png'
-import midnightBlack4   from '../assets/midnight-black-4.png'
 import reelVideo        from '../assets/reel.mp4'
+import figmaGallery1    from '../assets/figma-gallery-1.png'
+import figmaGallery2    from '../assets/figma-gallery-2.png'
+import figmaGallery3    from '../assets/figma-gallery-3-245583.png'
+import figmaGallery4    from '../assets/figma-gallery-4-634b58.png'
+import figmaVideoPoster from '../assets/figma-gallery-video-poster.png'
+import relatedMidnight1 from '../assets/related-midnight-1.png'
+import relatedMidnight2 from '../assets/related-midnight-2.png'
+import relatedMidnight3 from '../assets/related-midnight-3.png'
+import relatedMidnight4 from '../assets/related-midnight-4.png'
+import relatedMidnight5 from '../assets/related-midnight-5.png'
+import relatedMidnight6 from '../assets/related-midnight-6.png'
+import relatedMidnight7 from '../assets/related-midnight-7.png'
+import relatedMidnight8 from '../assets/related-midnight-8.png'
+import relatedMidnight9 from '../assets/related-midnight-9.png'
+import relatedMidnight10 from '../assets/related-midnight-10.png'
 import navyImg          from '../assets/navy.png'
 import tealImg          from '../assets/teal.png'
 import truffleImg       from '../assets/truffle.png'
@@ -32,11 +44,11 @@ export const COLORS = [
     name: 'MIDNIGHT BLACK',
     img: midnightBlackImg,
     images: [
-      { type: 'image', src: midnightBlackImg },
-      { type: 'image', src: midnightBlack2 },
-      { type: 'image', src: midnightBlack3 },
-      { type: 'image', src: midnightBlack4 },
-      { type: 'video', src: reelVideo },
+      { type: 'image', src: figmaGallery1 },
+      { type: 'image', src: figmaGallery2 },
+      { type: 'image', src: figmaGallery3 },
+      { type: 'image', src: figmaGallery4 },
+      { type: 'video', src: reelVideo, poster: figmaVideoPoster },
     ],
     isNew: false,
     model: { variant: 'banner', badgeText: "Aliyah is 5'7 wearing S", name: 'Aliyah', size: 'S', height: '149cm', bust: '81cm', waist: '54cm', hips: '91cm' },
@@ -165,6 +177,99 @@ export const LOOK_ITEMS = [
     current: false,
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     lengths: ['SHORT', 'REGULAR', 'LONG'],
+  },
+]
+
+export const RELATED_RANGES_ITEMS = [
+  {
+    id: 1,
+    name: 'Defy Strappy Bra',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight1,
+  },
+  {
+    id: 2,
+    name: 'Origin Halter Bra',
+    color: 'Midnight Black',
+    price: '$38.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight2,
+  },
+  {
+    id: 3,
+    name: 'Origin Sports Bra',
+    color: 'Midnight Black',
+    price: '$38.99',
+    reviews: 52866,
+    badge: 'LIMITED EDITION',
+    img: relatedMidnight3,
+  },
+  {
+    id: 4,
+    name: 'Impact Scoop Back Bra',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight4,
+  },
+  {
+    id: 5,
+    name: 'Vision Sports Bras',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight5,
+  },
+  {
+    id: 6,
+    name: 'Vision Twist Front Sports Bras',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight6,
+  },
+  {
+    id: 7,
+    name: 'Dynamic Twist Back Bra',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight7,
+  },
+  {
+    id: 8,
+    name: 'Defy Strappy Bra',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight8,
+  },
+  {
+    id: 9,
+    name: 'Dynamic Backless Sports Bra',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight9,
+  },
+  {
+    id: 10,
+    name: 'Impact Strappy Bra',
+    color: 'Midnight Black',
+    price: '$36.99',
+    reviews: 52866,
+    badge: 'NEW',
+    img: relatedMidnight10,
   },
 ]
 

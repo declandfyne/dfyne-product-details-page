@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { ASSETS } from '../data/product'
 import { LOOK_ITEMS } from '../data/product'
 import styles from './CompleteLookModal.module.css'
 
@@ -53,44 +52,46 @@ function CurrentlyViewingCard({ item, selectedSize, isEditing, onSelectSize, onE
           <span className={styles.viewingDot} aria-hidden="true" />
           CURRENTLY VIEWING
         </span>
-        <p className={styles.currentName}>{item.name}</p>
-        <p className={styles.currentColor}>{item.color.toUpperCase()}</p>
-        <p className={styles.currentPrice}>{item.price}</p>
+        <div className={styles.currentDetails}>
+          <p className={styles.currentName}>{item.name}</p>
+          <p className={styles.currentColor}>{item.color.toUpperCase()}</p>
+          <p className={styles.currentPrice}>{item.price}</p>
 
-        {isEditing ? (
-          <>
-            <p className={styles.selectSizeLabel}>
-              SELECT SIZE:
-              {selectedSize && <span className={styles.selectedValue}> {selectedSize}</span>}
-            </p>
-            <div className={styles.sizeButtons}>
-              {item.sizes.map(size => (
-                <button
-                  type="button"
-                  key={size}
-                  className={`${styles.sizeBtn} ${selectedSize === size ? styles.sizeBtnActive : ''}`}
-                  aria-pressed={selectedSize === size}
-                  onClick={() => onSelectSize(size)}
-                  data-analytics-id="complete-look-current-size"
-                  data-size-label={size}
-                  data-selected={selectedSize === size}
-                >
-                  {size}
-                </button>
-              ))}
+          {isEditing ? (
+            <>
+              <p className={styles.selectSizeLabel}>
+                SELECT SIZE:
+                {selectedSize && <span className={styles.selectedValue}> {selectedSize}</span>}
+              </p>
+              <div className={styles.sizeButtons}>
+                {item.sizes.map(size => (
+                  <button
+                    type="button"
+                    key={size}
+                    className={`${styles.sizeBtn} ${selectedSize === size ? styles.sizeBtnActive : ''}`}
+                    aria-pressed={selectedSize === size}
+                    onClick={() => onSelectSize(size)}
+                    data-analytics-id="complete-look-current-size"
+                    data-size-label={size}
+                    data-selected={selectedSize === size}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className={styles.selectionSummary}>
+              <button type="button" className={styles.summaryPill} onClick={onEdit} data-analytics-id="complete-look-current-size-summary">
+                <span className={styles.summaryPillContent}>
+                  <CheckIcon />
+                  <span>{selectedSize}</span>
+                </span>
+              </button>
+              <button type="button" className={styles.editHint} onClick={onEdit} data-analytics-id="complete-look-current-edit">EDIT</button>
             </div>
-          </>
-        ) : (
-          <div className={styles.selectionSummary}>
-            <button type="button" className={styles.summaryPill} onClick={onEdit} data-analytics-id="complete-look-current-size-summary">
-              <span className={styles.summaryPillContent}>
-                <CheckIcon />
-                <span>{selectedSize}</span>
-              </span>
-            </button>
-            <button type="button" className={styles.editHint} onClick={onEdit} data-analytics-id="complete-look-current-edit">EDIT</button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )
@@ -427,11 +428,6 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
           >
             {canSubmit ? 'ADD SELECTED ITEMS TO CART' : 'SELECT SIZES'}
           </button>
-          <p className={styles.footerMeta}>
-            <img src={ASSETS.klarna} alt="Klarna" className={styles.footerLogo} />
-            Pay in 3 interest-free installments.
-            <button type="button" className={styles.learnMoreBtn} data-analytics-id="complete-look-modal-learn-more">Learn more</button>
-          </p>
         </div>
       </div>
     </div>

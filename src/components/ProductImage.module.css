@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1;
+  background: #fff;
 }
 
 .carousel {
@@ -26,6 +27,7 @@
   scroll-snap-align: start;
   overflow: hidden;
   position: relative;
+  background: #fff;
 }
 
 .slideTrigger {
@@ -418,17 +420,14 @@
     grid-template-columns: 1fr 1fr;
     gap: 4px;
     overflow-x: visible;
+    overflow-y: visible;
     scroll-snap-type: none;
   }
 
   .slide {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 400.55 / 521.17;
     scroll-snap-align: unset;
-  }
-
-  .slide:nth-child(3) {
-    grid-column: 1 / -1;
   }
 
   .slideTrigger {
@@ -476,7 +475,7 @@
   .modelBadgeWrapDesktopImage {
     position: absolute;
     right: 16px;
-    bottom: 16px;
+    bottom: 15px;
     z-index: 3;
   }
 }

@@ -50,10 +50,10 @@
 
   .twoCol {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 476px;
-    padding: 0 50px;
+    grid-template-columns: minmax(0, 1fr) 488px;
+    padding: 0 40px;
     align-items: start;
-    gap: 40px;
+    gap: 25px;
   }
 
   .colLeft {
