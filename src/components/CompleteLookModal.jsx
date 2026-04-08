@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { LOOK_ITEMS } from '../data/product'
+import useModalTransition from '../hooks/useModalTransition'
 import styles from './CompleteLookModal.module.css'
 
 const CloseIcon = () => (
@@ -21,6 +22,8 @@ const createSelectionForItem = (item) => ({
   size: '',
   length: '',
 })
+
+const createSelections = (items) => Object.fromEntries(items.map(item => [item.id, createInitialSelection()]))
 
 function SelectedThumbnail({ item, onRemove, removable = true }) {
   return (
@@ -115,13 +118,6 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
             <p className={styles.itemName}>{item.name}</p>
             <p className={styles.itemColor}>{item.color.toUpperCase()}</p>
           </div>
-          {isIdle && (
-            <div className={styles.itemRight}>
-              <button type="button" className={styles.addBtn} onClick={() => onStart(item)} data-analytics-id="complete-look-item-add" data-look-item-id={item.id}>
-                ADD
-              </button>
-            </div>
-          )}
           {!isIdle && (
             <div className={styles.itemActions}>
               <span className={styles.itemPrice}>{item.price}</span>
@@ -138,6 +134,15 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
             </div>
           )}
         </div>
+
+        {isIdle && (
+          <div className={styles.idlePurchase}>
+            <p className={styles.itemPriceBelow}>{item.price}</p>
+            <button type="button" className={styles.addBtn} onClick={() => onStart(item)} data-analytics-id="complete-look-item-add" data-look-item-id={item.id}>
+              ADD
+            </button>
+          </div>
+        )}
 
         {showSizeSelector && !hasLength && !showLengthSelector && (
           <>
@@ -229,10 +234,6 @@ function LookItemCard({ item, selection, onStart, onSelectSize, onSelectLength, 
             <button type="button" className={styles.editHint} onClick={() => onEditSize(item.id)} data-analytics-id="complete-look-item-edit" data-look-item-id={item.id}>EDIT</button>
           </div>
         )}
-
-        {isIdle && (
-          <p className={styles.itemPriceBelow}>{item.price}</p>
-        )}
       </div>
     </div>
   )
@@ -242,25 +243,24 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
   const currentItem = LOOK_ITEMS.find(i => i.current)
   const otherItems = LOOK_ITEMS.filter(i => !i.current)
 
+  const { isRendered, isVisible } = useModalTransition(open)
   const [isCurrentEditing, setIsCurrentEditing] = useState(!currentSize)
-  const [selections, setSelections] = useState(() =>
-    Object.fromEntries(otherItems.map(i => [i.id, createInitialSelection()]))
-  )
+  const [selections, setSelections] = useState(() => createSelections(otherItems))
 
   useEffect(() => {
-    if (open) {
+    if (isRendered) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
     }
     return () => { document.body.style.overflow = '' }
-  }, [open])
+  }, [isRendered])
 
   useEffect(() => {
-    if (!open) {
-      setSelections(Object.fromEntries(otherItems.map(i => [i.id, createInitialSelection()])))
+    if (!isRendered) {
+      setSelections(createSelections(otherItems))
     }
-  }, [open])
+  }, [isRendered])
 
   useEffect(() => {
     if (!open || !preselectedItemId) return
@@ -281,7 +281,7 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
   }, [open, currentSize])
 
   useEffect(() => {
-    if (!open) return undefined
+    if (!isRendered) return undefined
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') onClose()
@@ -289,9 +289,9 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [open, onClose])
+  }, [isRendered, onClose])
 
-  if (!open) return null
+  if (!isRendered) return null
 
   const handleStartItem = (item) => {
     setSelections(prev => ({
@@ -358,10 +358,12 @@ export default function CompleteLookModal({ open, onClose, currentSize = '', onC
   const canSubmit = selectedCount > 0
   const title = 'COMPLETE THE LOOK'
   const sectionTitle = 'COMPLETE THE LOOK'
+  const overlayClassName = `${styles.overlay} ${isVisible ? styles.overlayVisible : ''}`
+  const sheetClassName = `${styles.sheet} ${isVisible ? styles.sheetVisible : ''}`
 
   return (
-    <div className={styles.overlay} onClick={onClose} id="complete-look-modal-overlay" data-analytics-id="complete-look-modal-overlay">
-      <div className={styles.sheet} onClick={e => e.stopPropagation()} id="complete-look-modal" data-analytics-id="complete-look-modal">
+    <div className={overlayClassName} onClick={onClose} id="complete-look-modal-overlay" data-analytics-id="complete-look-modal-overlay">
+      <div className={sheetClassName} onClick={e => e.stopPropagation()} id="complete-look-modal" data-analytics-id="complete-look-modal">
         <div className={styles.header} id="complete-look-modal-header" data-analytics-id="complete-look-modal-header">
           <h2 className={styles.headerTitle}>{title}</h2>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close" id="complete-look-modal-close" data-analytics-id="complete-look-modal-close">

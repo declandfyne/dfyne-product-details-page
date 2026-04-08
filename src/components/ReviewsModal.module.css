@@ -6,6 +6,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.18s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .sheet {
@@ -16,6 +18,21 @@
   max-height: 75vh;
   display: flex;
   flex-direction: column;
+  transform: translate3d(0, 12px, 0);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    transform 0.18s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.16s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.overlayVisible {
+  opacity: 1;
+}
+
+.sheetVisible {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
 }
 
 .header {
@@ -40,47 +57,114 @@
   padding: 20px 16px 32px;
 }
 
-/* Summary */
-.summarySection {
-  padding: 8px 0 20px;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 4px;
-}
-
-.title {
-  font-family: 'Rawline', sans-serif;
-  font-weight: 700;
-  font-size: 9px;
-  letter-spacing: 1.2px;
-  color: #0a0a0a;
-  margin: 0 0 14px;
-}
-
-.summaryRow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.avgScore {
-  font-family: 'Rawline', sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  color: #0a0a0a;
-  line-height: 1;
-}
-
 .stars {
   display: flex;
   gap: 2px;
 }
 
-.reviewCount {
+.filterSectionLabel {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  color: #0a0a0a;
+  margin: 0 0 6px;
+}
+
+.starFilterChips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.starFilterChips::-webkit-scrollbar {
+  display: none;
+}
+
+.starFilterChip {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 89px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.starFilterChipActive {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+}
+
+.starFilterChipActive .starFilterCount {
+  color: white;
+}
+
+.starFilterChipActive svg path {
+  fill: white;
+  stroke: white;
+}
+
+.starFilterStars {
+  display: flex;
+  gap: 1px;
+}
+
+.starFilterCount {
   font-family: 'Rawline', sans-serif;
   font-weight: 500;
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 0.3px;
+}
+
+.filterChips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 10px 0 2px;
+}
+
+.filterChips::-webkit-scrollbar {
+  display: none;
+}
+
+.filterChip {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 89px;
+  background: transparent;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.filterChipActive {
+  background: #0a0a0a;
+  color: white;
+  border-color: #0a0a0a;
+}
+
+.noResults {
+  font-family: 'Rawline', sans-serif;
+  font-weight: 400;
   font-size: 11px;
   color: #888;
-  letter-spacing: 0.3px;
+  text-align: center;
+  padding: 32px 0;
 }
 
 /* Review Card */
@@ -176,46 +260,25 @@
   margin: 0;
 }
 
-/* Scores */
-.scoresGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+@media (min-width: 1024px) {
+  .overlay {
+    align-items: stretch;
+    justify-content: flex-end;
+  }
+
+  .sheet {
+    max-width: 700px;
+    width: 700px;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    transform: translate3d(12px, 0, 0);
+  }
 }
 
-.scoreItem {
-  flex: 1 1 140px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.scoreLabel {
-  font-family: 'Rawline', sans-serif;
-  font-weight: 400;
-  font-size: 10px;
-  color: #0a0a0a;
-  letter-spacing: 0.86px;
-}
-
-.scoreTrack {
-  height: 6px;
-  background: #e5e5e5;
-  border-radius: 116px;
-  width: 100%;
-}
-
-.scoreFill {
-  height: 100%;
-  background: #0a0a0a;
-  border-radius: 116px;
-}
-
-.scoreEnds {
-  display: flex;
-  justify-content: space-between;
-  font-family: 'Rawline', sans-serif;
-  font-weight: 400;
-  font-size: 8px;
-  color: #0a0a0a;
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .sheet {
+    transition-duration: 0.01ms;
+  }
 }

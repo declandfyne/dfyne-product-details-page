@@ -35,15 +35,15 @@ export default function useDragToDismiss(onClose, { threshold = 120 } = {}) {
     const sheet = sheetRef.current
     if (!sheet) return
 
-    sheet.style.transition = 'transform 0.28s ease'
+    sheet.style.transition = 'transform 0.18s cubic-bezier(0.32, 0.72, 0, 1)'
 
     if (currentY.current > threshold) {
       // Dismiss — slide fully off screen
-      sheet.style.transform = `translateY(100%)`
-      setTimeout(onClose, 280)
+      sheet.style.transform = 'translate3d(0, 100%, 0)'
+      setTimeout(onClose, 180)
     } else {
       // Snap back
-      sheet.style.transform = 'translateY(0)'
+      sheet.style.transform = 'translate3d(0, 0, 0)'
     }
     currentY.current = 0
   }, [onClose, threshold])

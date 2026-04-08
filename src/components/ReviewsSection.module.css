@@ -425,7 +425,7 @@
 @media (min-width: 1024px) {
   .section {
     margin-top: 32px;
-    padding: 32px 50px 0;
+    padding: 32px var(--page-side-gutter, 16px) 0;
   }
 
   .reviewLayout {

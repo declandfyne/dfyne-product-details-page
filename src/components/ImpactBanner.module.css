@@ -12,6 +12,9 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 1420px;
+  margin: 0 auto;
   gap: 10px;
   color: white;
   text-align: center;

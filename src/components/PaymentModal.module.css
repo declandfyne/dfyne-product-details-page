@@ -6,6 +6,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.18s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .sheet {
@@ -17,14 +19,21 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-
-  /* slide-up animation */
-  transform: translateY(100%);
-  animation: slideUp 0.28s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  transform: translate3d(0, 12px, 0);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    transform 0.18s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.16s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-@keyframes slideUp {
-  to { transform: translateY(0); }
+.overlayVisible {
+  opacity: 1;
+}
+
+.sheetVisible {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
 }
 
 .handle {
@@ -181,15 +190,18 @@
     max-width: 700px;
     width: 700px;
     border-radius: 0;
-    animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+    transform: translate3d(12px, 0, 0);
   }
 
   .handle {
     display: none;
   }
 
-  @keyframes slideInRight {
-    from { transform: translateX(100%); }
-    to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .sheet {
+    transition-duration: 0.01ms;
   }
 }

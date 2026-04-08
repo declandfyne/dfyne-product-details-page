@@ -6,6 +6,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.22s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .sheet {
@@ -16,6 +18,21 @@
   max-height: 85vh;
   display: flex;
   flex-direction: column;
+  transform: translate3d(0, 18px, 0);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    transform 0.22s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.overlayVisible {
+  opacity: 1;
+}
+
+.sheetVisible {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
 }
 
 .header {
@@ -61,13 +78,14 @@
 /* Currently Viewing Card */
 .currentCard {
   display: flex;
+  align-items: center;
   gap: 16px;
   padding: 16px;
   border-bottom: 1px solid #e7e7e7;
 }
 
 .currentImageWrap {
-  width: 100px;
+  width: 108px;
   flex-shrink: 0;
   border-radius: 2px;
   overflow: hidden;
@@ -84,12 +102,11 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 2px;
+  justify-content: center;
+  gap: 6px;
 }
 
 .currentDetails {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -327,6 +344,7 @@
 
 .itemCard {
   display: flex;
+  align-items: center;
   gap: 16px;
   padding: 12px 16px;
   border-bottom: 1px solid #f0f0f0;
@@ -337,7 +355,7 @@
 }
 
 .itemImageWrap {
-  width: 80px;
+  width: 96px;
   flex-shrink: 0;
   border-radius: 2px;
   overflow: hidden;
@@ -361,6 +379,15 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 12px;
+}
+
+.idlePurchase {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 6px;
 }
 
 .itemName {
@@ -428,7 +455,7 @@
   font-weight: 600;
   font-size: 12px;
   color: #0a0a0a;
-  margin: 4px 0 0;
+  margin: 0;
 }
 
 .addBtn {
@@ -595,7 +622,7 @@
     height: 100vh;
     border-radius: 0;
     box-shadow: none;
-    animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+    transform: translate3d(18px, 0, 0);
   }
 
   .currentCard {
@@ -620,13 +647,21 @@
     width: 108px;
   }
 
+  .idlePurchase {
+    gap: 10px;
+    margin-top: 8px;
+  }
+
   .footer {
     padding: 16px 20px 20px;
     padding-bottom: max(20px, env(safe-area-inset-bottom));
   }
 
-  @keyframes slideInRight {
-    from { transform: translateX(100%); }
-    to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .sheet {
+    transition-duration: 0.01ms;
   }
 }

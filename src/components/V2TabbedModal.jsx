@@ -2,10 +2,11 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS, ASSETS } from '../data/product'
 import useDragToDismiss from '../hooks/useDragToDismiss'
+import useModalTransition from '../hooks/useModalTransition'
 import styles from './V2TabbedModal.module.css'
 
 const TABS = [
-  { id: 'features', label: 'PRODUCT DETAILS' },
+  { id: 'features', label: 'FULL DETAILS' },
   { id: 'model',    label: 'MODEL SIZE' },
   { id: 'delivery', label: 'DELIVERY & RETURNS' },
 ]
@@ -113,6 +114,14 @@ const RulerIcon = () => (
   </svg>
 )
 
+const InstagramIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.6" />
+    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+    <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" />
+  </svg>
+)
+
 function ModelContent({ model }) {
   const [unit, setUnit] = useState(getDefaultUnit)
 
@@ -161,6 +170,15 @@ function ModelContent({ model }) {
           </div>
         </div>
         <div className={styles.modelHeroSmall}>
+          <a
+            href="https://www.instagram.com/aliahje/"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.modelInstagram}
+          >
+            <InstagramIcon />
+            <span>@aliahje</span>
+          </a>
           <img src={ASSETS.modelPhoto} className={styles.modelHeroImg} alt={model.name} />
         </div>
       </div>
@@ -396,28 +414,11 @@ function ReviewsContent() {
 
 export default function V2TabbedModal({ open, initialTab, onClose, model }) {
   const [activeTab, setActiveTab] = useState(initialTab || 'features')
+  const { isRendered, isVisible } = useModalTransition(open)
   const { sheetRef, handleProps } = useDragToDismiss(onClose)
   const swipeRef = useRef(null)
   const tabsRef = useRef(null)
   const indicatorRef = useRef(null)
-
-  // When modal opens with a new tab, sync state + scroll + indicator in one effect
-  useEffect(() => {
-    if (!open || !initialTab) return
-    setActiveTab(initialTab)
-    const el = swipeRef.current
-    if (!el) return
-    const idx = TABS.findIndex(t => t.id === initialTab)
-    requestAnimationFrame(() => {
-      el.scrollTo({ left: idx * el.offsetWidth, behavior: 'instant' })
-      positionIndicator(idx, false)
-    })
-  }, [open, initialTab])
-
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
 
   // Position the sliding indicator over a tab button
   const positionIndicator = useCallback((idx, animate = true) => {
@@ -432,6 +433,43 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
     bar.style.left = `${btnRect.left - tabsRect.left}px`
     bar.style.width = `${btnRect.width}px`
   }, [])
+
+  // When modal opens with a new tab, sync state + scroll + indicator in one effect
+  useEffect(() => {
+    if (!open || !initialTab) return
+    setActiveTab(initialTab)
+    const el = swipeRef.current
+    if (!el) return
+    const idx = TABS.findIndex(t => t.id === initialTab)
+    requestAnimationFrame(() => {
+      el.scrollTo({ left: idx * el.offsetWidth, behavior: 'instant' })
+      positionIndicator(idx, false)
+    })
+  }, [open, initialTab, positionIndicator])
+
+  useEffect(() => {
+    if (!isRendered || !isVisible) return undefined
+
+    const idx = TABS.findIndex(tab => tab.id === activeTab)
+    if (idx < 0) return undefined
+
+    const frameId = window.requestAnimationFrame(() => {
+      positionIndicator(idx, false)
+    })
+
+    const handleResize = () => positionIndicator(idx, false)
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.cancelAnimationFrame(frameId)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [activeTab, isRendered, isVisible, positionIndicator])
+
+  useEffect(() => {
+    document.body.style.overflow = isRendered ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [isRendered])
 
   // On tab click: scroll to panel + move indicator
   const handleTabClick = useCallback((tabId) => {
@@ -476,11 +514,14 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
     if (tab) setActiveTab(prev => prev === tab.id ? prev : tab.id)
   }, [])
 
-  if (!open) return null
+  if (!isRendered) return null
+
+  const overlayClassName = `${styles.overlay} ${isVisible ? styles.overlayVisible : ''}`
+  const sheetClassName = `${styles.sheet} ${isVisible ? styles.sheetVisible : ''}`
 
   return (
-    <div className={styles.overlay} onClick={onClose} id="details-modal-overlay" data-analytics-id="details-modal-overlay">
-      <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()} id="details-modal" data-analytics-id="details-modal">
+    <div className={overlayClassName} onClick={onClose} id="details-modal-overlay" data-analytics-id="details-modal-overlay">
+      <div ref={sheetRef} className={sheetClassName} onClick={e => e.stopPropagation()} id="details-modal" data-analytics-id="details-modal">
         <div className={styles.dragHandle} {...handleProps}>
           <div className={styles.dragBar} />
         </div>

@@ -1,5 +1,8 @@
 .page {
+  --page-side-gutter: 16px;
   width: 100%;
+  max-width: 1420px;
+  margin: 0 auto;
   overflow-x: clip;
 }
 
@@ -44,14 +47,13 @@
 
 @media (min-width: 1024px) {
   .page {
-    max-width: 1920px;
-    margin: 0 auto;
+    --page-side-gutter: 50px;
   }
 
   .twoCol {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 488px;
-    padding: 0 40px;
+    padding: 0 var(--page-side-gutter);
     align-items: start;
     gap: 25px;
   }
@@ -74,10 +76,10 @@
   }
 
   .divider {
-    margin: 24px 50px;
+    margin: 24px var(--page-side-gutter);
   }
 
   .dividerNoTop {
-    margin: 24px 50px;
+    margin: 24px var(--page-side-gutter);
   }
 }

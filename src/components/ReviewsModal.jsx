@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import useModalTransition from '../hooks/useModalTransition'
 import styles from './ReviewsModal.module.css'
 
 const CloseIcon = () => (
@@ -116,6 +117,20 @@ const MOCK_REVIEWS = [
   },
 ]
 
+const REVIEW_FILTERS = [
+  { id: 'all',     label: 'All',         keywords: null },
+  { id: 'sizing',  label: 'Sizing',      keywords: ['size', 'sizing', 'small', 'large', 'tight', 'loose', 'runs'] },
+  { id: 'fit',     label: 'Fit',         keywords: ['fit', 'flattering', 'contour', 'holds', 'shape'] },
+  { id: 'support', label: 'Bra Support', keywords: ['bra', 'support', 'cups', 'built-in'] },
+  { id: 'fabric',  label: 'Fabric',      keywords: ['soft', 'fabric', 'quality', 'material', 'wash'] },
+]
+
+function matchesFilter(review, filter) {
+  if (!filter.keywords) return true
+  const text = review.title.toLowerCase()
+  return filter.keywords.some(kw => text.includes(kw))
+}
+
 function ReviewScores({ scores }) {
   const items = [
     { label: 'Product Quality', low: 'Not as expected', high: 'Incredible', value: scores.quality },
@@ -173,18 +188,33 @@ function ReviewCard({ review }) {
 }
 
 export default function ReviewsModal({ open, onClose }) {
+  const { isRendered, isVisible } = useModalTransition(open)
+  const [activeFilter, setActiveFilter] = useState('all')
+  const [starFilter, setStarFilter] = useState(null)
+
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    document.body.style.overflow = isRendered ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [open])
+  }, [isRendered])
 
-  if (!open) return null
+  if (!isRendered) return null
 
-  const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
+  const currentFilter = REVIEW_FILTERS.find(filter => filter.id === activeFilter)
+  const starCounts = [5, 4, 3, 2, 1].map(star => ({
+    star,
+    count: MOCK_REVIEWS.filter(review => review.stars === star).length,
+  }))
+
+  const filtered = MOCK_REVIEWS
+    .filter(review => matchesFilter(review, currentFilter))
+    .filter(review => starFilter === null || review.stars === starFilter)
+
+  const overlayClassName = `${styles.overlay} ${isVisible ? styles.overlayVisible : ''}`
+  const sheetClassName = `${styles.sheet} ${isVisible ? styles.sheetVisible : ''}`
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.sheet} onClick={e => e.stopPropagation()}>
+    <div className={overlayClassName} onClick={onClose}>
+      <div className={sheetClassName} onClick={e => e.stopPropagation()}>
         <div className={styles.header}>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <CloseIcon />
@@ -192,19 +222,44 @@ export default function ReviewsModal({ open, onClose }) {
         </div>
 
         <div className={styles.body}>
-          <div className={styles.summarySection}>
-            <p className={styles.title}>CUSTOMER REVIEWS</p>
-            <div className={styles.summaryRow}>
-              <span className={styles.avgScore}>{avgRating}</span>
-              <Stars count={Math.round(Number(avgRating))} />
-              <span className={styles.reviewCount}>Based on {MOCK_REVIEWS.length} reviews</span>
-            </div>
+          <p className={styles.filterSectionLabel}>FILTER BY RATING</p>
+          <div className={styles.starFilterChips}>
+            {starCounts.map(({ star, count }) => (
+              <button
+                key={star}
+                type="button"
+                className={`${styles.starFilterChip} ${starFilter === star ? styles.starFilterChipActive : ''}`}
+                onClick={() => setStarFilter(prev => prev === star ? null : star)}
+              >
+                <span className={styles.starFilterStars}>
+                  {[...Array(star)].map((_, index) => <StarIcon key={index} filled />)}
+                </span>
+                <span className={styles.starFilterCount}>({count})</span>
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.filterChips}>
+            {REVIEW_FILTERS.map(filter => (
+              <button
+                key={filter.id}
+                type="button"
+                className={`${styles.filterChip} ${activeFilter === filter.id ? styles.filterChipActive : ''}`}
+                onClick={() => setActiveFilter(filter.id)}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
 
           <div className={styles.reviewsList}>
-            {MOCK_REVIEWS.map((review, i) => (
-              <ReviewCard key={i} review={review} />
-            ))}
+            {filtered.length > 0 ? (
+              filtered.map((review, i) => (
+                <ReviewCard key={i} review={review} />
+              ))
+            ) : (
+              <p className={styles.noResults}>No reviews match the selected filters</p>
+            )}
           </div>
         </div>
       </div>

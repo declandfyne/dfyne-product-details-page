@@ -1,7 +1,7 @@
 import afterpayLogo from '../assets/afterpay.svg'
 import shopPayLogo  from '../assets/shoppay.svg'
 import klarnaLogo   from '../assets/klarna.svg'
-import modelPhoto   from '../assets/modelfullbody.jpg'
+import modelPhoto   from '../assets/modelsize.jpg'
 import dfyneLogo    from '../assets/dfyne-logo.svg'
 import packageIcon  from '../assets/package-icon.svg'
 

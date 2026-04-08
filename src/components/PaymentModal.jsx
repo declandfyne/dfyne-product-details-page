@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { ASSETS } from '../data/product'
 import useDragToDismiss from '../hooks/useDragToDismiss'
+import useModalTransition from '../hooks/useModalTransition'
 import styles from './PaymentModal.module.css'
 
 const PAYMENT_OPTIONS = [
@@ -37,29 +38,33 @@ const PAYMENT_OPTIONS = [
 ]
 
 export default function PaymentModal({ open, onClose }) {
+  const { isRendered, isVisible } = useModalTransition(open)
   const { sheetRef, handleProps } = useDragToDismiss(onClose)
 
   // Close on Escape key
   useEffect(() => {
-    if (!open) return
+    if (!isRendered) return
     const handler = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [open, onClose])
+  }, [isRendered, onClose])
 
   // Prevent body scroll while open
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    document.body.style.overflow = isRendered ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [open])
+  }, [isRendered])
 
-  if (!open) return null
+  if (!isRendered) return null
+
+  const overlayClassName = `${styles.overlay} ${isVisible ? styles.overlayVisible : ''}`
+  const sheetClassName = `${styles.sheet} ${isVisible ? styles.sheetVisible : ''}`
 
   return (
-    <div className={styles.overlay} onClick={onClose} aria-modal="true" role="dialog" id="payment-modal-overlay" data-analytics-id="payment-modal-overlay">
+    <div className={overlayClassName} onClick={onClose} aria-modal="true" role="dialog" id="payment-modal-overlay" data-analytics-id="payment-modal-overlay">
       <div
         ref={sheetRef}
-        className={`${styles.sheet} ${open ? styles.sheetOpen : ''}`}
+        className={sheetClassName}
         onClick={(e) => e.stopPropagation()}
         id="payment-modal"
         data-analytics-id="payment-modal"

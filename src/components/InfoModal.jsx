@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import useModalTransition from '../hooks/useModalTransition'
 import styles from './InfoModal.module.css'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS } from '../data/product'
@@ -20,41 +21,17 @@ function Stars({ count }) {
 }
 
 const MOCK_REVIEWS = [
-  { name: 'Reyna V.', verified: true, location: 'United States', date: '14/01/2026', stars: 5, title: 'Love this jacket!', scores: { quality: 100, sizing: 74, fit: 74 } },
-  { name: 'Sophie L.', verified: true, location: 'United Kingdom', date: '09/01/2026', stars: 5, title: 'Best workout top I own', scores: { quality: 95, sizing: 50, fit: 60 } },
-  { name: 'Megan T.', verified: true, location: 'Canada', date: '02/01/2026', stars: 4, title: 'Super cute, runs a little small', scores: { quality: 90, sizing: 85, fit: 80 } },
-  { name: 'Aisha K.', verified: true, location: 'Australia', date: '28/12/2025', stars: 5, title: 'Incredibly soft fabric', scores: null },
-  { name: 'Emma R.', verified: true, location: 'United Kingdom', date: '20/12/2025', stars: 4, title: 'Perfect for the gym and brunch after', scores: { quality: 100, sizing: 50, fit: 55 } },
-  { name: 'Chloe B.', verified: false, location: 'Ireland', date: '15/12/2025', stars: 3, title: 'Great quality, wished it came in more colours', scores: null },
-  { name: 'Jasmine P.', verified: true, location: 'United States', date: '10/12/2025', stars: 5, title: 'The built-in bra is a game changer', scores: { quality: 100, sizing: 55, fit: 65 } },
-  { name: 'Nina W.', verified: true, location: 'Germany', date: '05/12/2025', stars: 4, title: 'Flattering fit, holds everything in place', scores: null },
-  { name: 'Olivia D.', verified: true, location: 'Canada', date: '28/11/2025', stars: 5, title: 'Ordered two more after my first', scores: { quality: 95, sizing: 50, fit: 50 } },
-  { name: 'Priya S.', verified: true, location: 'United Kingdom', date: '20/11/2025', stars: 3, title: 'Washes beautifully, no shape loss', scores: null },
+  { name: 'Reyna V.', verified: true, location: 'United States', date: '14/01/2026', stars: 5, title: 'Love this jacket!' },
+  { name: 'Sophie L.', verified: true, location: 'United Kingdom', date: '09/01/2026', stars: 5, title: 'Best workout top I own' },
+  { name: 'Megan T.', verified: true, location: 'Canada', date: '02/01/2026', stars: 4, title: 'Super cute, runs a little small' },
+  { name: 'Aisha K.', verified: true, location: 'Australia', date: '28/12/2025', stars: 5, title: 'Incredibly soft fabric' },
+  { name: 'Emma R.', verified: true, location: 'United Kingdom', date: '20/12/2025', stars: 4, title: 'Perfect for the gym and brunch after' },
+  { name: 'Chloe B.', verified: false, location: 'Ireland', date: '15/12/2025', stars: 3, title: 'Great quality, wished it came in more colours' },
+  { name: 'Jasmine P.', verified: true, location: 'United States', date: '10/12/2025', stars: 5, title: 'The built-in bra is a game changer' },
+  { name: 'Nina W.', verified: true, location: 'Germany', date: '05/12/2025', stars: 4, title: 'Flattering fit, holds everything in place' },
+  { name: 'Olivia D.', verified: true, location: 'Canada', date: '28/11/2025', stars: 5, title: 'Ordered two more after my first' },
+  { name: 'Priya S.', verified: true, location: 'United Kingdom', date: '20/11/2025', stars: 3, title: 'Washes beautifully, no shape loss' },
 ]
-
-function ReviewScores({ scores }) {
-  const items = [
-    { label: 'Product Quality', low: 'Not as expected', high: 'Incredible', value: scores.quality },
-    { label: 'Sizing', low: 'Size Down', high: 'Size Up', value: scores.sizing },
-    { label: 'Fit', low: 'Loose', high: 'Tight', value: scores.fit },
-  ]
-  return (
-    <div className={styles.scoresGrid}>
-      {items.map(({ label, low, high, value }) => (
-        <div key={label} className={styles.scoreItem}>
-          <span className={styles.scoreLabel}>{label}:</span>
-          <div className={styles.scoreTrack}>
-            <div className={styles.scoreFill} style={{ width: `${value}%` }} />
-          </div>
-          <div className={styles.scoreEnds}>
-            <span>{low}</span>
-            <span>{high}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 function ReviewCard({ review }) {
   return (
@@ -79,12 +56,9 @@ function ReviewCard({ review }) {
         <span className={styles.reviewDate}>{review.date}</span>
       </div>
       <p className={styles.reviewTitle}>{review.title}</p>
-      {review.scores && <ReviewScores scores={review.scores} />}
     </div>
   )
 }
-
-const AGGREGATE_SCORES = { quality: 95, sizing: 78, fit: 72 }
 
 const REVIEW_FILTERS = [
   { id: 'all',     label: 'All',         keywords: null },
@@ -103,7 +77,6 @@ function matchesFilter(review, filter) {
 function ReviewsContent() {
   const [activeFilter, setActiveFilter] = useState('all')
   const [starFilter, setStarFilter] = useState(null)
-  const avgRating = (MOCK_REVIEWS.reduce((sum, r) => sum + r.stars, 0) / MOCK_REVIEWS.length).toFixed(1)
   const currentFilter = REVIEW_FILTERS.find(f => f.id === activeFilter)
 
   const starCounts = [5, 4, 3, 2, 1].map(s => ({
@@ -121,49 +94,6 @@ function ReviewsContent() {
 
   return (
     <div className={styles.content}>
-      <div className={styles.summarySection}>
-        <div className={styles.summaryRow}>
-          <span className={styles.avgScore}>{avgRating}</span>
-          <Stars count={Math.round(Number(avgRating))} />
-          <span className={styles.reviewCount}>Based on {MOCK_REVIEWS.length} reviews</span>
-        </div>
-      </div>
-
-      <div className={styles.summaryScales}>
-        <div className={styles.summaryScalesRow}>
-          <div className={styles.summaryScaleItem}>
-            <span className={styles.summaryScaleLabel}>Product Quality:</span>
-            <div className={styles.summaryScaleTrack}>
-              <div className={styles.summaryScaleFill} style={{ width: `${AGGREGATE_SCORES.quality}%` }} />
-            </div>
-            <div className={styles.summaryScaleEnds}>
-              <span>Not as expected</span>
-              <span>Incredible</span>
-            </div>
-          </div>
-          <div className={styles.summaryScaleItem}>
-            <span className={styles.summaryScaleLabel}>Sizing:</span>
-            <div className={styles.summaryScaleTrack}>
-              <div className={styles.summaryScaleFill} style={{ width: `${AGGREGATE_SCORES.sizing}%` }} />
-            </div>
-            <div className={styles.summaryScaleEnds}>
-              <span>Size Down</span>
-              <span>Size Up</span>
-            </div>
-          </div>
-        </div>
-        <div className={styles.summaryScaleItemHalf}>
-          <span className={styles.summaryScaleLabel}>Fit:</span>
-          <div className={styles.summaryScaleTrack}>
-            <div className={styles.summaryScaleFill} style={{ width: `${AGGREGATE_SCORES.fit}%` }} />
-          </div>
-          <div className={styles.summaryScaleEnds}>
-            <span>Loose</span>
-            <span>Tight</span>
-          </div>
-        </div>
-      </div>
-
       <p className={styles.filterSectionLabel}>FILTER BY RATING</p>
       <div className={styles.starFilterChips}>
         {starCounts.map(({ star, count }) => (
@@ -380,23 +310,28 @@ function DeliveryContent() {
 }
 
 const TITLES = {
-  features: 'PRODUCT DETAILS',
+  features: 'FULL DETAILS',
   model: 'MODEL SIZE',
   delivery: 'DELIVERY & RETURNS',
   reviews: 'CUSTOMER REVIEWS',
 }
 
 export default function InfoModal({ open, activeTab, onClose, model, productImg }) {
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
+  const { isRendered, isVisible } = useModalTransition(open)
 
-  if (!open) return null
+  useEffect(() => {
+    document.body.style.overflow = isRendered ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [isRendered])
+
+  if (!isRendered) return null
+
+  const overlayClassName = `${styles.overlay} ${isVisible ? styles.overlayVisible : ''}`
+  const sheetClassName = `${styles.sheet} ${isVisible ? styles.sheetVisible : ''}`
 
   return (
-    <div className={styles.overlay} onClick={onClose} id="info-modal-overlay" data-analytics-id="info-modal-overlay" data-info-modal-tab={activeTab}>
-      <div className={styles.sheet} onClick={e => e.stopPropagation()} id="info-modal" data-analytics-id="info-modal" data-info-modal-tab={activeTab}>
+    <div className={overlayClassName} onClick={onClose} id="info-modal-overlay" data-analytics-id="info-modal-overlay" data-info-modal-tab={activeTab}>
+      <div className={sheetClassName} onClick={e => e.stopPropagation()} id="info-modal" data-analytics-id="info-modal" data-info-modal-tab={activeTab}>
         <div className={styles.header} id="info-modal-header" data-analytics-id="info-modal-header">
           <p className={styles.headerTitle}>{TITLES[activeTab]}</p>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close" id="info-modal-close" data-analytics-id="info-modal-close">

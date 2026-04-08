@@ -6,6 +6,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.18s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .sheet {
@@ -16,6 +18,21 @@
   height: 70vh;
   display: flex;
   flex-direction: column;
+  transform: translate3d(0, 12px, 0);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    transform 0.18s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.16s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.overlayVisible {
+  opacity: 1;
+}
+
+.sheetVisible {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
 }
 
 .dragHandle {
@@ -84,6 +101,7 @@
 .tab.tabActive {
   color: #0a0a0a;
   font-weight: 700;
+  border-bottom: 3px solid #0a0a0a;
 }
 
 .tabIndicator {
@@ -102,6 +120,7 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   height: 100%;
+  width: 100%;
 }
 
 .swipeContainer::-webkit-scrollbar {
@@ -116,7 +135,9 @@
 
 .swipePanel {
   flex-shrink: 0;
+  flex-basis: 100%;
   width: 100%;
+  min-width: 100%;
   scroll-snap-align: start;
   overflow: hidden;
   display: flex;
@@ -137,6 +158,7 @@
 .body {
   overflow-y: auto;
   flex: 1;
+  width: 100%;
   padding: 20px 16px 32px;
 }
 
@@ -371,19 +393,41 @@
 }
 
 .modelHeroSmall {
-  width: 200px;
+  width: min(44%, 220px);
   flex-shrink: 0;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1334 / 2000;
   border-radius: 2px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
 .modelHeroImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+}
+
+.modelInstagram {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0a0a0a;
+  text-decoration: none;
+  font-family: 'Rawline', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.4px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .modelInfoRight {
@@ -391,7 +435,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  min-height: 100%;
 }
 
 .modelName {
@@ -418,17 +463,18 @@
   border-radius: 4px;
   overflow: hidden;
   flex: 1;
+  min-height: 0;
 }
 
 .modelRowCompact {
   display: flex;
+  flex: 1 1 0;
   justify-content: space-between;
   align-items: center;
-  padding: 0 12px;
+  padding: 10px 12px;
   border-bottom: 1px solid #ebebeb;
   font-family: 'Rawline', sans-serif;
   font-size: 10px;
-  flex: 1;
 }
 
 .modelRowCompact:last-child {
@@ -973,6 +1019,8 @@
   .overlay {
     align-items: stretch;
     justify-content: flex-end;
+    padding-right: 16px;
+    box-sizing: border-box;
   }
 
   .tabs {
@@ -981,10 +1029,10 @@
 
   .sheet {
     max-width: 700px;
-    width: 700px;
+    width: min(700px, calc(100vw - 16px));
     height: 100vh;
     border-radius: 0;
-    animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+    transform: translate3d(12px, 0, 0);
   }
 
   .dragHandle {
@@ -996,7 +1044,7 @@
   }
 
   .modelHeroSmall {
-    width: 300px;
+    width: min(42%, 320px);
   }
 
   .modelInfoRight {
@@ -1028,5 +1076,12 @@
   @keyframes slideInRight {
     from { transform: translateX(100%); }
     to   { transform: translateX(0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .sheet {
+    transition-duration: 0.01ms;
   }
 }
