@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import FeatureRatings from './FeatureRatings'
 import { FEATURE_RATINGS, ASSETS } from '../data/product'
 import useDragToDismiss from '../hooks/useDragToDismiss'
@@ -434,18 +434,22 @@ export default function V2TabbedModal({ open, initialTab, onClose, model }) {
     bar.style.width = `${btnRect.width}px`
   }, [])
 
-  // When modal opens with a new tab, sync state + scroll + indicator in one effect
-  useEffect(() => {
-    if (!open || !initialTab) return
+  // Keep the visible panel aligned with the requested tab before paint.
+  useLayoutEffect(() => {
+    if (!open || !initialTab || !isRendered) return
+
+    const idx = TABS.findIndex(tab => tab.id === initialTab)
+    if (idx < 0) return
+
     setActiveTab(initialTab)
+
     const el = swipeRef.current
-    if (!el) return
-    const idx = TABS.findIndex(t => t.id === initialTab)
-    requestAnimationFrame(() => {
-      el.scrollTo({ left: idx * el.offsetWidth, behavior: 'instant' })
-      positionIndicator(idx, false)
-    })
-  }, [open, initialTab, positionIndicator])
+    if (el) {
+      el.scrollLeft = idx * el.offsetWidth
+    }
+
+    positionIndicator(idx, false)
+  }, [open, initialTab, isRendered, positionIndicator])
 
   useEffect(() => {
     if (!isRendered || !isVisible) return undefined
