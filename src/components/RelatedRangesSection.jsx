@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { RELATED_RANGES_ITEMS } from '../data/product'
 import styles from './RelatedRangesSection.module.css'
@@ -50,14 +50,52 @@ function RelatedCard({ item }) {
 
 export default function RelatedRangesSection() {
   const scrollRef = useRef(null)
+  const [carouselImageHeight, setCarouselImageHeight] = useState(0)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(false)
+
+  useEffect(() => {
+    const scroller = scrollRef.current
+
+    if (!scroller) return undefined
+
+    const updateCarouselState = () => {
+      const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth
+      const firstImage = scroller.querySelector(`.${styles.imageWrap}`)
+
+      setCanScrollLeft(scroller.scrollLeft > 1)
+      setCanScrollRight(scroller.scrollLeft < maxScrollLeft - 1)
+      setCarouselImageHeight(firstImage ? Math.round(firstImage.getBoundingClientRect().height) : 0)
+    }
+
+    updateCarouselState()
+
+    scroller.addEventListener('scroll', updateCarouselState, { passive: true })
+    window.addEventListener('resize', updateCarouselState)
+
+    const resizeObserver = new ResizeObserver(updateCarouselState)
+    resizeObserver.observe(scroller)
+
+    const firstImage = scroller.querySelector(`.${styles.imageWrap}`)
+    if (firstImage) resizeObserver.observe(firstImage)
+
+    return () => {
+      scroller.removeEventListener('scroll', updateCarouselState)
+      window.removeEventListener('resize', updateCarouselState)
+      resizeObserver.disconnect()
+    }
+  }, [])
 
   const scrollByCard = (direction) => {
     if (!scrollRef.current) return
 
     const firstCard = scrollRef.current.querySelector(`.${styles.card}`)
+    const rowStyles = window.getComputedStyle(scrollRef.current)
+    const cardGap = parseFloat(rowStyles.columnGap || rowStyles.gap || '0') || 0
     const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 266
+
     scrollRef.current.scrollBy({
-      left: direction * (cardWidth + 8),
+      left: direction * (cardWidth + cardGap),
       behavior: 'smooth',
     })
   }
@@ -66,12 +104,21 @@ export default function RelatedRangesSection() {
     <section className={styles.section} id="pdp-related-ranges" data-analytics-id="pdp-related-ranges">
       <div className={styles.header}>
         <h2 className={styles.title}>SEE OTHER MIDNIGHT BLACK RANGES</h2>
-        <div className={styles.controls}>
+      </div>
+
+      <div
+        className={styles.carouselViewport}
+        style={{ '--carousel-image-height': `${carouselImageHeight}px` }}
+      >
+        <div className={styles.carouselControls} aria-hidden="true">
           <button
             type="button"
             className={styles.arrowButton}
             onClick={() => scrollByCard(-1)}
             aria-label="Scroll related products left"
+            disabled={!canScrollLeft}
+            data-actionable={canScrollLeft}
+            tabIndex={canScrollLeft ? 0 : -1}
           >
             <ArrowIcon direction="left" />
           </button>
@@ -80,16 +127,19 @@ export default function RelatedRangesSection() {
             className={styles.arrowButton}
             onClick={() => scrollByCard(1)}
             aria-label="Scroll related products right"
+            disabled={!canScrollRight}
+            data-actionable={canScrollRight}
+            tabIndex={canScrollRight ? 0 : -1}
           >
             <ArrowIcon direction="right" />
           </button>
         </div>
-      </div>
 
-      <div ref={scrollRef} className={styles.row}>
-        {RELATED_RANGES_ITEMS.map(item => (
-          <RelatedCard key={item.id} item={item} />
-        ))}
+        <div ref={scrollRef} className={styles.row}>
+          {RELATED_RANGES_ITEMS.map(item => (
+            <RelatedCard key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </section>
   )

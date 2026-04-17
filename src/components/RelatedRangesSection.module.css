@@ -1,6 +1,8 @@
 .section {
+  --related-ranges-gap: 8px;
+  --related-ranges-leading-space: 16px;
   margin-top: 40px;
-  padding: 40px 16px 32px;
+  padding: 40px 0 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -10,8 +12,9 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
+  padding: 0 var(--related-ranges-leading-space);
 }
 
 .title {
@@ -24,24 +27,27 @@
   color: #0a0a0a;
 }
 
-.controls {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
+.carouselViewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.carouselControls {
+  display: none;
 }
 
 .arrowButton {
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(10, 10, 10, 0.14);
   border-radius: 999px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.94);
   color: #0a0a0a;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 12px 24px rgba(10, 10, 10, 0.08);
   transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
@@ -52,12 +58,23 @@
   transform: translateY(-1px);
 }
 
+.arrowButton:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .row {
   display: flex;
-  gap: 8px;
+  gap: var(--related-ranges-gap);
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+
+.row::before {
+  content: '';
+  flex: 0 0 calc(var(--related-ranges-leading-space) - var(--related-ranges-gap));
 }
 
 .row::-webkit-scrollbar {
@@ -68,6 +85,7 @@
   flex: 0 0 266px;
   text-decoration: none;
   color: inherit;
+  scroll-snap-align: start;
 }
 
 .imageWrap {
@@ -122,18 +140,19 @@
 }
 
 .meta {
-  padding-top: 8px;
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
+  gap: 1px;
 }
 
 .name {
   margin: 0;
   font-family: 'Rawline', sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: 0.023em;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
   color: #0a0a0a;
 }
 
@@ -146,16 +165,16 @@
 
 .color {
   font-weight: 400;
-  font-size: 11px;
-  line-height: 18px;
-  letter-spacing: 0.093em;
-  color: rgba(0, 0, 0, 0.65);
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  color: rgba(10, 10, 10, 0.58);
 }
 
 .price {
   font-weight: 500;
   font-size: 11px;
-  line-height: 18px;
+  line-height: 16px;
   letter-spacing: 0.027em;
   color: #0a0a0a;
 }
@@ -163,7 +182,7 @@
 .reviewRow {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .stars {
@@ -174,14 +193,73 @@
 
 .reviewCount {
   font-weight: 400;
-  font-size: 11px;
-  line-height: 17px;
+  font-size: 10px;
+  line-height: 16px;
   letter-spacing: 0.027em;
   color: #0a0a0a;
 }
 
 @media (min-width: 1024px) {
   .section {
-    padding: 24px var(--page-side-gutter, 16px) 40px;
+    --related-ranges-gap: 12px;
+    --related-ranges-leading-space: var(--page-side-gutter, 16px);
+    gap: 18px;
+    padding: 28px 0 44px;
+  }
+
+  .title {
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.13em;
+  }
+
+  .carouselControls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--carousel-image-height, 0px);
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .arrowButton {
+    width: 34px;
+    height: 34px;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.96);
+    transition: opacity 0.18s ease, transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  }
+
+  .carouselViewport:hover .arrowButton[data-actionable='true'],
+  .carouselViewport:focus-within .arrowButton[data-actionable='true'] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  .card {
+    flex-basis: calc((100% - (6 * var(--related-ranges-gap))) / 6.5);
+  }
+
+  .meta {
+    padding-top: 12px;
+  }
+
+  .name {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .color,
+  .price,
+  .reviewCount {
+    font-size: 10px;
+    line-height: 15px;
   }
 }
