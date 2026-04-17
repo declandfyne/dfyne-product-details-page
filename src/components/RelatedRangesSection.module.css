@@ -1,6 +1,7 @@
 .section {
   --related-ranges-gap: 8px;
   --related-ranges-leading-space: 16px;
+  --related-ranges-card-width: 266px;
   margin-top: 40px;
   padding: 40px 0 32px;
   display: flex;
@@ -82,7 +83,7 @@
 }
 
 .card {
-  flex: 0 0 266px;
+  flex: 0 0 var(--related-ranges-card-width);
   text-decoration: none;
   color: inherit;
   scroll-snap-align: start;
@@ -244,7 +245,7 @@
   }
 
   .card {
-    flex-basis: calc((100% - (6 * var(--related-ranges-gap))) / 6.5);
+    flex-basis: 266px;
   }
 
   .meta {
@@ -261,5 +262,21 @@
   .reviewCount {
     font-size: 10px;
     line-height: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    --related-ranges-card-width: min(266px, calc(100vw - (2 * var(--related-ranges-leading-space))));
+  }
+}
+
+@media (min-width: 1600px) {
+  .section {
+    gap: 20px;
+  }
+
+  .carouselControls {
+    padding: 0 18px;
   }
 }

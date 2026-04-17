@@ -185,6 +185,12 @@
   }
 }
 
+@media (min-width: 1600px) {
+  .page {
+    --desktop-info-column-width-effective: var(--desktop-info-column-width, 700px);
+  }
+}
+
 @media (min-width: 1024px) and (max-width: 1320px) {
   .page {
     --desktop-info-column-width-effective: min(var(--desktop-info-column-width, 550px), 42vw);

@@ -23,8 +23,17 @@ const DEFAULT_DESKTOP_GUTTER = 24
 const MIN_DESKTOP_GUTTER = 0
 const MAX_DESKTOP_GUTTER = 250
 const DEFAULT_INFO_COLUMN_WIDTH = 550
+const WIDE_DESKTOP_INFO_COLUMN_WIDTH = 700
 const MIN_INFO_COLUMN_WIDTH = 360
 const MAX_INFO_COLUMN_WIDTH = 760
+
+const getDefaultInfoColumnWidth = () => {
+  if (typeof window === 'undefined') return DEFAULT_INFO_COLUMN_WIDTH
+
+  return window.matchMedia('(min-width: 1600px)').matches
+    ? WIDE_DESKTOP_INFO_COLUMN_WIDTH
+    : DEFAULT_INFO_COLUMN_WIDTH
+}
 
 export default function V2() {
   const [selectedColor,  setSelectedColor]  = useState(DEFAULT_COLOR)
@@ -35,7 +44,8 @@ export default function V2() {
   const [infoTab,        setInfoTab]        = useState(null)
   const [layoutControlOpen, setLayoutControlOpen] = useState(false)
   const [desktopGutter, setDesktopGutter] = useState(DEFAULT_DESKTOP_GUTTER)
-  const [infoColumnWidth, setInfoColumnWidth] = useState(DEFAULT_INFO_COLUMN_WIDTH)
+  const [infoColumnWidth, setInfoColumnWidth] = useState(null)
+  const [defaultInfoColumnWidth, setDefaultInfoColumnWidth] = useState(getDefaultInfoColumnWidth)
   const [rightRailStickyTop, setRightRailStickyTop] = useState(0)
   const layoutControlRef = useRef(null)
   const rightRailRef = useRef(null)
@@ -76,6 +86,21 @@ export default function V2() {
   }, [])
 
   useEffect(() => {
+    const media = window.matchMedia('(min-width: 1600px)')
+
+    const update = () => {
+      setDefaultInfoColumnWidth(media.matches ? WIDE_DESKTOP_INFO_COLUMN_WIDTH : DEFAULT_INFO_COLUMN_WIDTH)
+    }
+
+    update()
+    media.addEventListener('change', update)
+
+    return () => {
+      media.removeEventListener('change', update)
+    }
+  }, [])
+
+  useEffect(() => {
     if (!layoutControlOpen) return undefined
 
     const handlePointerDown = (event) => {
@@ -109,12 +134,14 @@ export default function V2() {
     setCompleteLookOpen(true)
   }
 
+  const effectiveInfoColumnWidth = infoColumnWidth ?? defaultInfoColumnWidth
+
   return (
     <>
       <div
         style={{
           '--desktop-page-side-gutter': `${desktopGutter}px`,
-          '--desktop-info-column-width': `${infoColumnWidth}px`,
+          ...(infoColumnWidth !== null ? { '--desktop-info-column-width': `${infoColumnWidth}px` } : {}),
         }}
       >
         <ImpactBanner />
@@ -164,7 +191,7 @@ export default function V2() {
 
               <div className={styles.layoutControlHeader}>
                 <label className={styles.layoutControlLabel} htmlFor="desktop-info-column-range">Info column</label>
-                <output className={styles.layoutControlValue} htmlFor="desktop-info-column-range">{infoColumnWidth}px</output>
+                <output className={styles.layoutControlValue} htmlFor="desktop-info-column-range">{effectiveInfoColumnWidth}px</output>
               </div>
 
               <input
@@ -174,7 +201,7 @@ export default function V2() {
                 min={MIN_INFO_COLUMN_WIDTH}
                 max={MAX_INFO_COLUMN_WIDTH}
                 step="1"
-                value={infoColumnWidth}
+                value={effectiveInfoColumnWidth}
                 onChange={(event) => setInfoColumnWidth(Number(event.target.value))}
                 aria-describedby="desktop-info-column-range-scale"
               />
